@@ -24,11 +24,11 @@ public class StationDistanceDO {
         ps.setLong(2, to);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            double temp= rs.getDouble("distance");
-             
+            double temp = rs.getDouble("distance");
+
             return temp;
         } else {
-             
+
             return -1;
         }
     }

@@ -15,6 +15,7 @@ import java.sql.SQLException;
  * @author vishnu-pt517
  */
 public class SeatTypeDO {
+
     public String getType(long id) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         PreparedStatement ps = con.prepareStatement("select type from seat_type where id=?");

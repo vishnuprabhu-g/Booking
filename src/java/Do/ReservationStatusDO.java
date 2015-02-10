@@ -26,9 +26,9 @@ public class ReservationStatusDO {
         ReservationStatus obj = new ReservationStatus();
         if (rs.next()) {
             obj.id = rs.getLong("id");
-            obj.status= rs.getString("status");
+            obj.status = rs.getString("status");
         }
-         
+
         return obj;
     }
 

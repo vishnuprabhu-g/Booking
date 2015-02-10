@@ -129,6 +129,8 @@ public class BookNew extends HttpServlet {
             booking.half = halfTicket;
             booking.senior = seniorCount;
             booking.adult = passengerList.size() - halfTicket;
+            booking.child = childList;
+
             int box;
             if (passengerList.size() >= 5) {
                 box = bookUtil.getANewBox(passengerList.size());

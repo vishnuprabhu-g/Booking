@@ -21,10 +21,10 @@ public class SeatPassengerDO {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "insert into seat_passenger values (? , ? )";
         PreparedStatement ps = con.prepareStatement(q);
-        ps.setLong(1, obj.seat_id );
+        ps.setLong(1, obj.seat_id);
         ps.setLong(2, obj.pnr);
         ps.executeUpdate();
-         
+
     }
 
     public void update(SeatPassenger obj) throws SQLException {
@@ -35,9 +35,8 @@ public class SeatPassengerDO {
         ps.setLong(2, obj.pnr);
         ps.setLong(3, obj.seat_id);
         ps.executeUpdate();
-         
-    }
 
+    }
 
     public SeatPassenger get(long id) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
@@ -47,19 +46,19 @@ public class SeatPassengerDO {
         ResultSet rs = ps.executeQuery();
         SeatPassenger obj = new SeatPassenger();
         if (rs.next()) {
-            obj.seat_id= rs.getLong("train_class_seat_status_id");
+            obj.seat_id = rs.getLong("train_class_seat_status_id");
             obj.pnr = rs.getLong("pnr");
         }
-         
+
         return obj;
     }
-    
+
     public void delete(long seatID) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "delete from seat_passenger where train_class_seat_status_id=?;";
         PreparedStatement ps = con.prepareStatement(q);
         ps.setLong(1, seatID);
         ps.executeUpdate();
-         
+
     }
 }

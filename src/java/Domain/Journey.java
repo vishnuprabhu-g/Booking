@@ -1,4 +1,3 @@
-
 package Domain;
 
 import java.sql.Date;

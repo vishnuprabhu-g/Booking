@@ -25,7 +25,7 @@ public class PassengerTicketDO {
         ps.setDouble(9, obj.reservationFare);
         ps.setDouble(10, obj.serviceCharge);
         ps.executeUpdate();
-         
+
     }
 
     public void update(PassengerTicket obj) throws SQLException {
@@ -40,7 +40,7 @@ public class PassengerTicketDO {
         ps.setInt(6, obj.Children);
         ps.setLong(7, obj.pnr);
         ps.executeUpdate();
-         
+
     }
 
     public List<PassengerTicket> getAll() throws SQLException {
@@ -54,13 +54,13 @@ public class PassengerTicketDO {
             obj.pnr = rs.getLong("pnr");
             //obj.fromStationId = rs.getLong("from_station_id");
             //obj.toStationId = rs.getLong("to_stattion_id");
-           // obj.totalFare = rs.getInt("total_fare");
+            // obj.totalFare = rs.getInt("total_fare");
             obj.Adult = rs.getInt("adult");
-           // obj.Children = rs.getInt("children");
-           // obj.timestamp = rs.getLong("timestamp");
+            // obj.Children = rs.getInt("children");
+            // obj.timestamp = rs.getLong("timestamp");
             out.add(obj);
         }
-         
+
         return out;
     }
 
@@ -79,12 +79,12 @@ public class PassengerTicketDO {
             obj.Adult = rs.getInt("adult");
             obj.Children = rs.getInt("children");
             obj.timestamp = rs.getLong("timestamp");
-            obj.trainClassStatusId=rs.getLong("train_class_status_id");
-            obj.reservationFare=rs.getDouble("reservation_fare");
-            obj.basicfare=rs.getDouble("basic_fare");
-            obj.serviceCharge=rs.getDouble("service_charge");
+            obj.trainClassStatusId = rs.getLong("train_class_status_id");
+            obj.reservationFare = rs.getDouble("reservation_fare");
+            obj.basicfare = rs.getDouble("basic_fare");
+            obj.serviceCharge = rs.getDouble("service_charge");
         }
-         
+
         return obj;
     }
 }

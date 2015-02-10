@@ -9,6 +9,7 @@ package Domain;
  * @author vishnu-pt517
  */
 public class Status {
+
     public long id;
     public String name;
 }

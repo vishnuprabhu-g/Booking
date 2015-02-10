@@ -19,7 +19,7 @@ public class TrainClassRacStatusDO {
         ps.setLong(3, obj.seatNo);
         ps.setBoolean(4, obj.availability);
         ps.executeUpdate();
-         
+
     }
 
     public void update(TrainClassRacStatus obj) throws SQLException {
@@ -31,10 +31,10 @@ public class TrainClassRacStatusDO {
         ps.setBoolean(3, obj.availability);
         ps.setLong(4, obj.trainClassRacStatusId);
         ps.executeUpdate();
-         
+
     }
-    
-     public void updateAfter(TrainClassRacStatus obj) throws SQLException {
+
+    public void updateAfter(TrainClassRacStatus obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "update train_class_rac_status set availability= ? where train_class_status_id = ? and rac_no=?;";
         PreparedStatement ps = con.prepareStatement(q);
@@ -42,8 +42,9 @@ public class TrainClassRacStatusDO {
         ps.setLong(3, obj.racNo);
         ps.setBoolean(1, obj.availability);
         ps.executeUpdate();
-         
+
     }
+
     public List<TrainClassRacStatus> getAll(long id) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from train_class_rac_status where train_class_status_id =?;";
@@ -59,7 +60,7 @@ public class TrainClassRacStatusDO {
             obj.availability = rs.getBoolean("availability");
             out.add(obj);
         }
-         
+
         return out;
     }
 
@@ -76,7 +77,7 @@ public class TrainClassRacStatusDO {
             obj.seatNo = rs.getLong("seat_no");
             obj.availability = rs.getBoolean("availability");
         }
-         
+
         return obj;
     }
 
@@ -99,7 +100,7 @@ public class TrainClassRacStatusDO {
         } else {
             obj = null;
         }
-         
+
         return obj;
     }
 
@@ -113,7 +114,7 @@ public class TrainClassRacStatusDO {
         if (rs.next()) {
             count = rs.getInt("rowcount");
         }
-         
+
         return count;
     }
 }

@@ -24,7 +24,7 @@
 <div id="to_print">
     <%
         List< TrainClassSeatStatus> allSeat = tcssdo.getAll(trainClassStatusID);
-        out.println("<table class=\"table table-bordered\"><thead><tr></tr></thead>");
+        out.println("<table border=1 class=\"table table-bordered\"><thead><tr></tr></thead>");
         out.println("<tbody>");
         boolean unAssign = false;
         TrainClassSeatStatus seat = null;
@@ -36,12 +36,12 @@
                 }
                 i = i + 1;
                 if (seat.availability) {
-                    out.println("<td>" + seat.seatNo + "<br>  " + seatTypeDO.getType(seat.typeId) + "<br>  " + "Not booked" + "<br> " + "" + "<br>" + "" + "<br>" + "" + "</td> ");
+                    out.println("<td style=\"color:lightgray\">" + seat.seatNo + "<br>  " + seatTypeDO.getType(seat.typeId) + "<br>  " + "Not booked" + "<br> " + "" + "<br>" + "" + "<br>" + "" + "</td> ");
                 } else {
                     long pnr = seatPassengerDO.get(seat.trainClassSeatStatusId).pnr;
                     if (pnr == 0) {
                         unAssign = true;
-                        out.println("<td>" + seat.seatNo + "<br>  " + seatTypeDO.getType(seat.typeId) + "<br>  " + "Not assigned<span style=\"color:blue\">*</span>" + "<br> " + "" + "<br>" + "" + "<br>" + "" + "</td> ");
+                        out.println("<td style=\"color:orange\" >" + seat.seatNo + "<br>  " + seatTypeDO.getType(seat.typeId) + "<br>  " + "Not assigned<span style=\"color:blue\">*</span>" + "<br> " + "" + "<br>" + "" + "<br>" + "" + "</td> ");
                     } else {
                         String gen;
                         Passenger p = pdo.getByCNFSeat(pnr, seat.seatNo);

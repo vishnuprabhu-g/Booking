@@ -9,6 +9,7 @@ package Domain;
  * @author vishnu-pt517
  */
 public class TrainClassRacStatus {
+
     public long trainClassRacStatusId;
     public long trainClassStatusId;
     public long racNo;

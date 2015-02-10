@@ -1,4 +1,5 @@
 package booking;
+
 import Do.*;
 import Domain.*;
 import java.io.IOException;
@@ -27,7 +28,8 @@ public class Cancel extends HttpServlet {
             UnderPassengerDO udo = new UnderPassengerDO();
             PassengerTicketDO ptdo = new PassengerTicketDO();
             Long pnr = (Long) session.getAttribute("pnr");
-            Long trainClassStatusId = 1L;int refund=0;
+            Long trainClassStatusId = 1L;
+            int refund = 0;
             boolean childDeleted = false;
             if (pnr == null) {
                 out.println("Invalid access..!");
@@ -67,11 +69,11 @@ public class Cancel extends HttpServlet {
                     out.println("Children ticket cancelled");
                 } else {
                     CancellingClass can = new CancellingClass();
-                    can.pnr=pnr;
+                    can.pnr = pnr;
                     PassengerTicket pt = ptdo.get(pnr);
                     for (Integer sno : cancel) {
                         Passenger p = pdo.get(pnr, sno);
-                        refund+=p.fare;
+                        refund += p.fare;
                         if (p.statusId == 4) {
                             out.println("Cancelled ticket cannot be cancelled once again..!");
                             out.println("<br>Exiting cancellation..!");
@@ -82,12 +84,12 @@ public class Cancel extends HttpServlet {
                             can.cancelRAC(p);
                         } else if (p.statusId == 3) {
                             can.cancelWL(p);
-                        }                        
-                        pt.Adult--;              
+                        }
+                        pt.Adult--;
                     }
                     ptdo.update(pt);
                     can.finalise();
-                    out.println("You will get a refund of: "+(refund-30));
+                    out.println("You will get a refund of: " + (refund - 30));
                     out.println("<div style=\"backround-color:green\" >Cancelled successfully </div>");
                     util.CommitUtil.commit();
                 }

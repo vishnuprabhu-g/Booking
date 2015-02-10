@@ -17,7 +17,7 @@ public class StatusDO {
         ps.setLong(1, obj.id);
         ps.setString(2, obj.name);
         ps.executeUpdate();
-         
+
     }
 
     public void update(Status obj) throws SQLException {
@@ -28,7 +28,7 @@ public class StatusDO {
         ps.setString(2, obj.name);
         ps.setLong(3, obj.id);
         ps.executeUpdate();
-         
+
     }
 
     public List<Status> getAll(long id) throws SQLException {
@@ -44,7 +44,7 @@ public class StatusDO {
             obj.name = rs.getString("name");
             out.add(obj);
         }
-         
+
         return out;
     }
 
@@ -59,7 +59,7 @@ public class StatusDO {
             obj.id = rs.getLong("id");
             obj.name = rs.getString("status");
         }
-         
+
         return obj;
     }
 }

@@ -41,7 +41,7 @@ public class ChartDO {
             p.sno = rs.getInt("sno");
             cnfList.add(p);
         }
-         
+
         return cnfList;
     }
 
@@ -66,7 +66,7 @@ public class ChartDO {
             p.sno = rs.getInt("sno");
             cnfList.add(p);
         }
-         
+
         return cnfList;
     }
 
@@ -86,10 +86,10 @@ public class ChartDO {
             p.name = rs.getString("name");
             p.initialSeatNo = rs.getInt("initial_seat_no");
             p.statusId = rs.getInt("status_id");
-             
+
             return p;
         } else {
-             
+
             return null;
         }
     }
@@ -115,7 +115,7 @@ public class ChartDO {
             p.sno = rs.getInt("sno");
             cnfList.add(p);
         }
-         
+
         return cnfList;
     }
 
@@ -126,6 +126,6 @@ public class ChartDO {
         ps.setBoolean(1, true);
         ps.setLong(2, trainClassStausId);
         ps.executeUpdate();
-         
+
     }
 }

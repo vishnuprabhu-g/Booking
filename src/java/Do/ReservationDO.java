@@ -18,7 +18,7 @@ public class ReservationDO {
         ps.setLong(2, obj.journeyID);
         ps.setInt(3, obj.ReservationStatus);
         ps.executeUpdate();
-         
+
     }
 
     public void update(Reservation obj) throws SQLException {
@@ -31,7 +31,7 @@ public class ReservationDO {
         //ps.setT(4, obj.timestamp);
         ps.setLong(4, obj.pnr);
         ps.executeUpdate();
-         
+
     }
 
     public List<Reservation> getAll() throws SQLException {
@@ -48,7 +48,7 @@ public class ReservationDO {
             obj.timestamp = rs.getTimestamp("timestamp");
             out.add(obj);
         }
-         
+
         return out;
     }
 
@@ -65,7 +65,7 @@ public class ReservationDO {
             obj.ReservationStatus = rs.getInt("reservation_status");
             obj.timestamp = rs.getTimestamp("timestamp");
         }
-         
+
         return obj;
     }
 }

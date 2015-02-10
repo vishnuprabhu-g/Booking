@@ -51,6 +51,7 @@ public class Book extends HttpServlet {
                 matcher = pattern.matcher(name);
                 if (!matcher.matches()) {
                     out.println("002");/* Name invalid*/
+
                     out.flush();
                     out.close();
                     return;
@@ -89,7 +90,7 @@ public class Book extends HttpServlet {
                     p.gender = gender;
                     p.name = name;
                     p.seat_no = pref;
-                    p.no=(index+1);
+                    p.no = (index + 1);
                     if (pref == 0) {
                         passengerList.add(p);
                     } else {

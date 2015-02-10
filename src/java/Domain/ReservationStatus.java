@@ -10,6 +10,7 @@ package Domain;
  * @author vishnu-pt517
  */
 public class ReservationStatus {
+
     public long id;
     public String status;
 }

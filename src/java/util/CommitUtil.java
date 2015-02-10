@@ -13,13 +13,15 @@ import java.sql.SQLException;
  * @author vishnu-pt517
  */
 public class CommitUtil {
-    public static Connection con=util.ConnectionUtil.getConnection();
+
+    public static Connection con = util.ConnectionUtil.getConnection();
+
     public static void commit() throws SQLException {
         if (con != null) {
             con.commit();
-        }
-        else
+        } else {
             System.out.println("----Null con obj found---");
+        }
     }
 
     public static void rollBack() throws SQLException {

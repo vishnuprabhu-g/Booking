@@ -35,10 +35,11 @@ View booked tickets:
                 int i = 1;
                 for (Reservation res : resList) {
                     PassengerTicket pt = ptdo.get(res.pnr);
-                    String dis="";
-                    if(res.ReservationStatus==3)
-                        dis="disabled";
-                    out.println("<tr><td><input type=\"radio\" name=\"pnr\" value=\"" + res.pnr + "\" "+dis +" > " + "</td><td>" + (i++) + "</td><td>" + res.pnr + "</td><td>" + rsdo.get(res.ReservationStatus).status + "<td>" + pt.Adult + "</td><td>" + res.timestamp + "</td><td><a href=\"#\" onClick=\"viewTic(" + pt.pnr + ") \" > <img height=\"20\" src=\"css/view.jpg \"> </a></td></tr>");
+                    String dis = "";
+                    if (res.ReservationStatus == 3) {
+                        dis = "disabled";
+                    }
+                    out.println("<tr><td><input type=\"radio\" name=\"pnr\" value=\"" + res.pnr + "\" " + dis + " > " + "</td><td>" + (i++) + "</td><td>" + res.pnr + "</td><td>" + rsdo.get(res.ReservationStatus).status + "<td>" + pt.Adult + "</td><td>" + res.timestamp + "</td><td><a href=\"#\" onClick=\"viewTic(" + pt.pnr + ") \" > <img height=\"20\" src=\"css/view.jpg \"> </a></td></tr>");
                 }
             %>
         </tbody>

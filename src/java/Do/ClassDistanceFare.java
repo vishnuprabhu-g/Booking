@@ -23,11 +23,11 @@ public class ClassDistanceFare {
         ps.setLong(1, classId);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            double val=rs.getDouble("fare_per_km");
-             
+            double val = rs.getDouble("fare_per_km");
+
             return val;
         } else {
-             
+
             return -1;
         }
     }

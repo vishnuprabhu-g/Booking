@@ -21,7 +21,7 @@ public class TrainClassStatusDO {
         ps.setInt(5, obj.available);
         ps.setInt(6, obj.maxWaiting);
         ps.executeUpdate();
-         
+
     }
 
     public void update(TrainClassStatus obj) throws SQLException {
@@ -39,7 +39,7 @@ public class TrainClassStatusDO {
         ps.setInt(6, obj.last_status_id);
         ps.setInt(8, obj.a_available);
         ps.executeUpdate();
-         
+
     }
 
     public List<TrainClassStatus> getAll(long id) throws SQLException {
@@ -59,7 +59,7 @@ public class TrainClassStatusDO {
             obj.maxWaiting = rs.getInt("max_waiting");
             out.add(obj);
         }
-         
+
         return out;
     }
 
@@ -83,12 +83,12 @@ public class TrainClassStatusDO {
             obj.sno = rs.getInt("sno");
             obj.maxRac = rs.getInt("max_rac");
             obj.chart = rs.getBoolean("chart");
-            obj.last_status_id=rs.getInt("last_status_id");
-            obj.last_seat_no=rs.getInt("last_seat_no");
-            obj.a_available=rs.getInt("a_available");
+            obj.last_status_id = rs.getInt("last_status_id");
+            obj.last_seat_no = rs.getInt("last_seat_no");
+            obj.a_available = rs.getInt("a_available");
 
         }
-         
+
         return obj;
     }
 
@@ -100,10 +100,10 @@ public class TrainClassStatusDO {
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
             int temp = rs.getInt("sno");
-             
+
             return temp;
         } else {
-             
+
             return 0;
         }
     }
@@ -116,10 +116,10 @@ public class TrainClassStatusDO {
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
             int temp = rs.getInt("waiting");
-             
+
             return temp;
         } else {
-             
+
             return 0;
         }
     }
@@ -132,10 +132,10 @@ public class TrainClassStatusDO {
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
             int temp = rs.getInt("initial_waiting");
-             
+
             return temp;
         } else {
-             
+
             return 0;
         }
     }
@@ -148,10 +148,10 @@ public class TrainClassStatusDO {
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
             int temp = rs.getInt("rac");
-             
+
             return temp;
         } else {
-             
+
             return 0;
         }
     }
@@ -163,7 +163,7 @@ public class TrainClassStatusDO {
         ps.setInt(1, obj.waiting);
         ps.setLong(2, obj.trianClassStatusId);
         ps.executeUpdate();
-         
+
     }
 
 }

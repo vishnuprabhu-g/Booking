@@ -10,6 +10,7 @@ package Domain;
  * @author vishnu-pt517
  */
 public class SeatPassenger {
+
     public long seat_id;
     public long pnr;
 }

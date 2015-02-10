@@ -39,7 +39,7 @@ public class PassengerDO {
         ps.setInt(10, obj.fare);
         ps.setString(11, obj.coach);
         ps.executeUpdate();
-         
+
     }
 
     public void update(Passenger obj) throws SQLException {
@@ -51,7 +51,7 @@ public class PassengerDO {
         ps.setInt(4, obj.sno);
         ps.setLong(3, obj.pnr);
         ps.executeUpdate();
-         
+
     }
 
     public List<Passenger> getAll(long id) throws SQLException {
@@ -73,10 +73,10 @@ public class PassengerDO {
             obj.initialSeatNo = rs.getInt("initial_seat_no");
             obj.initialStatusId = rs.getInt("initial_status_id");
             obj.fare = rs.getInt("fare");
-            obj.coach=rs.getString("coach");
+            obj.coach = rs.getString("coach");
             out.add(obj);
         }
-         
+
         return out;
     }
 
@@ -102,7 +102,7 @@ public class PassengerDO {
             out.add(obj);
         }
         //System.out.println(out.size());
-         
+
         return out;
     }
 
@@ -126,7 +126,7 @@ public class PassengerDO {
             obj.initialStatusId = rs.getInt("initial_status_id");
             out.add(obj);
         }
-         
+
         return out;
     }
 
@@ -150,7 +150,7 @@ public class PassengerDO {
             obj.fare = rs.getInt("fare");
 
         }
-         
+
         return obj;
     }
 
@@ -175,7 +175,7 @@ public class PassengerDO {
             obj.fare = rs.getInt("fare");
 
         }
-         
+
         return obj;
     }
 
@@ -198,7 +198,7 @@ public class PassengerDO {
             obj.initialSeatNo = rs.getInt("initial_seat_no");
             obj.initialStatusId = rs.getInt("initial_status_id");
         }
-         
+
         return obj;
     }
 
@@ -221,7 +221,7 @@ public class PassengerDO {
             obj.initialSeatNo = rs.getInt("initial_seat_no");
             obj.initialStatusId = rs.getInt("initial_status_id");
         }
-         
+
         return obj;
     }
 
@@ -245,10 +245,10 @@ public class PassengerDO {
             obj.initialStatusId = rs.getInt("initial_status_id");
             obj.fare = rs.getInt("fare");
         }
-         
+
         return obj;
     }
-    
+
     public Passenger getByCNFSeat(long pnr, int seatno) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from passengers where pnr =? and seat_no=? and status_id=1;";
@@ -269,7 +269,7 @@ public class PassengerDO {
             obj.initialStatusId = rs.getInt("initial_status_id");
             obj.fare = rs.getInt("fare");
         }
-         
+
         return obj;
     }
 
@@ -280,7 +280,7 @@ public class PassengerDO {
         ps.setLong(1, pnr);
         ResultSet rs = ps.executeQuery();
         boolean st = rs.next();
-         
+
         return st;
     }
 }

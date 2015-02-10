@@ -153,22 +153,22 @@ public class BookingClass {
             }
         }
     }
-    public boolean isSameBox(int arr[])
-    {
-        for(int i=0;i<arr.length-1;i++)
-        {
-            if(arr[i]!=arr[i+1])
+
+    public boolean isSameBox(int arr[]) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] != arr[i + 1]) {
                 return false;
+            }
         }
         return true;
     }
-    public int getCountBox(int[]arr,int num)
-    {
-        int count=0;
-        for(int x:arr)
-        {
-            if(x==num)
+
+    public int getCountBox(int[] arr, int num) {
+        int count = 0;
+        for (int x : arr) {
+            if (x == num) {
                 count++;
+            }
         }
         return count;
     }

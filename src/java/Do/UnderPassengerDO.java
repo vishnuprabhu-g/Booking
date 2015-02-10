@@ -19,7 +19,7 @@ public class UnderPassengerDO {
         ps.setInt(3, obj.age);
         ps.setInt(4, obj.gender);
         ps.executeUpdate();
-         
+
     }
 
     public void update(UnderPassenger obj) throws SQLException {
@@ -32,7 +32,7 @@ public class UnderPassengerDO {
         ps.setInt(4, obj.gender);
         ps.setLong(5, obj.pnr);
         ps.executeUpdate();
-         
+
     }
 
     public List<UnderPassenger> getAll(long id) throws SQLException {
@@ -50,7 +50,7 @@ public class UnderPassengerDO {
             obj.gender = rs.getInt("gender");
             out.add(obj);
         }
-         
+
         return out;
     }
 
@@ -67,7 +67,7 @@ public class UnderPassengerDO {
             obj.age = rs.getInt("age");
             obj.gender = rs.getInt("gender");
         }
-         
+
         return obj;
     }
 
@@ -79,6 +79,6 @@ public class UnderPassengerDO {
         ps.setString(2, obj.name);
         ps.setInt(3, obj.age);
         ps.executeUpdate();
-         
+
     }
 }

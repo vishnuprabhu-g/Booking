@@ -17,7 +17,7 @@ public class TrainStatusDO {
         ps.setLong(1, obj.statusId);
         ps.setLong(2, obj.journeyId);
         ps.executeUpdate();
-         
+
     }
 
     public void update(TrainStatus obj) throws SQLException {
@@ -28,7 +28,7 @@ public class TrainStatusDO {
         ps.setLong(2, obj.journeyId);
         ps.setLong(3, obj.statusId);
         ps.executeUpdate();
-         
+
     }
 
     public List<TrainStatus> getAll(long id) throws SQLException {
@@ -44,7 +44,7 @@ public class TrainStatusDO {
             obj.journeyId = rs.getLong("journey_id");
             out.add(obj);
         }
-         
+
         return out;
     }
 
@@ -59,7 +59,7 @@ public class TrainStatusDO {
             obj.statusId = rs.getLong("status_id");
             obj.journeyId = rs.getLong("journey_id");
         }
-         
+
         return obj;
     }
 }
