@@ -215,4 +215,26 @@ public class TrainClassSeatStatusDO {
         }
         return lastBox;
     }
+    
+    public List<Integer> getBoxsFreeforPassengers(long tcsID, int noOfpassengers) throws SQLException {
+        Connection con = util.ConnectionUtil.getConnection();
+        String q = " select count(*) as free,box from train_class_seat_status where availability=1 and train_class_status_id=? group by box;";
+        PreparedStatement ps = con.prepareStatement(q);
+        ps.setLong(1, tcsID);
+        int box, free;
+        List<Integer> boxs=new ArrayList<Integer>();
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            free = rs.getInt("free");
+            box = rs.getInt("box");
+            if (free < noOfpassengers) {
+                continue;
+            }
+            else
+            {
+               boxs.add(box);
+            }
+        }
+        return boxs;
+    }
 }

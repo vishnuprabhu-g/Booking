@@ -61,7 +61,6 @@ public class BookingClass {
         } catch (SQLException ex) {
             System.out.println("Exception in getting the sno\n" + ex);
         }
-
         pnr = System.currentTimeMillis();
         class_id = 1;
         from_id = 1;
@@ -75,8 +74,9 @@ public class BookingClass {
     public boolean BookPrefrredTicket(Passenger p, int pref) throws SQLException {
         TrainClassSeatStatus tcss = tcsdo.getPref(trianClassId, pref, near, box);
         if (tcss == null) {
-            System.out.println("In the book pref-getting null in the selected box");
+            /*System.out.println("In the book pref-getting null in the selected box");
             tcss = tcsdo.getPref(trianClassId, pref, near, 0);
+            */
         }
 
         if (tcss == null) {

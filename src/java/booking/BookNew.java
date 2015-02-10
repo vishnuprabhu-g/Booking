@@ -138,7 +138,7 @@ public class BookNew extends HttpServlet {
                 box = bookUtil.getANewBox(passengerList.size());
                 System.out.println("In the booking of >5 tics and box=" + box);
                 if (box == 0) {
-                    bookUtil.openBook(passengerList);                    
+                    bookUtil.openBook(passengerList);
                 } else {
                     booking.box = box;
                     bookUtil.booking = booking;
@@ -146,27 +146,37 @@ public class BookNew extends HttpServlet {
                     response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
                 }
             } else if (passengerList.size() <= 2) {
-                box = bookUtil.getFew(passengerList.size());
+                box = bookUtil.getFew(passengerList);
                 System.out.println("In the booking of <2 tics and box=" + box);
-                booking.box = box;
-                bookUtil.booking = booking;
-                bookUtil.ArrangeFew(box, passengerList);
-                response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
+                if (box == 0) {
+                    bookUtil.openBook(passengerList);
+                } else {
+                    booking.box = box;
+                    bookUtil.booking = booking;
+                    bookUtil.ArrangeFew(box, passengerList);
+                    response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
+                }
             } else {
-                box = bookUtil.getHalfFree(passengerList.size());
+                box = bookUtil.getFew(passengerList);
                 System.out.println("In the booking of 3-4 tics and box=" + box);
-                booking.box = box;
-                bookUtil.booking = booking;
-                bookUtil.arrangeHalf(box, passengerList);
-                response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
+                if (box == 0) {
+                    bookUtil.openBook(passengerList);
+                } else {
+                    booking.box = box;
+                    bookUtil.booking = booking;
+                    bookUtil.arrangeHalf(box, passengerList);
+                    response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
+                }
             }
             util.CommitUtil.commit();
-        } catch (SQLException ex) {
+        } 
+        catch (SQLException ex) {
             System.out.println("Exception in booknew\n" + ex);
+            out.println("006");
             ex.printStackTrace();
         } catch (NumberFormatException numex) {
             System.out.println("numberformat exception in booknew\n");
-            out.println("Number format exception in the system..!");
+            out.println("006Number format exception in the system..!");
             numex.printStackTrace();
         } finally {
             out.close();

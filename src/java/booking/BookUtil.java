@@ -8,6 +8,7 @@ package booking;
 import Do.*;
 import Domain.*;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -47,6 +48,9 @@ class BookUtil {
                 st = booking.BookPrefrredTicket(p, p.seat_no);
             } else {
                 st = booking.bookNear(p);
+            }
+            if (!st) {
+                booking.bookNear(p);
             }
         }
         if (booking.finalise()) {
@@ -89,10 +93,48 @@ class BookUtil {
         return true;
     }
 
-    public int getFew(int size) throws SQLException {
-        int box = tcssdo.getBoxFreeforPassengers(tcsID, size);
-        System.out.println("The found box for " + size + " passengers is " + box);
-        return box;
+    public int getFew(List<Passenger> passList) throws SQLException {
+        int size = passList.size(), lastBox = 0, lastMatch = 0;
+        List<Integer> boxs = tcssdo.getBoxsFreeforPassengers(tcsID, size);
+        if (boxs == null || boxs.isEmpty()) {
+            return 0;
+        }
+        Collections.sort(boxs);
+        for (Integer box : boxs) {
+            int rt = this.isFit(passList, box);
+            if (rt == 0) {
+                return box;
+            } else if (rt > 0) {
+                if (rt > lastMatch) {
+                    lastBox = box;
+                    lastMatch = rt;
+                }
+            }
+        }
+        System.out.println("The found box for " + size + " passengers is " + lastBox);
+        return lastBox;
+    }
+
+    public int isFit(List<Passenger> list, int box) throws SQLException {
+        int fitCount = 0;
+        for (Passenger p : list) {
+
+            if (p.seat_no != 0) {
+                TrainClassSeatStatus tcss = tcssdo.getPref(tcsID, p.seat_no, 0, box);
+                if (tcss != null) {
+                    fitCount++;
+                }
+            } else {
+                fitCount++;
+            }
+        }
+        if (list.size() == fitCount) {
+            return 0;
+        } else if (fitCount == 0) {
+            return -1;
+        } else {
+            return fitCount;
+        }
     }
 
     public boolean ArrangeFew(int box, List<Passenger> passList) throws SQLException {
@@ -109,9 +151,23 @@ class BookUtil {
         }
         return true;
     }
-    
-    public void openBook(List<Passenger> passList)
-    {
-        
+
+    public void openBook(List<Passenger> passList) throws SQLException {
+        boolean bookingOpn;
+        for (Passenger p : passList) {
+            bookingOpn=booking.isBookingOpen();
+                if(bookingOpn)
+                {
+                    if(p.seat_no!=0)
+                    {
+                        booking.BookPrefrredTicket(p, p.seat_no);
+                    }
+                    else
+                        booking.bookNear(p);
+                }
+                else
+                    booking.bookRAC(p);
+        }
+        booking.finalise();
     }
 }
