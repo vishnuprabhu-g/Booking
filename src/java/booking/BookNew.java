@@ -91,6 +91,7 @@ public class BookNew extends HttpServlet {
                     p.gender = gender;
                     p.name = name;
                     p.seat_no = pref;
+                    p.no = (index + 1);
                     if (pref == 0) {
                         passengerList.add(p);
                     } else {
@@ -112,6 +113,7 @@ public class BookNew extends HttpServlet {
 
             System.out.println("---------Parsed the input given by user----------");
             System.out.println(passengerList.size());
+            System.out.println();
 
             if (passengerList.isEmpty() && childList.isEmpty()) {
                 out.println("004");/*Empty set*/
@@ -135,10 +137,14 @@ public class BookNew extends HttpServlet {
             if (passengerList.size() >= 5) {
                 box = bookUtil.getANewBox(passengerList.size());
                 System.out.println("In the booking of >5 tics and box=" + box);
-                booking.box = box;
-                bookUtil.booking = booking;
-                bookUtil.arrangeABox(box, passengerList);
-                response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
+                if (box == 0) {
+                    bookUtil.openBook(passengerList);                    
+                } else {
+                    booking.box = box;
+                    bookUtil.booking = booking;
+                    bookUtil.arrangeABox(box, passengerList);
+                    response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
+                }
             } else if (passengerList.size() <= 2) {
                 box = bookUtil.getFew(passengerList.size());
                 System.out.println("In the booking of <2 tics and box=" + box);

@@ -26,8 +26,9 @@
         List< TrainClassSeatStatus> allSeat = tcssdo.getAll(trainClassStatusID);
         out.println("<table border=1 class=\"table table-bordered\"><thead><tr></tr></thead>");
         out.println("<tbody>");
-        boolean unAssign = false;
+        boolean unAssign = false;String same;
         TrainClassSeatStatus seat = null;
+        long lastPnr=0;
         for (int i = 0; i < allSeat.size();) {
             out.println("<tr>");
             for (int j = 0; j < 7; j++) {
@@ -39,6 +40,11 @@
                     out.println("<td style=\"color:lightgray\">" + seat.seatNo + "<br>  " + seatTypeDO.getType(seat.typeId) + "<br>  " + "Not booked" + "<br> " + "" + "<br>" + "" + "<br>" + "" + "</td> ");
                 } else {
                     long pnr = seatPassengerDO.get(seat.trainClassSeatStatusId).pnr;
+                    if(pnr==lastPnr)
+                        same= "style=\"color:blue\"";
+                    else
+                        same="";
+                    lastPnr=pnr;
                     if (pnr == 0) {
                         unAssign = true;
                         out.println("<td style=\"color:orange\" >" + seat.seatNo + "<br>  " + seatTypeDO.getType(seat.typeId) + "<br>  " + "Not assigned<span style=\"color:blue\">*</span>" + "<br> " + "" + "<br>" + "" + "<br>" + "" + "</td> ");
@@ -50,7 +56,7 @@
                         } else {
                             gen = "Female";
                         }
-                        out.println("<td>" + seat.seatNo + "<br>  " + seatTypeDO.getType(seat.typeId) + "<br>" + pnr + "<br> " + p.name + "<br>" + gen + "<br>" + p.age + "</td> ");
+                        out.println("<td "+same+">" + seat.seatNo + "<br>  " + seatTypeDO.getType(seat.typeId) + "<br>"+ pnr + "<br> " + p.name + "<br>" + gen + "<br>" + p.age + "</td> ");
                     }
                 }
             }

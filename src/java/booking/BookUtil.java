@@ -40,10 +40,6 @@ class BookUtil {
             }
         });
 
-        for (Passenger p : passList) {
-            System.out.println(p.name + p.age + p.no);
-        }
-
         booking.box = box;
         for (Passenger p : passList) {
             boolean st;
@@ -78,10 +74,6 @@ class BookUtil {
             }
         });
 
-        for (Passenger p : passList) {
-            System.out.println(p.name + p.age);
-        }
-
         booking.box = box;
         for (Passenger p : passList) {
             boolean st = booking.BookPrefrredTicket(p, p.seat_no);
@@ -105,10 +97,6 @@ class BookUtil {
 
     public boolean ArrangeFew(int box, List<Passenger> passList) throws SQLException {
         for (Passenger p : passList) {
-            System.out.println(p.name + p.age);
-        }
-
-        for (Passenger p : passList) {
             boolean st = booking.BookPrefrredTicket(p, p.seat_no);
             if (!st) {
                 booking.bookNear(p);
@@ -120,5 +108,10 @@ class BookUtil {
             util.CommitUtil.rollBack();
         }
         return true;
+    }
+    
+    public void openBook(List<Passenger> passList)
+    {
+        
     }
 }

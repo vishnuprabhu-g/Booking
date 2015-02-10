@@ -4,6 +4,8 @@ import Domain.*;
 import Do.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class BookingClass {
@@ -345,6 +347,21 @@ public class BookingClass {
             res.ReservationStatus = 1;
             ReservationDO rsdo = new ReservationDO();
             rsdo.add(res);
+
+            Collections.sort(queue, new Comparator<Passenger>() {
+                @Override
+                public int compare(Passenger t, Passenger t1) {
+                    if (t.no > t1.no) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+                }
+            });
+            
+            for(Passenger p:queue)
+                System.out.println(p.no);
+            
 
             for (Passenger pss : queue) {
                 if (pss.age >= 60 || pss.age <= 12) {
