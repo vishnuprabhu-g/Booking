@@ -1,0 +1,131 @@
+<%@page import="Do.*"%>
+<%@page import="Domain.*"%>
+<%@page import="java.util.List"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    long trainClassId = 1;
+    TrainClassStatus tcs = new TrainClassStatusDO().get(trainClassId);
+    String mode = request.getParameter("mode");
+    if (!tcs.chart && mode == null) {
+        out.println("900");
+        out.flush();
+        return;
+    }
+    ChartDO chartDO = new ChartDO();
+    TrainClassSeatStatusDO tcssdo = new TrainClassSeatStatusDO();
+    PassengerDO pdo = new PassengerDO();
+    long trainClassStatusID = 1;
+    SeatPassengerDO seatPassengerDO = new SeatPassengerDO();
+    SeatTypeDO seatTypeDO = new SeatTypeDO();
+%>
+<button onclick="PrintElem()">Print this chart</button>
+<br><br>
+
+<div id="to_print">
+    <%
+        List< TrainClassSeatStatus> allSeat = tcssdo.getAll(trainClassStatusID);
+        out.println("<table class=\"table table-bordered\"><thead><tr></tr></thead>");
+        out.println("<tbody>");
+        boolean unAssign = false;
+        TrainClassSeatStatus seat = null;
+        for (int i = 0; i < allSeat.size();) {
+            out.println("<tr>");
+            for (int j = 0; j < 7; j++) {
+                if (i < 63) {
+                    seat = allSeat.get(i);
+                }
+                i = i + 1;
+                if (seat.availability) {
+                    out.println("<td>" + seat.seatNo + "<br>  " + seatTypeDO.getType(seat.typeId) + "<br>  " + "Not booked" + "<br> " + "" + "<br>" + "" + "<br>" + "" + "</td> ");
+                } else {
+                    long pnr = seatPassengerDO.get(seat.trainClassSeatStatusId).pnr;
+                    if (pnr == 0) {
+                        unAssign = true;
+                        out.println("<td>" + seat.seatNo + "<br>  " + seatTypeDO.getType(seat.typeId) + "<br>  " + "Not assigned<span style=\"color:blue\">*</span>" + "<br> " + "" + "<br>" + "" + "<br>" + "" + "</td> ");
+                    } else {
+                        String gen;
+                        Passenger p = pdo.getByCNFSeat(pnr, seat.seatNo);
+                        if (p.gender == 1) {
+                            gen = "Male";
+                        } else {
+                            gen = "Female";
+                        }
+                        out.println("<td>" + seat.seatNo + "<br>  " + seatTypeDO.getType(seat.typeId) + "<br>" + pnr + "<br> " + p.name + "<br>" + gen + "<br>" + p.age + "</td> ");
+                    }
+                }
+            }
+            out.println("</tr>");
+        }
+        out.println("</tbody></table>");
+        if (unAssign) {
+            out.println("<span style=\"color:blue\">*</span> Prepare chart to view the final seat assignment.");
+        }
+    %>
+    <br>
+
+    <%
+        List<Passenger> racList = chartDO.getAllByStatus(2);
+
+        if (racList.size()
+                == 0) {
+            out.println("<!--");
+        }
+
+        out.println(
+                "Passengers who are in RAC and share the rac seats<br>");
+        out.println(
+                "<table class=\"table table-bordered\"><thead><tr><th>PNR</th><th>Name</th><th>Age</th><th>Seat</th></tr></thead>");
+        out.println(
+                "<tbody>");
+        int finalRacCount = racList.size();
+        if (finalRacCount <= ((tcs.maxRac) / 2)) {
+            for (Passenger p : racList) {
+                p.seat_no = (p.seat_no * 8) - 1;
+                out.println("<tr><td>" + p.pnr + "<br> " + p.name + "<br>" + p.age + "<br>" + p.seat_no + "</tr>");
+            }
+        } else if (finalRacCount == tcs.maxRac) {
+            int i = 0;
+            boolean flg = false;
+            for (Passenger p : racList) {
+                String seatS = "" + ((i * 8) + 7);
+                if (!flg) {
+                    seatS += " A";
+                    flg = true;
+                } else {
+                    seatS += " B";
+                    flg = false;
+                    i++;
+                }
+                out.println("<tr><td>" + p.pnr + "<br> " + p.name + "<br>" + p.age + "<br>" + seatS + "</tr>");
+            }
+        } else {
+            int singleCount = tcs.maxRac - finalRacCount, i;
+            for (i = 0; i < singleCount; i++) {
+                Passenger p = racList.get(0);
+                p.seat_no = (p.seat_no * 8) - 1;
+                out.println("<tr><td>" + p.pnr + "<br> " + p.name + "<br>" + p.age + "<br>" + p.seat_no + "</tr>");
+                racList.remove(p);
+            }
+            boolean flg = false;
+            for (Passenger p : racList) {
+                String seatS = "" + ((i * 8) + 7);
+                if (!flg) {
+                    seatS += " A";
+                    flg = true;
+                } else {
+                    seatS += " B";
+                    flg = false;
+                    i++;
+                }
+                out.println("<tr><td>" + p.pnr + "<br> " + p.name + "<br>" + p.age + "<br>" + seatS + "</tr>");
+            }
+        }
+
+        out.println(
+                "</tbody></table>");
+        if (racList.size()
+                == 0) {
+            out.println("-->");
+        }
+    %>
+</div>

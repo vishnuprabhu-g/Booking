@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <servlet>
+        <servlet-name>Book</servlet-name>
+        <servlet-class>booking.BookNew</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Cancel</servlet-name>
+        <servlet-class>booking.Cancel</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Chart</servlet-name>
+        <servlet-class>booking.Chart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookNew</servlet-name>
+        <servlet-class>booking.BookNew</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Book</servlet-name>
+        <url-pattern>/Book</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Cancel</servlet-name>
+        <url-pattern>/Cancel</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Chart</servlet-name>
+        <url-pattern>/Chart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookNew</servlet-name>
+        <url-pattern>/BookNew</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+</web-app>

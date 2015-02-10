@@ -1,0 +1,15 @@
+<strong>Reservation Charge:</strong><br>
+    <p>Rs.15 upto 100 kms.<br>
+    Rs.30 above that.<br></p>
+<br>
+<strong>Cancellation charge:</strong><br>
+    Rs.30 before chart preparation.<br>
+ <br>   
+<strong>Child Age concession.</strong><br>
+    50% of the basic fare(Other charges will apply).<br>
+<br>
+<strong>Senior citizen concession:</strong><br>
+    (Above age 60)<br>
+        50% of the basic fare(Other charges will apply).<br>
+<br>
+ <i>Total Amount will be rounded off to the next higher multiple of Rs. 5. <br>
