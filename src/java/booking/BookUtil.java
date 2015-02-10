@@ -20,7 +20,7 @@ class BookUtil {
 
     TrainClassSeatStatusDO tcssdo = new TrainClassSeatStatusDO();
     long tcsID = 1;
-    BookingClass bc;
+    BookingClass booking;
 
     public int getANewBox(int size) throws SQLException {
         int box = tcssdo.getBoxFreeforPassengers(tcsID, size);
@@ -44,20 +44,16 @@ class BookUtil {
             System.out.println(p.name + p.age + p.no);
         }
 
+        booking.box = box;
         for (Passenger p : passList) {
-            bc = new BookingClass();
-            bc.box = box;
             boolean st;
             if (p.seat_no != 0) {
-                st = bc.BookPrefrredTicket(p, p.seat_no);
+                st = booking.BookPrefrredTicket(p, p.seat_no);
             } else {
-                st = bc.bookNear(p);
-            }
-            if (!st) {
-                bc.bookNear(p);
+                st = booking.bookNear(p);
             }
         }
-        if (bc.finalise()) {
+        if (booking.finalise()) {
             util.CommitUtil.commit();
         } else {
             util.CommitUtil.rollBack();
@@ -86,15 +82,14 @@ class BookUtil {
             System.out.println(p.name + p.age);
         }
 
+        booking.box = box;
         for (Passenger p : passList) {
-            bc = new BookingClass();
-            bc.box = box;
-            boolean st = bc.BookPrefrredTicket(p, p.seat_no);
+            boolean st = booking.BookPrefrredTicket(p, p.seat_no);
             if (!st) {
-                bc.bookNear(p);
+                booking.bookNear(p);
             }
         }
-        if (bc.finalise()) {
+        if (booking.finalise()) {
             util.CommitUtil.commit();
         } else {
             util.CommitUtil.rollBack();
@@ -109,35 +104,21 @@ class BookUtil {
     }
 
     public boolean ArrangeFew(int box, List<Passenger> passList) throws SQLException {
-        Collections.sort(passList, new Comparator<Passenger>() {
-            @Override
-            public int compare(Passenger a, Passenger b) {
-                if (a.age > b.age) {
-                    return -1;
-                } else {
-                    return 1;
-                }
-            }
-        });
-
         for (Passenger p : passList) {
             System.out.println(p.name + p.age);
         }
 
         for (Passenger p : passList) {
-            bc = new BookingClass();
-            bc.box = box;
-            boolean st = bc.BookPrefrredTicket(p, p.seat_no);
+            boolean st = booking.BookPrefrredTicket(p, p.seat_no);
             if (!st) {
-                bc.bookNear(p);
+                booking.bookNear(p);
             }
         }
-        if (bc.finalise()) {
+        if (booking.finalise()) {
             util.CommitUtil.commit();
         } else {
             util.CommitUtil.rollBack();
         }
-
         return true;
     }
 }

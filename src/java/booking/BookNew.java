@@ -110,6 +110,9 @@ public class BookNew extends HttpServlet {
                 }
             }
 
+            System.out.println("---------Parsed the input given by user----------");
+            System.out.println(passengerList.size());
+
             if (passengerList.isEmpty() && childList.isEmpty()) {
                 out.println("004");/*Empty set*/
 
@@ -118,18 +121,38 @@ public class BookNew extends HttpServlet {
 
             }
             BookUtil bookUtil = new BookUtil();
+            BookingClass booking = new BookingClass();
+            booking.totalPassenger = passengerList.size();
+            booking.requiredLower = requiredBerth;
+            booking.preferredLower = prefchoiceLower;
+            booking.totalChild = childList.size();
+            booking.half = halfTicket;
+            booking.senior = seniorCount;
+            booking.adult = passengerList.size() - halfTicket;
             int box;
             if (passengerList.size() >= 5) {
                 box = bookUtil.getANewBox(passengerList.size());
+                System.out.println("In the booking of >5 tics and box=" + box);
+                booking.box = box;
+                bookUtil.booking = booking;
                 bookUtil.arrangeABox(box, passengerList);
+                response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
             } else if (passengerList.size() <= 2) {
                 box = bookUtil.getFew(passengerList.size());
+                System.out.println("In the booking of <2 tics and box=" + box);
+                booking.box = box;
+                bookUtil.booking = booking;
                 bookUtil.ArrangeFew(box, passengerList);
+                response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
             } else {
                 box = bookUtil.getHalfFree(passengerList.size());
-                bookUtil.ArrangeFew(box, passengerList);
+                System.out.println("In the booking of 3-4 tics and box=" + box);
+                booking.box = box;
+                bookUtil.booking = booking;
+                bookUtil.arrangeHalf(box, passengerList);
+                response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
             }
-
+            util.CommitUtil.commit();
         } catch (SQLException ex) {
             System.out.println("Exception in booknew\n" + ex);
             ex.printStackTrace();
