@@ -56,7 +56,7 @@
                         } else {
                             gen = "Female";
                         }
-                        out.println("<td "+same+">" + seat.seatNo + "<br>  " + seatTypeDO.getType(seat.typeId) + "<br>"+ pnr + "<br> " + p.name + "<br>" + gen + "<br>" + p.age + "</td> ");
+                        out.println("<td class=\"filled\" name=\""+pnr+"\" "+same+">" + seat.seatNo + "<br>  " + seatTypeDO.getType(seat.typeId) + "<br>"+ pnr + "<br> " + p.name + "<br>" + gen + "<br>" + p.age + "</td> ");
                     }
                 }
             }
@@ -135,3 +135,20 @@
         }
     %>
 </div>
+<script>
+   // var objlist=$(".filled").css("border", "9px solid blue");
+    //console.log(objlist.size());
+    $(".filled").each(function(index){
+       //console.log($(this).attr("name"));
+       //console.log(getColor($(this).attr("name")));
+       $(this).css("background-color",getColor($(this).attr("name")));
+    });
+    
+    function getColor(pnr)
+    {
+        var r=pnr.substring(11,13);
+        var g=pnr.substring(9,11);
+        var b=pnr.substring(10,12);        
+        return "#"+r+""+g+""+b;
+    }
+</script>
