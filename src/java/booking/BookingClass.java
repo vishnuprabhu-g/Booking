@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 public class BookingClass {
@@ -403,6 +404,7 @@ public class BookingClass {
             }
 
             StringBuilder sb = new StringBuilder();
+            sb.append(new Date()).append("\n");
             sb.append("PNR:").append(pt.pnr).append("<br>");
             for (Passenger p : queue) {
                 sb.append("Name:").append(p.name).append(" seat:").append(p.seat_no).append("<br>");

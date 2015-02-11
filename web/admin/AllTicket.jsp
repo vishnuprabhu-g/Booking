@@ -3,7 +3,7 @@
 <%@page import="java.util.List"%>
 <%@page import="Do.*"%>
 <%@page import="Domain.*"%>
-
+<%! int x=10;%>
 <%
     List<Reservation> resList = null;
     PassengerTicketDO ptdo = new PassengerTicketDO();

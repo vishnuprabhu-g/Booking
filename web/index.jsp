@@ -8,16 +8,16 @@
         <link rel="icon" href="css/logo.png">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body>
+    <body style="height: 100%">
         <script src="css/jquery.min.js" type="text/javascript"></script>
         <script src="css/jquery-ui.js"></script>
-        <div style="width:94%;margin-left: 3%;margin-top: 0.2%;box-shadow: 10px 10px 5px #888888; ">
-            <div class="row" style="background-color: #e6e6e6">
+        <div style="width:94%;height:10% ;margin-left: 3%;margin-top: 0.2%;box-shadow: 10px 10px 5px #888888; ">
+            <div class="row" style="height: 10%;background-color: #e6e6e6">
                 <div class="col-lg-3"><a href="/Booking"><img src="css/logo.png" alt="logo" height="100"></a></div>
                 <div class="col-lg-6"><h2>Online ticket reservation system</h2>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" style="height: 90%;min-height: 90%">
                 <div class="col-lg-12" style="background-color:#3276b1 ">
                     <div align="right">
                         <a style="margin-left: 3px" href="#" onclick="fn(0)" title="currect status"><font color="white"> View current tickets</font></a> 
@@ -38,7 +38,7 @@
                         </h3>
                     </div>
                 </center>
-                <div class="col-lg-9" style="height: 500px;max-height: 500px;padding-left:3%;padding-top:3%  ;overflow: auto ;background-color:ghostwhite ">
+                <div class="col-lg-9" style="height: 80%;max-height: 80%;padding-left:3%;padding-top:3%  ;overflow: auto ;background-color:ghostwhite ">
                     <div id="main">
                         <h4>
                             <br>
