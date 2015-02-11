@@ -19,7 +19,6 @@
     }
 
     StationDO sdo = new StationDO();
-
     TrainClassStatusDO tcsdo = new TrainClassStatusDO();
     TrainClassStatus classStatus = tcsdo.get(statusId);
     TrainClassRacStatusDO racdo = new TrainClassRacStatusDO();
