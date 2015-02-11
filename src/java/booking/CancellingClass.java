@@ -19,7 +19,7 @@ public class CancellingClass {
     TrainClassSeatStatusDO tcssdo;
     TrainClassStatus tcs;
     public long trainClassStatusId = 1;
-    public int maxRac = 4;
+    public int maxRac = 18;
     public int wait = 1, refund = 0;
     //public int initial_wait=1;
     boolean waitUpdated = false;

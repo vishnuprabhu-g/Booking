@@ -275,6 +275,15 @@
                 mywindow.close();
                 return true;
             }
+
+            function selectAll()
+            {
+                //console.log($(".cb").size());
+                $(".cb").each(function ()
+                {
+                    this.checked = true;
+                });
+            }
         </script>
     </body>
 </html>

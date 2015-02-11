@@ -48,7 +48,6 @@
     if (classStatus.chart) {
         message = "Chart prepared..No more bookings..!";
     } else {
-
         if (available > 0 && racA == 1) {
             message = "Available " + available;
         } else if (available > 0 && racA > 1) {
@@ -59,6 +58,12 @@
             }
         } else if (available <= 0 && availbleA > 0) {
             if (initial_waiting == 1) {
+                if (racA <= maxRac) {
+                    message = "RAC " + racA + "/ CNF";
+                } else {
+                    message = "WL " + initial_waiting + "/ CNF";
+                }
+            } else {
                 if (racA <= maxRac) {
                     message = "RAC " + racA + "/ CNF";
                 } else {
@@ -91,15 +96,15 @@
         <tr><th>Train Number</th><th>Name</th><th>From</th><th>To</th><th>Distance(KM)</th> <th>Fare (&#8377) </th> <th>Current Status</th></tr>
     </thead>
     <tbody>
-        <tr class="success"> <td>1001</td><td>CBE express</td><td><%=sdo.get(from).name%></td><td><%=sdo.get(to).name%></td><td><%=(int) distance%> </td> <td><%= fare%> </td> <td title="<% if (!classStatus.chart) {
-                    out.print(detailAvl);
-                                                                                                                                                                               }%>"><%= message%><br> <% if (classStatus.chart) {
-                                                                                                                                                                                           out.print(" <!-- ");
-                                                                                                                                                                                       } %><a href="#" onclick="showBook()"  >Book now</a><% if (classStatus.chart) {
-                                out.print(" --> ");
-                            }%>
-            </td></tr>
-    </tbody>
+                                                                                                                                                                               <tr class="success"> <td>1001</td><td>CBE express</td><td><%=sdo.get(from).name%></td><td><%=sdo.get(to).name%></td><td><%=(int) distance%> </td> <td><%= fare%> </td> <td title="<% if (!classStatus.chart) {
+                out.print(detailAvl);
+            }%>"><%= message%><br> <% if (classStatus.chart) {
+                                                                                                                                                                                       out.print(" <!-- ");
+                                                                                                                                                                                   } %><a href="#" onclick="showBook()"  >Book now</a><% if (classStatus.chart) {
+                                                                                                                                                                                               out.print(" --> ");
+                                                                                                                                                                                           }%>
+        </td></tr>
+</tbody>
 </table>
 <br>
 <div>

@@ -132,6 +132,7 @@ public class BookNew extends HttpServlet {
             booking.senior = seniorCount;
             booking.adult = passengerList.size() - halfTicket;
             booking.child = childList;
+            bookUtil.booking = booking;
 
             int box;
             if (passengerList.size() >= 5) {
@@ -143,8 +144,9 @@ public class BookNew extends HttpServlet {
                     booking.box = box;
                     bookUtil.booking = booking;
                     bookUtil.arrangeABox(box, passengerList);
-                    response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
                 }
+                response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
+
             } else if (passengerList.size() <= 2) {
                 box = bookUtil.getFew(passengerList);
                 System.out.println("In the booking of <2 tics and box=" + box);
@@ -154,8 +156,9 @@ public class BookNew extends HttpServlet {
                     booking.box = box;
                     bookUtil.booking = booking;
                     bookUtil.ArrangeFew(box, passengerList);
-                    response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
                 }
+                response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
+
             } else {
                 box = bookUtil.getFew(passengerList);
                 System.out.println("In the booking of 3-4 tics and box=" + box);
@@ -165,12 +168,12 @@ public class BookNew extends HttpServlet {
                     booking.box = box;
                     bookUtil.booking = booking;
                     bookUtil.arrangeHalf(box, passengerList);
-                    response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
                 }
+                response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
+
             }
             util.CommitUtil.commit();
-        } 
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             System.out.println("Exception in booknew\n" + ex);
             out.println("006");
             ex.printStackTrace();

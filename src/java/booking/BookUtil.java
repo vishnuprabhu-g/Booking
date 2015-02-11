@@ -153,6 +153,7 @@ class BookUtil {
     }
 
     public void openBook(List<Passenger> passList) throws SQLException {
+        booking.box=tcssdo.getBoxFreeforPassengersRelaxed(tcsID, passList.size());
         boolean bookingOpn;
         for (Passenger p : passList) {
             bookingOpn=booking.isBookingOpen();

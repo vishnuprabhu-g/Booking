@@ -31,7 +31,7 @@ public class BookingClass {
     public long trianClassId = 1, journey_id = 1;
     int near = 1, adult = 0, half = 0, senior, box = 0;
     int bookedRac = 0;
-    public int wait, initial_wait, racVal, max_rac = 4, max_waiting = 50;//fetch it from db
+    public int wait, initial_wait, racVal, max_rac = 18, max_waiting = 50;//fetch it from db
     public int preferredLower;// How many selected lower
     public long class_id, from_id, to_id;
     public String message, coach = "S1";

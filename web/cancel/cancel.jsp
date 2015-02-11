@@ -55,7 +55,7 @@
                     if (p.statusId == 4) {
                         dis = "disabled";
                     }
-                    out.println("<tr><td> <input type=\"checkbox\" name=\"sno" + (i++) + "\" value=\"" + p.sno + " \" " + dis + " >");
+                    out.println("<tr><td> <input class=\"cb\" type=\"checkbox\" name=\"sno" + (i++) + "\" value=\"" + p.sno + " \" " + dis + " >");
                     out.println("</td><td>" + p.name + "</td><td>" + p.age + "</td>");
                     int status = p.statusId;
                     String clr = "";
@@ -112,6 +112,7 @@
                 out.println("-->");
             }
         %>
-    </form> 
+    </form>
+    <button href="#" onclick="selectAll()" >Select all</button> 
     <button href="#" onclick="cancelLast()" >Cancel selected tickets</button>   
 </center>

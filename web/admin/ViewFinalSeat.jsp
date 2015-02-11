@@ -26,9 +26,10 @@
         List< TrainClassSeatStatus> allSeat = tcssdo.getAll(trainClassStatusID);
         out.println("<table border=1 class=\"table table-bordered\"><thead><tr></tr></thead>");
         out.println("<tbody>");
-        boolean unAssign = false;String same;
+        boolean unAssign = false;
+        String same;
         TrainClassSeatStatus seat = null;
-        long lastPnr=0;
+        long lastPnr = 0;
         for (int i = 0; i < allSeat.size();) {
             out.println("<tr>");
             for (int j = 0; j < 7; j++) {
@@ -40,11 +41,12 @@
                     out.println("<td style=\"color:lightgray\">" + seat.seatNo + "<br>  " + seatTypeDO.getType(seat.typeId) + "<br>  " + "Not booked" + "<br> " + "" + "<br>" + "" + "<br>" + "" + "</td> ");
                 } else {
                     long pnr = seatPassengerDO.get(seat.trainClassSeatStatusId).pnr;
-                    if(pnr==lastPnr)
-                        same= "style=\"color:blue\"";
-                    else
-                        same="";
-                    lastPnr=pnr;
+                    if (pnr == lastPnr) {
+                        same = "style=\"color:blue\"";
+                    } else {
+                        same = "";
+                    }
+                    lastPnr = pnr;
                     if (pnr == 0) {
                         unAssign = true;
                         out.println("<td style=\"color:orange\" >" + seat.seatNo + "<br>  " + seatTypeDO.getType(seat.typeId) + "<br>  " + "Not assigned<span style=\"color:blue\">*</span>" + "<br> " + "" + "<br>" + "" + "<br>" + "" + "</td> ");
@@ -56,7 +58,7 @@
                         } else {
                             gen = "Female";
                         }
-                        out.println("<td class=\"filled\" name=\""+pnr+"\" "+same+">" + seat.seatNo + "<br>  " + seatTypeDO.getType(seat.typeId) + "<br>"+ pnr + "<br> " + p.name + "<br>" + gen + "<br>" + p.age + "</td> ");
+                        out.println("<td class=\"filled\" name=\"" + pnr + "\" " + same + ">" + seat.seatNo + "<br>  " + seatTypeDO.getType(seat.typeId) + "<br>" + pnr + "<br> " + p.name + "<br>" + gen + "<br>" + p.age + "</td> ");
                     }
                 }
             }
@@ -87,7 +89,7 @@
         if (finalRacCount <= ((tcs.maxRac) / 2)) {
             for (Passenger p : racList) {
                 p.seat_no = (p.seat_no * 8) - 1;
-                out.println("<tr><td>" + p.pnr + "<br> " + p.name + "<br>" + p.age + "<br>" + p.seat_no + "</tr>");
+                out.println("<tr><td>" + p.pnr + "</td><td> " + p.name + "</td><td>" + p.age + "</td><td>" + p.seat_no + "</tr>");
             }
         } else if (finalRacCount == tcs.maxRac) {
             int i = 0;
@@ -102,14 +104,14 @@
                     flg = false;
                     i++;
                 }
-                out.println("<tr><td>" + p.pnr + "<br> " + p.name + "<br>" + p.age + "<br>" + seatS + "</tr>");
+                out.println("<tr><td>" + p.pnr + "</td><td> " + p.name + "</td><td>" + p.age + "</td><td>" + seatS + "</tr>");
             }
         } else {
             int singleCount = tcs.maxRac - finalRacCount, i;
             for (i = 0; i < singleCount; i++) {
                 Passenger p = racList.get(0);
                 p.seat_no = (p.seat_no * 8) - 1;
-                out.println("<tr><td>" + p.pnr + "<br> " + p.name + "<br>" + p.age + "<br>" + p.seat_no + "</tr>");
+                out.println("<tr><td>" + p.pnr + "</td><td> " + p.name + "</td><td>" + p.age + "</td><td>" + p.seat_no + "</tr>");
                 racList.remove(p);
             }
             boolean flg = false;
@@ -123,7 +125,7 @@
                     flg = false;
                     i++;
                 }
-                out.println("<tr><td>" + p.pnr + "<br> " + p.name + "<br>" + p.age + "<br>" + seatS + "</tr>");
+                out.println("<tr><td>" + p.pnr + "</td><td> " + p.name + "</td><td>" + p.age + "</td><td>" + seatS + "</tr>");
             }
         }
 
@@ -136,19 +138,21 @@
     %>
 </div>
 <script>
-   // var objlist=$(".filled").css("border", "9px solid blue");
+    // var objlist=$(".filled").css("border", "9px solid blue");
     //console.log(objlist.size());
-    $(".filled").each(function(index){
-       //console.log($(this).attr("name"));
-       //console.log(getColor($(this).attr("name")));
-       $(this).css("background-color",getColor($(this).attr("name")));
-    });
-    
+    function a() {
+        $(".filled").each(function (index) {
+            //console.log($(this).attr("name"));
+            //console.log(getColor($(this).attr("name")));
+            $(this).css("background-color", getColor($(this).attr("name")));
+        });
+    }
+
     function getColor(pnr)
     {
-        var r=pnr.substring(11,13);
-        var g=pnr.substring(9,11);
-        var b=pnr.substring(10,12);        
-        return "#"+r+""+g+""+b;
+        var r = pnr.substring(11, 13);
+        var g = pnr.substring(9, 11);
+        var b = pnr.substring(10, 12);
+        return "#" + r + "" + g + "" + b;
     }
 </script>
