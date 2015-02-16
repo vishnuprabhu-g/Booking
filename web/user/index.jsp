@@ -95,13 +95,13 @@
         <tr><th>Train Number</th><th>Name</th><th>From</th><th>To</th><th>Distance(KM)</th> <th>Fare (&#8377) </th> <th>Current Status</th></tr>
     </thead>
     <tbody>
-            <tr class="success"> <td>1001</td><td>CBE express</td><td><%=sdo.get(from).name%></td><td><%=sdo.get(to).name%></td><td><%=(int) distance%> </td> <td><%= fare%> </td> <td title="<% if (!classStatus.chart) {
-                                                                                                                                                                                       out.print(detailAvl);
-                                                                                                                                                                                   }%>"><%= message%><br> <% if (classStatus.chart) {
-                    out.print(" <!-- ");
-                } %><a href="javascript:void(0)" onclick="showBook()"  >Book now</a><% if (classStatus.chart) {
-                                                                                                                                                                                           out.print(" --> ");
-                                                                                                                                                                                       }%>
+                                                                                                                                                                               <tr class="success"> <td>1001</td><td>CBE express</td><td><%=sdo.get(from).name%></td><td><%=sdo.get(to).name%></td><td><%=(int) distance%> </td> <td><%= fare%> </td> <td title="<% if (!classStatus.chart) {
+                    out.print(detailAvl);
+                }%>"><%= message%><br> <% if (classStatus.chart) {
+                                                                                                                                                                                           out.print(" <!-- ");
+                                                                                                                                                                                       } %><a href="javascript:void(0)" onclick="showBook()"  >Book now</a><% if (classStatus.chart) {
+                        out.print(" --> ");
+                    }%>
             </td></tr>
     </tbody>
 </table>

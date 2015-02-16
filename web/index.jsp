@@ -6,18 +6,20 @@
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/jquery-ui.css">
         <link rel="icon" href="css/logo.png">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0">
     </head>
-    <body style="height: 100%">
+    <body>
         <script src="css/jquery.min.js" type="text/javascript"></script>
         <script src="css/jquery-ui.js"></script>
-        <div style="width:94%;height:10% ;margin-left: 3%;margin-top: 0.2%;box-shadow: 10px 10px 5px #888888; ">
-            <div class="row" style="height: 10%;background-color: #e6e6e6">
+        <div style="width:94%;height: 100%;margin-left: 3%;margin-top: 0.2%;">
+            <!--Top bar row -->
+            <div class="row" style="background-color: #e6e6e6">
                 <div class="col-lg-3"><a href="/Booking"><img src="css/logo.png" alt="logo" height="100"></a></div>
-                <div class="col-lg-6"><h2>Online ticket reservation system</h2>
+                <div class="col-lg-6"><h2>Online railway ticket reservation system</h2>
                 </div>
             </div>
-            <div class="row" style="height: 90%;min-height: 90%">
+            <!--second small bar row -->
+            <div class="row">
                 <div class="col-lg-12" style="background-color:#3276b1 ">
                     <div align="right">
                         <a style="margin-left: 3px" href="javascript:void(0)" onclick="fn(0)" title="currect status"><font color="white"> View current tickets</font></a> 
@@ -27,9 +29,10 @@
                     </div>
                 </div>
             </div>
-            <div class="row" style="height: 80%;max-height: 80%">
+            <!--body row -->
+            <div class="row" style="height: 78vh">
                 <center>
-                    <div class="col-lg-3" style="background-color: #ffffcc;height:500px ">
+                    <div class="col-lg-3" style="background-color: #ffffcc;height:78vh;min-height: 78vh ">
                         <h3>
                             <a href="javascript:void(0)" onclick="fn(1)" >Book tickets</a>
                             <br><br>
@@ -38,7 +41,7 @@
                         </h3>
                     </div>
                 </center>
-                <div class="col-lg-9" style="height: 80%;max-height: 80%;padding-left:3%;padding-top:3%  ;overflow: auto ;background-color:ghostwhite ">
+                <div class="col-lg-9" style="height: 78vh;max-height: 78vh;min-height: 78vh;padding-left:3%;padding-top:3%  ;overflow: auto ;background-color:ghostwhite ">
                     <div id="main">
                         <h4>
                             <br>
@@ -46,11 +49,13 @@
                             <br> </h4>
                         <p>An advanced CRS(Computer reservation system) that gives you the best booking experience..!</p>
                     </div>
-                </div>
+                </div>               
+            </div>
+            <div class="row">
+                <div class="col-lg-12"><div style="background-color: #3276b1"><center><p>Online ticket reservation system</p></center></div></div>
             </div>
         </div>
         <div id="dia" style="display: none;padding-left: 1px" title="Ticket Details" >
-
         </div>
         <script type="text/javascript">
             function fn(val)
@@ -221,8 +226,7 @@
                             buttons: {
                                 Ok: function () {
                                     $(this).dialog("close");
-                                    window.location = "Booking/";
-                                    location.reload();
+                                    fn(3);
                                 }
                             }
                         });
