@@ -20,20 +20,20 @@
             <div class="row" style="height: 90%;min-height: 90%">
                 <div class="col-lg-12" style="background-color:#3276b1 ">
                     <div align="right">
-                        <a style="margin-left: 3px" href="#" onclick="fn(0)" title="currect status"><font color="white"> View current tickets</font></a> 
-                        <a style="margin-left: 3px" href="#" onclick="fn(4)" title="Reset system"><font color="white"> Reset</font></a>
-                        <a style="margin-left: 3px" href="#" onclick="fn(5)" title="Prepare chart" ><font color="white">Prepare chart</font></a>
-                        <a style="margin-left: 3px" href="#" onclick="fn(6)" title="View chart" ><font color="white">View chart</font></a> 
+                        <a style="margin-left: 3px" href="javascript:void(0)" onclick="fn(0)" title="currect status"><font color="white"> View current tickets</font></a> 
+                        <a style="margin-left: 3px" href="javascript:void(0)" onclick="fn(4)" title="Reset system"><font color="white"> Reset</font></a>
+                        <a style="margin-left: 3px" href="javascript:void(0)" onclick="fn(5)" title="Prepare chart" ><font color="white">Prepare chart</font></a>
+                        <a style="margin-left: 3px" href="javascript:void(0)" onclick="fn(6)" title="View chart" ><font color="white">View chart</font></a> 
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" style="height: 80%;max-height: 80%">
                 <center>
                     <div class="col-lg-3" style="background-color: #ffffcc;height:500px ">
                         <h3>
-                            <a href="#" onclick="fn(1)" >Book tickets</a>
+                            <a href="javascript:void(0)" onclick="fn(1)" >Book tickets</a>
                             <br><br>
-                            <a href="#" onclick="fn(3)" >View tickets</a>
+                            <a href="javascript:void(0)" onclick="fn(3)" >View tickets</a>
                             <br><br>
                         </h3>
                     </div>
@@ -49,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <div id="dia" style="display: none;width:auto ;overflow: auto;padding-left: 1px" title="Ticket Details" >
+        <div id="dia" style="display: none;padding-left: 1px" title="Ticket Details" >
 
         </div>
         <script type="text/javascript">

@@ -113,6 +113,6 @@
             }
         %>
     </form>
-    <button href="#" onclick="selectAll()" >Select all</button> 
-    <button href="#" onclick="cancelLast()" >Cancel selected tickets</button>   
+    <button href="javascript:void(0)" onclick="selectAll()" >Select all</button> 
+    <button href="javascript:void(0)" onclick="cancelLast()" >Cancel selected tickets</button>   
 </center>

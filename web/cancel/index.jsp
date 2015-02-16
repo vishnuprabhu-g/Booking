@@ -34,7 +34,7 @@
         <tbody>
             <%
                 for (PassengerTicket pt : tickets) {
-                    out.println("<tr><td>" + pt.pnr + "</td><td>" + pt.Adult + "</td><td><a href=\"#\" onClick=\"viewTic(" + pt.pnr + ") \"\" >View ticket</a></td><td><a href=\"#\" onclick=\"cancel(" + pt.pnr + ") \">Cancel ticket</a> </td></tr>");
+                    out.println("<tr><td>" + pt.pnr + "</td><td>" + pt.Adult + "</td><td><a href=\"javascript:void(0)\" onClick=\"viewTic(" + pt.pnr + ") \"\" >View ticket</a></td><td><a href=\"javascript:void(0)\" onclick=\"cancel(" + pt.pnr + ") \">Cancel ticket</a> </td></tr>");
                 }
             %>
         </tbody>
