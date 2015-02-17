@@ -113,7 +113,7 @@ public class BookNew extends HttpServlet {
 
             System.out.println("---------Parsed the input given by user----------");
             System.out.println(passengerList.size());
-            System.out.println();
+            System.out.println("--------------------------------------------------");
 
             if (passengerList.isEmpty() && childList.isEmpty()) {
                 out.println("004");/*Empty set*/
@@ -135,7 +135,9 @@ public class BookNew extends HttpServlet {
             bookUtil.booking = booking;
 
             int box;
+            //case 1 if passCount is > 5
             if (passengerList.size() >= 5) {
+                
                 box = bookUtil.getANewBox(passengerList.size());
                 System.out.println("In the booking of >5 tics and box=" + box);
                 if (box == 0) {

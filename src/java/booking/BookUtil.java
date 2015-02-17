@@ -152,6 +152,7 @@ class BookUtil {
     }
 
     public void openBook(List<Passenger> passList) throws SQLException {
+        System.out.println("--On open ticket booking");
         booking.box=tcssdo.getBoxFreeforPassengersRelaxed(tcsID, passList.size());
         boolean bookingOpn;
         for (Passenger p : passList) {
@@ -160,7 +161,9 @@ class BookUtil {
                 {
                     if(p.seat_no!=0)
                     {
-                        booking.BookPrefrredTicket(p, p.seat_no);
+                        boolean isBooked=booking.BookPrefrredTicket(p, p.seat_no);
+                        if(!isBooked)
+                            booking.bookNear(p);
                     }
                     else
                         booking.bookNear(p);

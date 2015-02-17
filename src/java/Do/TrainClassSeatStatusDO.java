@@ -136,7 +136,6 @@ public class TrainClassSeatStatusDO {
     }
 
     public TrainClassSeatStatus getPref(long id, int type_id, int near, int box) throws SQLException {
-        System.out.println(box);
         Connection con = util.ConnectionUtil.getConnection();
         String q;
         PreparedStatement ps;

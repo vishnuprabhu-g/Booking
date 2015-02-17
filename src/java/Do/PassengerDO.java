@@ -101,8 +101,6 @@ public class PassengerDO {
 
             out.add(obj);
         }
-        //System.out.println(out.size());
-
         return out;
     }
 
