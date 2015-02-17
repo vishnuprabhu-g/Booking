@@ -136,8 +136,7 @@ public class BookNew extends HttpServlet {
 
             int box;
             //case 1 if passCount is > 5
-            if (passengerList.size() >= 5) {
-                
+            if (passengerList.size() >= 5) {                
                 box = bookUtil.getANewBox(passengerList.size());
                 System.out.println("In the booking of >5 tics and box=" + box);
                 if (box == 0) {

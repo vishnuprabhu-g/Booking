@@ -152,25 +152,56 @@ class BookUtil {
     }
 
     public void openBook(List<Passenger> passList) throws SQLException {
-        System.out.println("--On open ticket booking");
-        booking.box=tcssdo.getBoxFreeforPassengersRelaxed(tcsID, passList.size());
-        boolean bookingOpn;
-        for (Passenger p : passList) {
-            bookingOpn=booking.isBookingOpen();
-                if(bookingOpn)
-                {
-                    if(p.seat_no!=0)
-                    {
-                        boolean isBooked=booking.BookPrefrredTicket(p, p.seat_no);
-                        if(!isBooked)
-                            booking.bookNear(p);
+        System.out.println("---on open ticket booking---");
+        int minMaxBox[] = tcssdo.getCloserOfSize(passList.size());
+        if (minMaxBox.length == 2) {
+            int minBox = minMaxBox[0];
+            int maxBox = minMaxBox[1];
+            System.out.println("System found closer box b/w"+minBox+"to"+maxBox);
+            for (Passenger p : passList)
+            {
+                System.out.println(p);
+                boolean booked = false;
+                for (int x = minBox; x <= maxBox; x++) {
+                    boolean isAvil = booking.searchInBox(x, p);
+                    if (isAvil&&!booked) {
+                        booking.bookInBox(x, p);
+                        booked = true;
+                        break;
                     }
-                    else
-                        booking.bookNear(p);
                 }
-                else
+                if (!booked)//Book without preference in the boxs
+                {
+                    System.out.println("went to openBook->closer->if Not"+p);
+                    for (int x = minBox; x <= maxBox; x++) {
+                        if (booking.isAvailInBox(x)&&!booked) {
+                            p.seat_no = 0;
+                            booking.bookInBox(x, p);
+                            booked = true;
+                        }
+                    }
+                }
+            }
+            booking.finalise();
+        } else {
+            booking.box = tcssdo.getBoxFreeforPassengersRelaxed(tcsID, passList.size());
+            boolean bookingOpn;
+            for (Passenger p : passList) {
+                bookingOpn = booking.isBookingOpen();
+                if (bookingOpn) {
+                    if (p.seat_no != 0) {
+                        boolean isBooked = booking.BookPrefrredTicket(p, p.seat_no);
+                        if (!isBooked) {
+                            booking.bookNear(p);
+                        }
+                    } else {
+                        booking.bookNear(p);
+                    }
+                } else {
                     booking.bookRAC(p);
+                }
+            }
+            booking.finalise();
         }
-        booking.finalise();
     }
 }

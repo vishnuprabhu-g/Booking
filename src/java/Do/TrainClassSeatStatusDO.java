@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class TrainClassSeatStatusDO {
@@ -214,44 +217,41 @@ public class TrainClassSeatStatusDO {
         }
         return lastBox;
     }
-    
+
     public List<Integer> getBoxsFreeforPassengers(long tcsID, int noOfpassengers) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = " select count(*) as free,box from train_class_seat_status where availability=1 and train_class_status_id=? group by box;";
         PreparedStatement ps = con.prepareStatement(q);
         ps.setLong(1, tcsID);
         int box, free;
-        List<Integer> boxs=new ArrayList<Integer>();
+        List<Integer> boxs = new ArrayList<Integer>();
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             free = rs.getInt("free");
             box = rs.getInt("box");
             if (free < noOfpassengers) {
                 continue;
-            }
-            else
-            {
-               boxs.add(box);
+            } else {
+                boxs.add(box);
             }
         }
         return boxs;
     }
-    
-     public int getBoxFreeforPassengersRelaxed(long tcsID, int noOfpassengers) throws SQLException {
+
+    public int getBoxFreeforPassengersRelaxed(long tcsID, int noOfpassengers) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = " select count(*) as free,box from train_class_seat_status where availability=1 and train_class_status_id=? group by box;";
         PreparedStatement ps = con.prepareStatement(q);
         ps.setLong(1, tcsID);
-        int box, free, lastBox = 0, diff = 9,maxFree=0,freeBox=0;
+        int box, free, lastBox = 0, diff = 9, maxFree = 0, freeBox = 0;
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             free = rs.getInt("free");
             box = rs.getInt("box");
             if (free < noOfpassengers) {
-                if(free>maxFree)
-                {
-                    maxFree=free;
-                    freeBox=box;
+                if (free > maxFree) {
+                    maxFree = free;
+                    freeBox = box;
                 }
             } else if (free == noOfpassengers) {
                 return box;
@@ -262,9 +262,88 @@ public class TrainClassSeatStatusDO {
                 }
             }
         }
-        if(lastBox==0)
+        if (lastBox == 0) {
             return freeBox;
+        }
         return lastBox;
     }
-    
+
+    class BoxNFree {
+
+        int box;
+        int free;
+
+        public BoxNFree() {
+        }
+
+        public BoxNFree(int box, int free) {
+            this.box = box;
+            this.free = free;
+        }
+
+    }
+
+    public int[] getCloserOfSize(int size) throws SQLException {
+        int free, total = 0, box[] = new int[20], ibox;
+        Connection con = util.ConnectionUtil.getConnection();
+        String q = " select count(*) as free,box from train_class_seat_status where availability=1 and train_class_status_id=? group by box;";
+        PreparedStatement ps = con.prepareStatement(q);
+        ps.setLong(1, 1);
+        ResultSet rs = ps.executeQuery();
+        List<BoxNFree> boxFree = new ArrayList<BoxNFree>();
+        while (rs.next()) {
+            free = rs.getInt("free");
+            ibox = rs.getInt("box");
+            total += free;
+            box[ibox] = free;
+            boxFree.add(new BoxNFree(ibox, free));
+        }
+        if (total <= size) {
+            return new int[0];
+        }
+
+        Collections.sort(boxFree, new Comparator<BoxNFree>() {
+            @Override
+            public int compare(BoxNFree t, BoxNFree t1) {
+                if (t.free > t1.free) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            }
+        });
+
+        for (BoxNFree bf : boxFree) {
+            System.out.println(bf.box + "-" + bf.free);
+        }
+        int maxIndex = boxFree.size() - 1;
+        int minWidth = 20, minA = 0, minB = 0;
+        for (BoxNFree bf : boxFree) {
+            int currBox = bf.box;
+            int currFree = 0;
+            int a = currBox, b = currBox;
+            int TotFree;
+            while (currFree < size) {
+                if (a > 0) {
+                    a--;
+                }
+                if (b < maxIndex) {
+                    b++;
+                }
+                TotFree = 0;
+                for (int x = a; x <= b; x++) {
+                    TotFree += box[x];
+                }
+                currFree = TotFree;
+            }
+            if ((b - a) < minWidth) {
+                minA = a;
+                minB = b;
+                minWidth = b - a;
+            }
+        }
+        System.out.println(minA + "--" + minB + "--" + minWidth);
+        return new int[]{minA, minB};
+    }
+
 }

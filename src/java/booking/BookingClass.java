@@ -76,8 +76,8 @@ public class BookingClass {
         TrainClassSeatStatus tcss = tcsdo.getPref(trianClassId, pref, near, box);
         if (tcss == null) {
             /*System.out.println("In the book pref-getting null in the selected box");
-            tcss = tcsdo.getPref(trianClassId, pref, near, 0);
-            */
+             tcss = tcsdo.getPref(trianClassId, pref, near, 0);
+             */
         }
 
         if (tcss == null) {
@@ -296,6 +296,9 @@ public class BookingClass {
     }
 
     public boolean finalise() throws SQLException {
+        System.out.println("Called finalise");
+        System.out.println("Queue Size-->"+queue.size()+"Undo size-->"+undo.size());
+        
         if (onlyConfirm && notConfirm) {
             message = "Confirmed tickets are not available.";
             this.UndoJobs(message);
@@ -359,10 +362,10 @@ public class BookingClass {
                     }
                 }
             });
-            
-            for(Passenger p:queue)
-                System.out.println(p.no);
-            
+
+            for (Passenger p : queue) {
+                //System.out.println(p.no);
+            }
 
             for (Passenger pss : queue) {
                 if (pss.age >= 60 || pss.age <= 12) {
@@ -426,5 +429,35 @@ public class BookingClass {
         System.out.println("Preferred lower:" + this.preferredLower);
         System.out.println("Undo jobs exit..!");
         System.out.println("---------------------------");
+    }
+
+    public boolean searchInBox(int box, Passenger p) throws SQLException {
+        if (p.seat_no == 0) {
+            return this.isAvailInBox(box);
+        }
+        TrainClassSeatStatus tcs = tcsdo.getPref(trianClassId, p.seat_no, 0, box);
+        if (tcs == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    void bookInBox(int x, Passenger p) throws SQLException {
+        this.box = x;
+        if (p.seat_no != 0) {
+            this.BookPrefrredTicket(p, p.seat_no);
+        } else {
+            this.bookNear(p);
+        }
+    }
+
+    boolean isAvailInBox(int box) throws SQLException {
+        TrainClassSeatStatus tcs = tcsdo.get(trianClassId, 0, box);
+        if (tcs == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
