@@ -17,6 +17,6 @@ public class Passenger {
 
     @Override
     public String toString() {
-        return this.name + this.age + this.seat_no;
+        return this.name + " " + this.age + " " + this.seat_no;
     }
 }

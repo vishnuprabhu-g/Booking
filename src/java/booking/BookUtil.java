@@ -8,6 +8,7 @@ package booking;
 import Do.*;
 import Domain.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -101,6 +102,7 @@ class BookUtil {
         Collections.sort(boxs);
         for (Integer box : boxs) {
             int rt = this.isFit(passList, box);
+            System.out.println("On Box" + box + "Rt val" + rt);
             if (rt == 0) {
                 return box;
             } else if (rt > 0) {
@@ -115,12 +117,17 @@ class BookUtil {
     }
 
     public int isFit(List<Passenger> list, int box) throws SQLException {
-        int fitCount = 0;
+        int fitCount = 0;//List<TrainClassSeatStatus> undo=new ArrayList<TrainClassSeatStatus>();
+        System.out.println("Finding the fit-->");
         for (Passenger p : list) {
-
+            System.out.println(p.toString());
             if (p.seat_no != 0) {
                 TrainClassSeatStatus tcss = tcssdo.getPref(tcsID, p.seat_no, 0, box);
                 if (tcss != null) {
+                    //System.out.println("SeatNo"+tcss.seatNo);
+                    tcss.availability = false;
+                    tcssdo.update(tcss);
+                    //undo.add(tcss);
                     fitCount++;
                 }
             } else {
@@ -128,10 +135,13 @@ class BookUtil {
             }
         }
         if (list.size() == fitCount) {
+            util.CommitUtil.rollBack();
             return 0;
         } else if (fitCount == 0) {
+            util.CommitUtil.rollBack();
             return -1;
         } else {
+            util.CommitUtil.rollBack();
             return fitCount;
         }
     }
@@ -157,14 +167,13 @@ class BookUtil {
         if (minMaxBox.length == 2) {
             int minBox = minMaxBox[0];
             int maxBox = minMaxBox[1];
-            System.out.println("System found closer box b/w"+minBox+"to"+maxBox);
-            for (Passenger p : passList)
-            {
+            System.out.println("System found closer box b/w" + minBox + "to" + maxBox);
+            for (Passenger p : passList) {
                 System.out.println(p);
                 boolean booked = false;
                 for (int x = minBox; x <= maxBox; x++) {
                     boolean isAvil = booking.searchInBox(x, p);
-                    if (isAvil&&!booked) {
+                    if (isAvil && !booked) {
                         booking.bookInBox(x, p);
                         booked = true;
                         break;
@@ -172,9 +181,9 @@ class BookUtil {
                 }
                 if (!booked)//Book without preference in the boxs
                 {
-                    System.out.println("went to openBook->closer->if Not"+p);
+                    System.out.println("went to openBook->closer->if Not" + p);
                     for (int x = minBox; x <= maxBox; x++) {
-                        if (booking.isAvailInBox(x)&&!booked) {
+                        if (booking.isAvailInBox(x) && !booked) {
                             p.seat_no = 0;
                             booking.bookInBox(x, p);
                             booked = true;

@@ -7,6 +7,13 @@
         <link rel="stylesheet" href="css/jquery-ui.css">
         <link rel="icon" href="css/logo.png">
         <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0">
+        <style>
+            body {
+                zoom: 0.98;
+                -moz-transform: scale(0.98);
+                -moz-transform-origin: 0 0;
+            }
+        </style>
     </head>
     <body>
         <script src="css/jquery.min.js" type="text/javascript"></script>

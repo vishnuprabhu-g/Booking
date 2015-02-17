@@ -136,7 +136,7 @@ public class BookNew extends HttpServlet {
 
             int box;
             //case 1 if passCount is > 5
-            if (passengerList.size() >= 5) {                
+            if (passengerList.size() >= 5) {
                 box = bookUtil.getANewBox(passengerList.size());
                 System.out.println("In the booking of >5 tics and box=" + box);
                 if (box == 0) {
@@ -171,17 +171,14 @@ public class BookNew extends HttpServlet {
                     bookUtil.arrangeHalf(box, passengerList);
                 }
                 response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
-
             }
             util.CommitUtil.commit();
         } catch (SQLException ex) {
             System.out.println("Exception in booknew\n" + ex);
             out.println("006");
-            ex.printStackTrace();
-        } catch (NumberFormatException numex) {
-            System.out.println("numberformat exception in booknew\n");
+        } catch (NumberFormatException NumExcep) {
+            System.out.println("numberformat exception in booknew\n"+NumExcep);
             out.println("006Number format exception in the system..!");
-            numex.printStackTrace();
         } finally {
             out.close();
         }
