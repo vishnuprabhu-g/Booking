@@ -58,10 +58,12 @@ function fn(val)
 }
 
 function cancel(pnr) {
-    var url = "cancel/cancel.jsp?pnr=" + pnr;
-    $.get(url, function (data) {
-        $("#main").html(data);
-    });
+    if (pnr !== undefined) {
+        var url = "cancel/cancel.jsp?pnr=" + pnr;
+        $.get(url, function (data) {
+            $("#main").html(data);
+        });
+    }
 }
 
 function showBook() {

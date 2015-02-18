@@ -190,6 +190,13 @@ public class CancellingClass {
             refund = 1;
             Reservation res = rsdo.get(pnr);
             res.ReservationStatus = 3;
+            UnderPassengerDO cdo = new UnderPassengerDO();
+            List<UnderPassenger> child = cdo.getAll(pnr);
+            for(UnderPassenger u:child)
+            {
+                u.status_id=2;
+                cdo.update(u);
+            }
             rsdo.update(res);
         } else {
             Reservation res = rsdo.get(pnr);
