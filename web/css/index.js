@@ -203,9 +203,12 @@ function ProcessCancel()
     cancel(pnr[1]);
 }
 
-function PrintElem()
+function PrintElem(val)
 {
-    elem = $("#to_print");
+    if(val==1)
+        elem=$("#ticket");
+    else
+       elem=$("#to_print");
     Popup($(elem).html());
 }
 

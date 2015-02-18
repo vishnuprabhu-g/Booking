@@ -18,7 +18,7 @@
     SeatPassengerDO seatPassengerDO = new SeatPassengerDO();
     SeatTypeDO seatTypeDO = new SeatTypeDO();
 %>
-<button onclick="PrintElem()">Print this chart</button>
+<button onclick="PrintElem(0)">Print this chart</button>
 <br><br>
 
 <div id="to_print">

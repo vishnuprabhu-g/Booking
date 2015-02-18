@@ -8,7 +8,6 @@ package booking;
 import Do.*;
 import Domain.*;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -43,14 +42,29 @@ class BookUtil {
 
         booking.box = box;
         for (Passenger p : passList) {
-            boolean st;
             if (p.seat_no != 0) {
-                st = booking.BookPrefrredTicket(p, p.seat_no);
-            } else {
-                st = booking.bookNear(p);
+                boolean st;
+                if (p.seat_no != 0) {
+                    st = booking.BookPrefrredTicket(p, p.seat_no);
+                } else {
+                    st = booking.bookNear(p);
+                }
+                if (!st) {
+                    booking.bookNear(p);
+                }
             }
-            if (!st) {
-                booking.bookNear(p);
+        }
+        for (Passenger p : passList) {
+            if (p.seat_no == 0) {
+                boolean st;
+                if (p.seat_no != 0) {
+                    st = booking.BookPrefrredTicket(p, p.seat_no);
+                } else {
+                    st = booking.bookNear(p);
+                }
+                if (!st) {
+                    booking.bookNear(p);
+                }
             }
         }
         if (booking.finalise()) {

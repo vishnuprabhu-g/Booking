@@ -75,7 +75,7 @@ public class BookNew extends HttpServlet {
                 pref = Integer.parseInt(request.getParameter("berth" + index));
                 if (age >= 60 && pref == 0)//senior not made choice ==>make lower as prefered one
                 {
-                    pref = 1;
+                    //pref = 1;
                     seniorCorrection = true;
                 }
                 gender = Integer.parseInt(request.getParameter("gender" + index));
