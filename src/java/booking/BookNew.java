@@ -178,7 +178,7 @@ public class BookNew extends HttpServlet {
             out.println("006");
         } catch (NumberFormatException NumExcep) {
             System.out.println("numberformat exception in booknew\n"+NumExcep);
-            out.println("006Number format exception in the system..!");
+            out.println("005Number format exception in the system..!");
         } finally {
             out.close();
         }
