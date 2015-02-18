@@ -297,8 +297,8 @@ public class BookingClass {
 
     public boolean finalise() throws SQLException {
         System.out.println("Called finalise");
-        System.out.println("Queue Size-->"+queue.size()+"Undo size-->"+undo.size());
-        
+        System.out.println("Queue Size-->" + queue.size() + "Undo size-->" + undo.size());
+
         if (onlyConfirm && notConfirm) {
             message = "Confirmed tickets are not available.";
             this.UndoJobs(message);
@@ -401,8 +401,11 @@ public class BookingClass {
             trainClassStatusDO.update(classSatatus);
 
             UnderPassengerDO cdo = new UnderPassengerDO();
+            int no = 1;
             for (UnderPassenger c : child) {
                 c.pnr = pnr;
+                c.status_id = 1;
+                c.no = no++;
                 cdo.add(c);
             }
 

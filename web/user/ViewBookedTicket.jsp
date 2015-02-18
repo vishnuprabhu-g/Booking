@@ -98,12 +98,17 @@ Children:
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th>Name</th><th>Age</th>
+            <th>Name</th><th>Age</th><th>Status</th>
         </tr>
     </thead>
 
     <% for (UnderPassenger p : child) {
-            out.println("<tr><td>" + p.name + "</td><td>" + p.age + "</td></tr>");
+        String bStatus="";
+        if(p.status_id==1)
+            bStatus="booked";
+        else
+            bStatus="cancelled";
+            out.println("<tr><td>" + p.name + "</td><td>" + p.age + "</td><td>"+bStatus+"</td></tr>");
         }
 
     %>

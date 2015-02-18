@@ -118,9 +118,13 @@ public class BookNew extends HttpServlet {
             if (passengerList.isEmpty() && childList.isEmpty()) {
                 out.println("004");/*Empty set*/
 
+                out.flush();
+                return;
             } else if (passengerList.isEmpty() && childList.size() > 0) {
                 out.println("001");/*Only kids*/
 
+                out.flush();
+                return;
             }
             BookUtil bookUtil = new BookUtil();
             BookingClass booking = new BookingClass();
@@ -147,8 +151,8 @@ public class BookNew extends HttpServlet {
                     bookUtil.arrangeABox(box, passengerList);
                 }
                 response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
-
-            } else if (passengerList.size() <= 2) {
+            } //case 2 if passCount is < 2
+            else if (passengerList.size() <= 2) {
                 box = bookUtil.getFew(passengerList);
                 System.out.println("In the booking of <2 tics and box=" + box);
                 if (box == 0) {
@@ -159,8 +163,8 @@ public class BookNew extends HttpServlet {
                     bookUtil.ArrangeFew(box, passengerList);
                 }
                 response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
-
-            } else {
+            }//case 3 if passcount is medium 
+            else {
                 box = bookUtil.getFew(passengerList);
                 System.out.println("In the booking of 3-4 tics and box=" + box);
                 if (box == 0) {
@@ -177,7 +181,7 @@ public class BookNew extends HttpServlet {
             System.out.println("Exception in booknew\n" + ex);
             out.println("006");
         } catch (NumberFormatException NumExcep) {
-            System.out.println("numberformat exception in booknew\n"+NumExcep);
+            System.out.println("numberformat exception in booknew\n" + NumExcep);
             out.println("005Number format exception in the system..!");
         } finally {
             out.close();

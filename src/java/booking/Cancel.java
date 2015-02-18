@@ -50,10 +50,11 @@ public class Cancel extends HttpServlet {
                         String name = nameAge[0];
                         int age = Integer.parseInt(nameAge[1]);
                         UnderPassenger up = new UnderPassenger();
-                        up.age = age;
+                        up.no = age;
                         up.name = name;
                         up.pnr = pnr;
-                        udo.delete(up);
+                        up.status_id = 2;
+                        udo.update(up);
                         childDeleted = true;
                         PassengerTicket pt = ptdo.get(pnr);
                         pt.Children--;
@@ -66,6 +67,7 @@ public class Cancel extends HttpServlet {
                     return;
                 }
                 if (cancel.isEmpty() && childDeleted) {
+                    util.CommitUtil.commit();
                     out.println("Children ticket cancelled");
                 } else {
                     CancellingClass can = new CancellingClass();

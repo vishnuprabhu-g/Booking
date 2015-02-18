@@ -2,15 +2,14 @@
 <%@page import="Do.*"%>
 <%@page import="Domain.*" %>
 <%
-    long trainClassId=1;
+    long trainClassId = 1;
     PassengerTicketDO ptdo = new PassengerTicketDO();
     PassengerDO pdo = new PassengerDO();
     long pnr = Long.parseLong(request.getParameter("pnr"));
-    
-    TrainClassStatusDO tcsdo=new TrainClassStatusDO();
-    TrainClassStatus tcs=tcsdo.get(trainClassId);
-    if(tcs.chart)
-    {
+
+    TrainClassStatusDO tcsdo = new TrainClassStatusDO();
+    TrainClassStatus tcs = tcsdo.get(trainClassId);
+    if (tcs.chart) {
         out.println("Chart prepared..No cancellaction allowed");
         return;
     }
@@ -72,7 +71,7 @@
                     out.println("<td style=\"background-color:" + clr + " \" >" + sd.get(p.statusId).name + "</td>");
                     String val = "";
                     if (status == 1) {
-                        val = ""+p.coach +"-"+ p.seat_no;
+                        val = "" + p.coach + "-" + p.seat_no;
                     }
                     if (status == 2) {
                         val = "RAC" + p.seat_no;
@@ -94,15 +93,22 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Select</th><th>Name</th><th>Age</th>
+                    <th>Select</th><th>Name</th><th>Age</th><th>Status</th>
                 </tr>
             </thead>
             <tbody>
                 <%
                     i = 1;
                     for (UnderPassenger up : child) {
-                        out.println("<tr><td> <input type=\"checkbox\" name=\"child" + (i++) + "\" value=\"" + up.name + "-" + up.age + "\" " + " >");
-                        out.println("</td><td>" + up.name + "</td><td>" + up.age + "</td></tr>");
+                        String dis = "", status = "";
+                        if (up.status_id == 2) {
+                            dis = "disabled";
+                            status = "cancelled";
+                        } else {
+                            status = "booked";
+                        }
+                        out.println("<tr><td> <input type=\"checkbox\" name=\"child" + (i++) + "\" value=\"" + up.name + "-" + up.no + "\" " + " " + dis + " >");
+                        out.println("</td><td>" + up.name + "</td><td>" + up.age + "</td><td>" + status + "</td></tr>");
                     }
                 %>
             </tbody>
