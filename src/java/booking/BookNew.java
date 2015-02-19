@@ -165,14 +165,14 @@ public class BookNew extends HttpServlet {
                 response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
             }//case 3 if passcount is medium 
             else {
-                box = bookUtil.getFew(passengerList);
+                box = bookUtil.getANewBox(passengerList.size());
                 System.out.println("In the booking of 3-4 tics and box=" + box);
                 if (box == 0) {
                     bookUtil.openBook(passengerList);
                 } else {
                     booking.box = box;
                     bookUtil.booking = booking;
-                    bookUtil.arrangeHalf(box, passengerList);
+                    bookUtil.arrangeABox(box, passengerList);
                 }
                 response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
             }

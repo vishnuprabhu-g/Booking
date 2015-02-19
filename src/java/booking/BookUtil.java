@@ -50,15 +50,20 @@ class BookUtil {
                     st = booking.bookNear(p);
                 }
                 if (!st) {
-                    booking.bookNear(p);
+                    st = booking.BookPrefrredTicketNew(p, p.seat_no);
+                    if (!st) {
+                        booking.bookNear(p);
+                    }
+                    booking.box=box;
                 }
             }
         }
+        booking.box = box;
         for (Passenger p : passList) {
             if (p.seat_no == 0) {
                 boolean st;
                 if (p.seat_no != 0) {
-                    st = booking.BookPrefrredTicket(p, p.seat_no);
+                    st = booking.BookPrefrredTicketNew(p, p.seat_no);
                 } else {
                     st = booking.bookNear(p);
                 }
@@ -198,7 +203,7 @@ class BookUtil {
                     System.out.println("went to openBook->closer->if Not" + p);
                     for (int x = minBox; x <= maxBox; x++) {
                         if (booking.isAvailInBox(x) && !booked) {
-                            p.seat_no = 0;
+                            //p.seat_no = 0;
                             booking.bookInBox(x, p);
                             booked = true;
                         }
@@ -207,6 +212,7 @@ class BookUtil {
             }
             booking.finalise();
         } else {
+            System.out.println("Since no fit,going to book relaxed");
             booking.box = tcssdo.getBoxFreeforPassengersRelaxed(tcsID, passList.size());
             boolean bookingOpn;
             for (Passenger p : passList) {

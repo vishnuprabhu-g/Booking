@@ -316,7 +316,8 @@ public class TrainClassSeatStatusDO {
         for (BoxNFree bf : boxFree) {
             System.out.println(bf.box + "-" + bf.free);
         }
-        int maxIndex = boxFree.size() - 1;
+        //int maxIndex = boxFree.size() - 1;
+        int maxIndex = 9;
         int minWidth = 20, minA = 0, minB = 0;
         for (BoxNFree bf : boxFree) {
             int currBox = bf.box;

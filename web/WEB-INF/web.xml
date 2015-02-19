@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <description>
+        Railway ticket booking app
+    </description>
+    <display-name>Railway ticket booking</display-name>
     <servlet>
         <servlet-name>Book</servlet-name>
         <servlet-class>booking.BookNew</servlet-class>
@@ -37,6 +41,10 @@
             20
         </session-timeout>
     </session-config>
+    <context-param>
+        <param-name>unloadDelay</param-name>
+        <param-value>300</param-value>
+    </context-param>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>

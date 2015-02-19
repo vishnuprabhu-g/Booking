@@ -113,6 +113,46 @@ public class BookingClass {
         return true;
     }
 
+    public boolean BookPrefrredTicketNew(Passenger p, int pref) throws SQLException {
+        TrainClassSeatStatus tcss = tcsdo.getPref(trianClassId, pref, near, box);
+        if (tcss == null) {
+            System.out.println("In the book pref-getting new implement");
+            tcss = tcsdo.getPref(trianClassId, pref, near, 0);
+        }
+
+        if (tcss == null) {
+            System.out.println("Required berth not available..!");
+            return false;
+        } else {
+            tcss.availability = false;
+            tcsdo.update(tcss);
+            undo.add(tcss);
+            if (tcss.typeId == 1) {
+                this.bookedLower++;
+            }
+            if (racVal > 1) {
+                if (racVal <= max_rac) {
+                    p.initialSeatNo = racVal++;
+                    p.initialStatusId = 2;
+                } else {
+                    p.initialSeatNo = initial_wait++;
+                    p.initialStatusId = 3;
+                }
+            } else {
+                p.initialSeatNo = tcss.seatNo;
+                p.initialStatusId = 1;
+            }
+            p.seat_no = tcss.seatNo;
+            this.near = tcss.seatNo;
+            this.box = tcss.box;
+            p.sno = sno++;
+            p.pnr = pnr;
+            p.statusId = 1;
+            queue.add(p);
+        }
+        return true;
+    }
+
     public int checkInBox(Passenger p) throws SQLException {
         if (p.seat_no == 0) {
             TrainClassSeatStatus tcs = tcsdo.get(trianClassId, near, box);
@@ -449,7 +489,7 @@ public class BookingClass {
     void bookInBox(int x, Passenger p) throws SQLException {
         this.box = x;
         if (p.seat_no != 0) {
-            this.BookPrefrredTicket(p, p.seat_no);
+            this.BookPrefrredTicketNew(p, p.seat_no);
         } else {
             this.bookNear(p);
         }
