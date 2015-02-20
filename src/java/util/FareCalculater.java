@@ -11,11 +11,22 @@ package util;
  */
 public class FareCalculater {
 
+    /**
+     *
+     * @param distance
+     * @param costPerKm
+     * @return
+     */
     public static double CalculateFare(double distance, double costPerKm) {
         double actual = distance * costPerKm;
         return Math.ceil(actual);
     }
 
+    /**
+     *
+     * @param distance
+     * @return
+     */
     public static double calculateReservationFare(double distance) {
         if (distance < 100) {
             return 15;
@@ -24,6 +35,11 @@ public class FareCalculater {
         }
     }
 
+    /**
+     *
+     * @param fare
+     * @return
+     */
     public static double roundOff(double fare) {
         double val = Math.ceil(fare);
         if (val % 5 != 0) {

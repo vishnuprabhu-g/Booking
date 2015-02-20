@@ -11,8 +11,17 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ *
+ * @author vishnu-pt517
+ */
 public class TrainClassSeatStatusDO {
 
+    /**
+     *
+     * @param obj
+     * @throws SQLException
+     */
     public void add(TrainClassSeatStatus obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "insert into train_class_seat_status (t_class_status_id ,seat_no ,availability ,pnr ,type_id ) values (? , ?, ?, ?, ? )";
@@ -26,6 +35,11 @@ public class TrainClassSeatStatusDO {
 
     }
 
+    /**
+     *
+     * @param obj
+     * @throws SQLException
+     */
     public void update(TrainClassSeatStatus obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "update train_class_seat_status set availability= ? where train_class_seat_status_id = ?;";
@@ -36,6 +50,11 @@ public class TrainClassSeatStatusDO {
 
     }
 
+    /**
+     *
+     * @param obj
+     * @throws SQLException
+     */
     public void updateAfter(TrainClassSeatStatus obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "update train_class_seat_status set availability= ? where train_class_status_id = ? and seat_no=?;";
@@ -47,6 +66,12 @@ public class TrainClassSeatStatusDO {
 
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public List<TrainClassSeatStatus> getAll(long id) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from train_class_seat_status where train_class_status_id =?;";
@@ -67,6 +92,14 @@ public class TrainClassSeatStatusDO {
         return out;
     }
 
+    /**
+     *
+     * @param id
+     * @param near
+     * @param box
+     * @return
+     * @throws SQLException
+     */
     public TrainClassSeatStatus get(long id, int near, int box) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q;
@@ -100,6 +133,13 @@ public class TrainClassSeatStatusDO {
         return obj;
     }
 
+    /**
+     *
+     * @param classId
+     * @param seatTypeID
+     * @return
+     * @throws SQLException
+     */
     public int getCount(long classId, long seatTypeID) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select COUNT(*) as rowcount from train_class_seat_status where train_class_status_id =? and seat_type_id=? and availability=1;";
@@ -115,6 +155,11 @@ public class TrainClassSeatStatusDO {
         return count;
     }
 
+    /**
+     *
+     * @param classStatusId
+     * @throws SQLException
+     */
     public void addSleeper(long classStatusId) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         int i;
@@ -138,6 +183,15 @@ public class TrainClassSeatStatusDO {
 
     }
 
+    /**
+     *
+     * @param id
+     * @param type_id
+     * @param near
+     * @param box
+     * @return
+     * @throws SQLException
+     */
     public TrainClassSeatStatus getPref(long id, int type_id, int near, int box) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q;
@@ -172,6 +226,13 @@ public class TrainClassSeatStatusDO {
         return obj;
     }
 
+    /**
+     *
+     * @param id
+     * @param seat_no
+     * @return
+     * @throws SQLException
+     */
     public TrainClassSeatStatus getTrainClassSeat(long id, int seat_no) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = " select * from train_class_seat_status where seat_no=? and train_class_status_id=? ";
@@ -194,6 +255,13 @@ public class TrainClassSeatStatusDO {
         return obj;
     }
 
+    /**
+     *
+     * @param tcsID
+     * @param noOfpassengers
+     * @return
+     * @throws SQLException
+     */
     public int getBoxFreeforPassengers(long tcsID, int noOfpassengers) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = " select count(*) as free,box from train_class_seat_status where availability=1 and train_class_status_id=? group by box;";
@@ -218,6 +286,13 @@ public class TrainClassSeatStatusDO {
         return lastBox;
     }
 
+    /**
+     *
+     * @param tcsID
+     * @param noOfpassengers
+     * @return
+     * @throws SQLException
+     */
     public List<Integer> getBoxsFreeforPassengers(long tcsID, int noOfpassengers) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = " select count(*) as free,box from train_class_seat_status where availability=1 and train_class_status_id=? group by box;";
@@ -238,6 +313,13 @@ public class TrainClassSeatStatusDO {
         return boxs;
     }
 
+    /**
+     *
+     * @param tcsID
+     * @param noOfpassengers
+     * @return
+     * @throws SQLException
+     */
     public int getBoxFreeforPassengersRelaxed(long tcsID, int noOfpassengers) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = " select count(*) as free,box from train_class_seat_status where availability=1 and train_class_status_id=? group by box;";
@@ -283,6 +365,12 @@ public class TrainClassSeatStatusDO {
 
     }
 
+    /**
+     *
+     * @param size
+     * @return
+     * @throws SQLException
+     */
     public int[] getCloserOfSize(int size) throws SQLException {
         int free, total = 0, box[] = new int[20], ibox;
         Connection con = util.ConnectionUtil.getConnection();

@@ -16,6 +16,12 @@ import java.sql.SQLException;
  */
 public class ClassDistanceFare {
 
+    /**
+     *
+     * @param classId
+     * @return
+     * @throws SQLException
+     */
     public double getFare(long classId) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from class_distance_fare where class_id =? ;";

@@ -9,8 +9,15 @@ import Domain.TrainClassSeatStatus;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ *
+ * @author vishnu-pt517
+ */
 public class CancellingClass {
 
+    /**
+     *
+     */
     public long pnr;
     List<Integer> cancel;
     ReservationDO rsdo = new ReservationDO();
@@ -18,13 +25,28 @@ public class CancellingClass {
     TrainClassStatusDO trainClassStatusDO;
     TrainClassSeatStatusDO tcssdo;
     TrainClassStatus tcs;
+
+    /**
+     *
+     */
     public long trainClassStatusId = 1;
+
+    /**
+     *
+     */
     public int maxRac = 18;
-    public int wait = 1, refund = 0;
+    public int wait = 1,
+            /**
+             *
+             */
+            refund = 0;
     //public int initial_wait=1;
     boolean waitUpdated = false;
     int amountRefund = 0;
 
+    /**
+     *
+     */
     public CancellingClass() {
         tcssdo = new TrainClassSeatStatusDO();
         this.trainClassStatusDO = new TrainClassStatusDO();
@@ -35,6 +57,12 @@ public class CancellingClass {
         }
     }
 
+    /**
+     *
+     * @param p
+     * @return
+     * @throws SQLException
+     */
     public boolean cancelCNF(Passenger p) throws SQLException {
         int seat = p.seat_no;
         p.statusId = 4;
@@ -65,6 +93,12 @@ public class CancellingClass {
         return true;
     }
 
+    /**
+     *
+     * @param p
+     * @return
+     * @throws SQLException
+     */
     public boolean cancelRAC(Passenger p) throws SQLException {
 
         List<Passenger> list = pdo.getAllRac(trainClassStatusId);
@@ -93,6 +127,12 @@ public class CancellingClass {
         return true;
     }
 
+    /**
+     *
+     * @param p
+     * @return
+     * @throws SQLException
+     */
     public boolean cancelWL(Passenger p) throws SQLException {
         int waitno = p.seat_no;
         p.statusId = 4;
@@ -176,6 +216,10 @@ public class CancellingClass {
         return true;
     }
 
+    /**
+     *
+     * @throws SQLException
+     */
     public void finalise() throws SQLException {
         TrainClassStatusDO statusDo = new TrainClassStatusDO();
         TrainClassStatus tcs = new TrainClassStatus();
@@ -192,9 +236,8 @@ public class CancellingClass {
             res.ReservationStatus = 3;
             UnderPassengerDO cdo = new UnderPassengerDO();
             List<UnderPassenger> child = cdo.getAll(pnr);
-            for(UnderPassenger u:child)
-            {
-                u.status_id=2;
+            for (UnderPassenger u : child) {
+                u.status_id = 2;
                 cdo.update(u);
             }
             rsdo.update(res);

@@ -10,6 +10,13 @@ package Domain;
  */
 public class Status {
 
+    /**
+     *
+     */
     public long id;
+
+    /**
+     *
+     */
     public String name;
 }

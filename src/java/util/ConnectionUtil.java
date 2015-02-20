@@ -17,6 +17,10 @@ public class ConnectionUtil {
      */
     private static Connection con;
 
+    /**
+     *
+     * @return
+     */
     public static Connection getConnection() {
         return CreateConnection(DB.getDomain(), DB.getDb(), DB.getUsername(), DB.getPassword());
     }

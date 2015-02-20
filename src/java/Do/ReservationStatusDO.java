@@ -17,6 +17,12 @@ import java.sql.SQLException;
  */
 public class ReservationStatusDO {
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public ReservationStatus get(long id) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from reservation_status where id =?;";

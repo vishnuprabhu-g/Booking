@@ -8,8 +8,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * @author vishnu-pt517
+ */
 public class PassengerDO {
 
+    /**
+     *
+     * @param obj
+     * @throws SQLException
+     */
     public void add(Passenger obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "insert into passengers (pnr ,name ,age ,gender ,seat_no,initial_seat_no ,status_id,initial_status_id ,sno,fare,coach ) values (? , ? ,? ,? , ?, ?, ?, ?, ?,?,? )";
@@ -42,6 +51,11 @@ public class PassengerDO {
 
     }
 
+    /**
+     *
+     * @param obj
+     * @throws SQLException
+     */
     public void update(Passenger obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "update passengers set status_id=?,seat_no=? where pnr = ? and sno=?;";
@@ -54,6 +68,12 @@ public class PassengerDO {
 
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public List<Passenger> getAll(long id) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from passengers where pnr =?;";
@@ -80,6 +100,12 @@ public class PassengerDO {
         return out;
     }
 
+    /**
+     *
+     * @param trainClassId
+     * @return
+     * @throws SQLException
+     */
     public List<Passenger> getAllRac(long trainClassId) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from all_passengers where train_class_status_id=? and status_id=2 order by sno;";
@@ -104,6 +130,12 @@ public class PassengerDO {
         return out;
     }
 
+    /**
+     *
+     * @param trainClassId
+     * @return
+     * @throws SQLException
+     */
     public List<Passenger> getAllWl(long trainClassId) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from all_passengers where train_class_status_id=? and status_id=3 order by sno;";
@@ -128,6 +160,12 @@ public class PassengerDO {
         return out;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public Passenger get(long id) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from passenger where pnr =?;";
@@ -152,6 +190,13 @@ public class PassengerDO {
         return obj;
     }
 
+    /**
+     *
+     * @param pnr
+     * @param sno
+     * @return
+     * @throws SQLException
+     */
     public Passenger get(long pnr, int sno) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from passengers where pnr =? and sno=?;";
@@ -177,6 +222,12 @@ public class PassengerDO {
         return obj;
     }
 
+    /**
+     *
+     * @param class_status_id
+     * @return
+     * @throws SQLException
+     */
     public Passenger getNextRac(long class_status_id) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from all_passengers where train_class_status_id =? and status_id=2 order by sno limit 1;";
@@ -200,6 +251,12 @@ public class PassengerDO {
         return obj;
     }
 
+    /**
+     *
+     * @param trainClassStatusId
+     * @return
+     * @throws SQLException
+     */
     public Passenger getNextwl(Long trainClassStatusId) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from all_passengers where train_class_status_id =? and status_id=3 order by sno limit 1;";
@@ -223,6 +280,13 @@ public class PassengerDO {
         return obj;
     }
 
+    /**
+     *
+     * @param pnr
+     * @param seatno
+     * @return
+     * @throws SQLException
+     */
     public Passenger getBySeat(long pnr, int seatno) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from passengers where pnr =? and seat_no=? ;";
@@ -247,6 +311,13 @@ public class PassengerDO {
         return obj;
     }
 
+    /**
+     *
+     * @param pnr
+     * @param seatno
+     * @return
+     * @throws SQLException
+     */
     public Passenger getByCNFSeat(long pnr, int seatno) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from passengers where pnr =? and seat_no=? and status_id=1;";
@@ -271,6 +342,12 @@ public class PassengerDO {
         return obj;
     }
 
+    /**
+     *
+     * @param pnr
+     * @return
+     * @throws SQLException
+     */
     public boolean checkUncancelled(long pnr) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from passengers where pnr =? and status_id!=4;";

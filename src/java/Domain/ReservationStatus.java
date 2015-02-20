@@ -11,6 +11,13 @@ package Domain;
  */
 public class ReservationStatus {
 
+    /**
+     *
+     */
     public long id;
+
+    /**
+     *
+     */
     public String status;
 }

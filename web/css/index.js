@@ -205,10 +205,10 @@ function ProcessCancel()
 
 function PrintElem(val)
 {
-    if(val==1)
-        elem=$("#ticket");
+    if (val == 1)
+        elem = $("#ticket");
     else
-       elem=$("#to_print");
+        elem = $("#to_print");
     Popup($(elem).html());
 }
 

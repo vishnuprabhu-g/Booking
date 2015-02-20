@@ -11,6 +11,13 @@ package Domain;
  */
 public class SeatPassenger {
 
+    /**
+     *
+     */
     public long seat_id;
+
+    /**
+     *
+     */
     public long pnr;
 }

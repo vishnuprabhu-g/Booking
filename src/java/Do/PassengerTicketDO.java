@@ -8,8 +8,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * @author vishnu-pt517
+ */
 public class PassengerTicketDO {
 
+    /**
+     *
+     * @param obj
+     * @throws SQLException
+     */
     public void add(PassengerTicket obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "insert into passengers_tickets (pnr,from_station_id ,to_stattion_id ,total_fare ,adult ,children,train_class_status_id,basic_fare,reservation_fare,service_charge ) values ( ?, ?, ?, ?, ?, ?,?,?,?,? )";
@@ -28,6 +37,11 @@ public class PassengerTicketDO {
 
     }
 
+    /**
+     *
+     * @param obj
+     * @throws SQLException
+     */
     public void update(PassengerTicket obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "update passengers_tickets set pnr= ?,from_station_id= ?,to_stattion_id= ?,total_fare= ?,adult= ?,children= ? where pnr = ?;";
@@ -43,6 +57,10 @@ public class PassengerTicketDO {
 
     }
 
+    /**
+     *
+     * @return @throws SQLException
+     */
     public List<PassengerTicket> getAll() throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from passengers_tickets ;";
@@ -64,6 +82,12 @@ public class PassengerTicketDO {
         return out;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public PassengerTicket get(long id) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from passengers_tickets where pnr =?;";

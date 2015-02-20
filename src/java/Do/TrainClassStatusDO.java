@@ -8,8 +8,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * @author vishnu-pt517
+ */
 public class TrainClassStatusDO {
 
+    /**
+     *
+     * @param obj
+     * @throws SQLException
+     */
     public void add(TrainClassStatus obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "insert into train_class_status (trian_class_status_id ,status_id ,class_id ,total ,available ,max_waiting ) values (? , ?, ?, ?, ?, ? )";
@@ -24,6 +33,11 @@ public class TrainClassStatusDO {
 
     }
 
+    /**
+     *
+     * @param obj
+     * @throws SQLException
+     */
     public void update(TrainClassStatus obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "update train_class_status set available= ?,sno=?,waiting=?,initial_waiting=?,rac=?,last_status_id=?,last_seat_no=?,a_available=? where train_class_status_id = ?;";
@@ -42,6 +56,12 @@ public class TrainClassStatusDO {
 
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public List<TrainClassStatus> getAll(long id) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from train_class_status where trian_class_status_id =?;";
@@ -63,6 +83,12 @@ public class TrainClassStatusDO {
         return out;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public TrainClassStatus get(long id) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from train_class_status where status_id =?;";
@@ -92,6 +118,12 @@ public class TrainClassStatusDO {
         return obj;
     }
 
+    /**
+     *
+     * @param trianClassId
+     * @return
+     * @throws SQLException
+     */
     public int getSno(long trianClassId) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from train_class_status where train_class_status_id =?;";
@@ -108,6 +140,12 @@ public class TrainClassStatusDO {
         }
     }
 
+    /**
+     *
+     * @param trianClassId
+     * @return
+     * @throws SQLException
+     */
     public int getWaiting(long trianClassId) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from train_class_status where train_class_status_id =?;";
@@ -124,6 +162,12 @@ public class TrainClassStatusDO {
         }
     }
 
+    /**
+     *
+     * @param trianClassId
+     * @return
+     * @throws SQLException
+     */
     public int getWaitingInitial(long trianClassId) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from train_class_status where train_class_status_id =?;";
@@ -140,6 +184,12 @@ public class TrainClassStatusDO {
         }
     }
 
+    /**
+     *
+     * @param trianClassId
+     * @return
+     * @throws SQLException
+     */
     public int getRAC(long trianClassId) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from train_class_status where train_class_status_id =?;";
@@ -156,6 +206,11 @@ public class TrainClassStatusDO {
         }
     }
 
+    /**
+     *
+     * @param obj
+     * @throws SQLException
+     */
     public void updateWaiting(TrainClassStatus obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "update train_class_status set waiting=? where train_class_status_id = ?;";

@@ -19,6 +19,12 @@ import java.util.List;
  */
 public class SeatAllDetailsDO {
 
+    /**
+     *
+     * @param tcs
+     * @return
+     * @throws SQLException
+     */
     public List<TrainClassSeatStatus> getAll(long tcs) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "Select * from seat_all_details where train_class_status_id=?";

@@ -19,8 +19,15 @@ import java.util.List;
  */
 public class ChartDO {
 
+    /**
+     *
+     */
     public long trainClassStausId = 1;
 
+    /**
+     *
+     * @return @throws SQLException
+     */
     public List<Passenger> getAllNewCnf() throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from all_passengers where train_class_status_id=? and initial_status_id!=1 and status_id=1";
@@ -45,6 +52,12 @@ public class ChartDO {
         return cnfList;
     }
 
+    /**
+     *
+     * @param pnr
+     * @return
+     * @throws SQLException
+     */
     public List<Passenger> getAllCNFofPNR(long pnr) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from all_passengers where train_class_status_id=? and initial_status_id=1 and pnr=?";
@@ -70,6 +83,12 @@ public class ChartDO {
         return cnfList;
     }
 
+    /**
+     *
+     * @param seat_no
+     * @return
+     * @throws SQLException
+     */
     public Passenger getSeatNo(int seat_no) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from all_passengers where initial_status_id!=1 and status_id=1 and train_class_status_id=? order by abs(?-seat_no) limit 1;";
@@ -94,6 +113,12 @@ public class ChartDO {
         }
     }
 
+    /**
+     *
+     * @param status
+     * @return
+     * @throws SQLException
+     */
     public List<Passenger> getAllByStatus(int status) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from all_passengers where train_class_status_id=? and status_id=?";
@@ -119,6 +144,11 @@ public class ChartDO {
         return cnfList;
     }
 
+    /**
+     *
+     * @param trainClassStatusID
+     * @throws SQLException
+     */
     public void close(long trainClassStatusID) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "update train_class_status set chart=? where train_class_status_id=?";

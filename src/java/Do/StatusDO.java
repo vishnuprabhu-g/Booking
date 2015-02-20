@@ -8,8 +8,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * @author vishnu-pt517
+ */
 public class StatusDO {
 
+    /**
+     *
+     * @param obj
+     * @throws SQLException
+     */
     public void add(Status obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "insert into status (id ,name ) values (? , ? )";
@@ -20,6 +29,11 @@ public class StatusDO {
 
     }
 
+    /**
+     *
+     * @param obj
+     * @throws SQLException
+     */
     public void update(Status obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "update status set id= ?,name= ? where id = ?;";
@@ -31,6 +45,12 @@ public class StatusDO {
 
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public List<Status> getAll(long id) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from status where id =?;";
@@ -48,6 +68,12 @@ public class StatusDO {
         return out;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public Status get(long id) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from status where id =?;";

@@ -14,8 +14,15 @@ import java.sql.SQLException;
  */
 public class CommitUtil {
 
+    /**
+     *
+     */
     public static Connection con = util.ConnectionUtil.getConnection();
 
+    /**
+     *
+     * @throws SQLException
+     */
     public static void commit() throws SQLException {
         if (con != null) {
             con.commit();
@@ -24,12 +31,20 @@ public class CommitUtil {
         }
     }
 
+    /**
+     *
+     * @throws SQLException
+     */
     public static void rollBack() throws SQLException {
         if (con != null) {
             con.rollback();
         }
     }
 
+    /**
+     *
+     * @throws SQLException
+     */
     public static void init() throws SQLException {
         if (con != null) {
             con.setAutoCommit(false);

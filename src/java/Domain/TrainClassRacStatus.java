@@ -10,9 +10,28 @@ package Domain;
  */
 public class TrainClassRacStatus {
 
+    /**
+     *
+     */
     public long trainClassRacStatusId;
+
+    /**
+     *
+     */
     public long trainClassStatusId;
+
+    /**
+     *
+     */
     public long racNo;
+
+    /**
+     *
+     */
     public long seatNo;
+
+    /**
+     *
+     */
     public boolean availability;
 }

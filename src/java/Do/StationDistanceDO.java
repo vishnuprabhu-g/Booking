@@ -16,6 +16,13 @@ import java.sql.SQLException;
  */
 public class StationDistanceDO {
 
+    /**
+     *
+     * @param from
+     * @param to
+     * @return
+     * @throws SQLException
+     */
     public double getDistance(long from, long to) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from station_distance where from_id =? and to_id=?;";

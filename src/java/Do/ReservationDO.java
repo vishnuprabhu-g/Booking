@@ -8,8 +8,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * @author vishnu-pt517
+ */
 public class ReservationDO {
 
+    /**
+     *
+     * @param obj
+     * @throws SQLException
+     */
     public void add(Reservation obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "insert into reservation (pnr ,journey_id ,reservation_status  ) values (? , ?, ? )";
@@ -21,6 +30,11 @@ public class ReservationDO {
 
     }
 
+    /**
+     *
+     * @param obj
+     * @throws SQLException
+     */
     public void update(Reservation obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "update reservation set pnr= ?,journey_id= ?,reservation_status= ? where pnr = ?;";
@@ -34,6 +48,10 @@ public class ReservationDO {
 
     }
 
+    /**
+     *
+     * @return @throws SQLException
+     */
     public List<Reservation> getAll() throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from reservation ";
@@ -52,6 +70,12 @@ public class ReservationDO {
         return out;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public Reservation get(long id) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from reservation where pnr =?;";

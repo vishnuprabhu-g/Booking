@@ -31,6 +31,10 @@ public class DB {
         return prop.getProperty(name);
     }
 
+    /**
+     *
+     * @return
+     */
     public static String getUsername() {
         String val = new DB().getPropValues("user");
         if (val == null) {
@@ -39,6 +43,10 @@ public class DB {
         return val;
     }
 
+    /**
+     *
+     * @return
+     */
     public static String getPassword() {
         String val = new DB().getPropValues("password");
         if (val == null) {
@@ -47,6 +55,10 @@ public class DB {
         return val;
     }
 
+    /**
+     *
+     * @return
+     */
     public static String getDb() {
         String val = new DB().getPropValues("db");
         if (val == null) {
@@ -55,6 +67,10 @@ public class DB {
         return val;
     }
 
+    /**
+     *
+     * @return
+     */
     public static String getDomain() {
         String val = new DB().getPropValues("domain");
         if (val == null) {

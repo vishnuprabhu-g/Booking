@@ -8,8 +8,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * @author vishnu-pt517
+ */
 public class UnderPassengerDO {
 
+    /**
+     *
+     * @param obj
+     * @throws SQLException
+     */
     public void add(UnderPassenger obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "insert into under_passenger (pnr ,name ,age ,gender ,status_id,no) values (? , ?, ?, ? ,?,?)";
@@ -24,17 +33,28 @@ public class UnderPassengerDO {
 
     }
 
+    /**
+     *
+     * @param obj
+     * @throws SQLException
+     */
     public void update(UnderPassenger obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "update under_passenger set status_id=? where pnr = ? and no=?;";
         PreparedStatement ps = con.prepareStatement(q);
-        ps.setLong(1,obj.status_id);
+        ps.setLong(1, obj.status_id);
         ps.setLong(2, obj.pnr);
         ps.setInt(3, obj.no);
         ps.executeUpdate();
 
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public List<UnderPassenger> getAll(long id) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from under_passenger where pnr =?;";
@@ -49,13 +69,19 @@ public class UnderPassengerDO {
             obj.age = rs.getInt("age");
             obj.gender = rs.getInt("gender");
             obj.status_id = rs.getLong("status_id");
-            obj.no=rs.getInt("no");
+            obj.no = rs.getInt("no");
             out.add(obj);
         }
 
         return out;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public UnderPassenger get(long id) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from under_passenger where pnr =?;";
@@ -73,6 +99,11 @@ public class UnderPassengerDO {
         return obj;
     }
 
+    /**
+     *
+     * @param obj
+     * @throws SQLException
+     */
     public void delete(UnderPassenger obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "delete from under_passenger where pnr= ? and name= ? and age= ?;";

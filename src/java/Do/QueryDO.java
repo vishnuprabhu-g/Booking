@@ -14,6 +14,11 @@ import java.sql.SQLException;
  */
 public class QueryDO {
 
+    /**
+     *
+     * @param qry
+     * @throws SQLException
+     */
     public void executeQry(String qry) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         PreparedStatement ps = con.prepareStatement(qry);

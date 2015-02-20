@@ -8,8 +8,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * @author vishnu-pt517
+ */
 public class TrainClassRacStatusDO {
 
+    /**
+     *
+     * @param obj
+     * @throws SQLException
+     */
     public void add(TrainClassRacStatus obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "insert into r3.train_class_rac_status (train_class_status_id ,rac_no ,seat_no ,availability ) values (? , ?, ?, ? )";
@@ -22,6 +31,11 @@ public class TrainClassRacStatusDO {
 
     }
 
+    /**
+     *
+     * @param obj
+     * @throws SQLException
+     */
     public void update(TrainClassRacStatus obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "update train_class_rac_status set rac_no= ?,seat_no= ?,availability= ? where train_class_rac_status_id = ?;";
@@ -34,6 +48,11 @@ public class TrainClassRacStatusDO {
 
     }
 
+    /**
+     *
+     * @param obj
+     * @throws SQLException
+     */
     public void updateAfter(TrainClassRacStatus obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "update train_class_rac_status set availability= ? where train_class_status_id = ? and rac_no=?;";
@@ -45,6 +64,12 @@ public class TrainClassRacStatusDO {
 
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public List<TrainClassRacStatus> getAll(long id) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from train_class_rac_status where train_class_status_id =?;";
@@ -64,6 +89,12 @@ public class TrainClassRacStatusDO {
         return out;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public TrainClassRacStatus get(long id) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from train_class_rac_status where train_class_status_id =?;";
@@ -81,6 +112,12 @@ public class TrainClassRacStatusDO {
         return obj;
     }
 
+    /**
+     *
+     * @param trianClassId
+     * @return
+     * @throws SQLException
+     */
     public TrainClassRacStatus getAvail(long trianClassId) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from train_class_rac_status where train_class_status_id =? and availability=1;";
@@ -104,6 +141,12 @@ public class TrainClassRacStatusDO {
         return obj;
     }
 
+    /**
+     *
+     * @param classStatusId
+     * @return
+     * @throws SQLException
+     */
     public int getCount(long classStatusId) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select COUNT(*) as rowcount from train_class_rac_status where train_class_status_id =? and availability=1;";

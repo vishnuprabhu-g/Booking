@@ -9,16 +9,55 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+/**
+ *
+ * @author vishnu-pt517
+ */
 public class BookingClass {
 
+    /**
+     *
+     */
     public boolean onlyConfirm;
+
+    /**
+     *
+     */
     public boolean notConfirm;
+
+    /**
+     *
+     */
     public boolean BookOnlyPreferred;
+
+    /**
+     *
+     */
     public boolean prefViolated;
+
+    /**
+     *
+     */
     public int totalPassenger;
+
+    /**
+     *
+     */
     public int totalChild;
+
+    /**
+     *
+     */
     public int prefrredPassengers;
+
+    /**
+     *
+     */
     public int requiredLower;
+
+    /**
+     *
+     */
     public int bookedLower;
     TrainClassStatusDO trainClassStatusDO;
     TrainClassSeatStatusDO tcsdo;
@@ -27,19 +66,62 @@ public class BookingClass {
     List<Passenger> queue = new ArrayList<Passenger>();
     List<UnderPassenger> child = new ArrayList<UnderPassenger>();
     List<TrainClassSeatStatus> undo = new ArrayList<TrainClassSeatStatus>();
+
+    /**
+     *
+     */
     public int sno;
     long pnr;
-    public long trianClassId = 1, journey_id = 1;
+    public long trianClassId = 1,
+            /**
+             *
+             */
+            journey_id = 1;
     int near = 1, adult = 0, half = 0, senior, box = 0;
     int bookedRac = 0;
-    public int wait, initial_wait, racVal, max_rac = 18, max_waiting = 50;//fetch it from db
+    public int wait,
+            /**
+             *
+             */
+            initial_wait,
+            /**
+             *
+             */
+            racVal,
+            /**
+             *
+             */
+            max_rac = 18,
+            /**
+             *
+             */
+            max_waiting = 50;//fetch it from db
+
+    /**
+     *
+     */
     public int preferredLower;// How many selected lower
-    public long class_id, from_id, to_id;
-    public String message, coach = "S1";
+    public long class_id,
+            /**
+             *
+             */
+            from_id,
+            /**
+             *
+             */
+            to_id;
+    public String message,
+            /**
+             *
+             */
+            coach = "S1";
     TrainClassStatus trainClassStatus;
     int lastStatus, lastSeat;
     SeatPassengerDO seatPDo = new SeatPassengerDO();
 
+    /**
+     *
+     */
     public BookingClass() {
         this.BookOnlyPreferred = false;
         this.prefViolated = false;
@@ -68,10 +150,21 @@ public class BookingClass {
         to_id = 2;
     }
 
+    /**
+     *
+     * @throws SQLException
+     */
     public void boxSelect() throws SQLException {
         this.box = tcsdo.getBoxFreeforPassengers(trianClassId, totalPassenger);
     }
 
+    /**
+     *
+     * @param p
+     * @param pref
+     * @return
+     * @throws SQLException
+     */
     public boolean BookPrefrredTicket(Passenger p, int pref) throws SQLException {
         TrainClassSeatStatus tcss = tcsdo.getPref(trianClassId, pref, near, box);
         if (tcss == null) {
@@ -113,6 +206,13 @@ public class BookingClass {
         return true;
     }
 
+    /**
+     *
+     * @param p
+     * @param pref
+     * @return
+     * @throws SQLException
+     */
     public boolean BookPrefrredTicketNew(Passenger p, int pref) throws SQLException {
         TrainClassSeatStatus tcss = tcsdo.getPref(trianClassId, pref, near, box);
         if (tcss == null) {
@@ -153,6 +253,12 @@ public class BookingClass {
         return true;
     }
 
+    /**
+     *
+     * @param p
+     * @return
+     * @throws SQLException
+     */
     public int checkInBox(Passenger p) throws SQLException {
         if (p.seat_no == 0) {
             TrainClassSeatStatus tcs = tcsdo.get(trianClassId, near, box);
@@ -179,6 +285,13 @@ public class BookingClass {
         }
     }
 
+    /**
+     *
+     * @param p
+     * @param t_box
+     * @return
+     * @throws SQLException
+     */
     public boolean checkInBoxX(Passenger p, int t_box) throws SQLException {
         if (p.seat_no == 0) {
             TrainClassSeatStatus tcs = tcsdo.get(trianClassId, near, t_box);
@@ -197,6 +310,11 @@ public class BookingClass {
         }
     }
 
+    /**
+     *
+     * @param arr
+     * @return
+     */
     public boolean isSameBox(int arr[]) {
         for (int i = 0; i < arr.length - 1; i++) {
             if (arr[i] != arr[i + 1]) {
@@ -206,6 +324,12 @@ public class BookingClass {
         return true;
     }
 
+    /**
+     *
+     * @param arr
+     * @param num
+     * @return
+     */
     public int getCountBox(int[] arr, int num) {
         int count = 0;
         for (int x : arr) {
@@ -216,6 +340,11 @@ public class BookingClass {
         return count;
     }
 
+    /**
+     *
+     * @param a
+     * @return
+     */
     public int getPopularElement(int[] a) {
         int count = 1, tempCount;
         int popular = a[0];
@@ -236,6 +365,12 @@ public class BookingClass {
         return popular;
     }
 
+    /**
+     *
+     * @param p
+     * @return
+     * @throws SQLException
+     */
     public boolean bookNear(Passenger p) throws SQLException {
         System.out.println("in method book near..!");
         TrainClassSeatStatus tcss = tcsdo.get(trianClassId, near, box);
@@ -275,6 +410,12 @@ public class BookingClass {
         return true;
     }
 
+    /**
+     *
+     * @param p
+     * @return
+     * @throws SQLException
+     */
     public boolean bookRAC(Passenger p) throws SQLException {
         TrainClassRacStatus rac = racDo.getAvail(trianClassId);
         System.out.println("in RAC");
@@ -330,11 +471,19 @@ public class BookingClass {
         return true;
     }
 
+    /**
+     *
+     * @return @throws SQLException
+     */
     public boolean isBookingOpen() throws SQLException {
         TrainClassSeatStatus tcss = tcsdo.get(trianClassId, near, 0);
         return (tcss != null);
     }
 
+    /**
+     *
+     * @return @throws SQLException
+     */
     public boolean finalise() throws SQLException {
         System.out.println("Called finalise");
         System.out.println("Queue Size-->" + queue.size() + "Undo size-->" + undo.size());
@@ -460,6 +609,11 @@ public class BookingClass {
         }
     }
 
+    /**
+     *
+     * @param message
+     * @throws SQLException
+     */
     public void UndoJobs(String message) throws SQLException {
         for (TrainClassSeatStatus tcss : undo) {
             tcss.availability = true;
@@ -474,6 +628,13 @@ public class BookingClass {
         System.out.println("---------------------------");
     }
 
+    /**
+     *
+     * @param box
+     * @param p
+     * @return
+     * @throws SQLException
+     */
     public boolean searchInBox(int box, Passenger p) throws SQLException {
         if (p.seat_no == 0) {
             return this.isAvailInBox(box);

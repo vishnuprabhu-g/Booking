@@ -54,7 +54,7 @@ class BookUtil {
                     if (!st) {
                         booking.bookNear(p);
                     }
-                    booking.box=box;
+                    booking.box = box;
                 }
             }
         }

@@ -17,6 +17,11 @@ import java.sql.SQLException;
  */
 public class SeatPassengerDO {
 
+    /**
+     *
+     * @param obj
+     * @throws SQLException
+     */
     public void add(SeatPassenger obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "insert into seat_passenger values (? , ? )";
@@ -27,6 +32,11 @@ public class SeatPassengerDO {
 
     }
 
+    /**
+     *
+     * @param obj
+     * @throws SQLException
+     */
     public void update(SeatPassenger obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "update seat_passenger set train_class_seat_status_id= ?,pnr= ? where train_class_seat_status_id = ?;";
@@ -38,6 +48,12 @@ public class SeatPassengerDO {
 
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public SeatPassenger get(long id) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from seat_passenger where train_class_seat_status_id =?;";
@@ -53,6 +69,11 @@ public class SeatPassengerDO {
         return obj;
     }
 
+    /**
+     *
+     * @param seatID
+     * @throws SQLException
+     */
     public void delete(long seatID) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "delete from seat_passenger where train_class_seat_status_id=?;";
