@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -15,13 +14,14 @@ public class TrainClassSeatStatusDO {
 
     public void add(TrainClassSeatStatus obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
-        String q = "insert into train_class_seat_status (t_class_status_id ,seat_no ,availability ,pnr ,type_id ) values (? , ?, ?, ?, ? )";
+        String q = "insert into train_class_seat_status (train_class_status_id ,seat_no ,availability ,seat_type_id ,compartment,box) values (? , ?, ?, ?, ? ,?)";
         PreparedStatement ps = con.prepareStatement(q);
         ps.setLong(1, obj.tClassStatusId);
         ps.setInt(2, obj.seatNo);
         ps.setBoolean(3, obj.availability);
-        ps.setLong(4, obj.pnr);
-        ps.setLong(5, obj.typeId);
+        ps.setLong(4, obj.typeId);
+        ps.setString(5, obj.compartment);
+        ps.setInt(6, obj.box);
         ps.executeUpdate();
 
     }

@@ -10,6 +10,7 @@ public class TrainClassSeatStatus implements Cloneable {
     public long typeId;
     public int id;
     public int box;
+    public String compartment;
 
     @Override
     public Object clone() throws CloneNotSupportedException {
