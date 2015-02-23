@@ -28,7 +28,7 @@ public class UnderPassengerDO {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "update under_passenger set status_id=? where pnr = ? and no=?;";
         PreparedStatement ps = con.prepareStatement(q);
-        ps.setLong(1,obj.status_id);
+        ps.setLong(1, obj.status_id);
         ps.setLong(2, obj.pnr);
         ps.setInt(3, obj.no);
         ps.executeUpdate();
@@ -49,7 +49,7 @@ public class UnderPassengerDO {
             obj.age = rs.getInt("age");
             obj.gender = rs.getInt("gender");
             obj.status_id = rs.getLong("status_id");
-            obj.no=rs.getInt("no");
+            obj.no = rs.getInt("no");
             out.add(obj);
         }
 

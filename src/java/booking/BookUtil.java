@@ -8,6 +8,7 @@ package booking;
 import Do.*;
 import Domain.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -54,7 +55,7 @@ class BookUtil {
                     if (!st) {
                         booking.bookNear(p);
                     }
-                    booking.box=box;
+                    booking.box = box;
                 }
             }
         }
@@ -233,4 +234,72 @@ class BookUtil {
             booking.finalise();
         }
     }
+
+    public void bookInCoach(List<Passenger> passenger, String coach) {
+        System.out.println("Found the coach->" + coach);
+        List<Passenger> Later = new ArrayList<>();
+        for (Passenger p : passenger) {
+            if (p.seat_no != 0) {
+
+            } else {
+                Later.add(p);
+            }
+        }
+
+    }
+
+    public void openBookInCoach(List<Passenger> passList, String coach) throws SQLException {
+        System.out.println("---on open ticket booking---");
+        int minMaxBox[] = tcssdo.getCloserOfSizeInCoach(passList.size(), coach);
+        if (minMaxBox.length == 2) {
+            int minBox = minMaxBox[0];
+            int maxBox = minMaxBox[1];
+            System.out.println("System found closer box b/w" + minBox + "to" + maxBox);
+            for (Passenger p : passList) {
+                System.out.println(p);
+                boolean booked = false;
+                for (int x = minBox; x <= maxBox; x++) {
+                    boolean isAvil = booking.searchInBoxInCoach(x, p, coach);
+                    if (isAvil && !booked) {
+                        booking.bookInBox(x, p);
+                        booked = true;
+                        break;
+                    }
+                }
+                if (!booked)//Book without preference in the boxs
+                {
+                    System.out.println("went to openBook->closer->if Not" + p);
+                    for (int x = minBox; x <= maxBox; x++) {
+                        if (booking.isAvailInBoxInCoach(x, coach) && !booked) {
+                            //p.seat_no = 0;
+                            booking.bookInBox(x, p);
+                            booked = true;
+                        }
+                    }
+                }
+            }
+            booking.finalise();
+        } else {
+            System.out.println("Since no fit,going to book relaxed");
+            booking.box = tcssdo.getBoxFreeforPassengersRelaxed(tcsID, passList.size());
+            boolean bookingOpn;
+            for (Passenger p : passList) {
+                bookingOpn = booking.isBookingOpen();
+                if (bookingOpn) {
+                    if (p.seat_no != 0) {
+                        boolean isBooked = booking.BookPrefrredTicket(p, p.seat_no);
+                        if (!isBooked) {
+                            booking.bookNear(p);
+                        }
+                    } else {
+                        booking.bookNear(p);
+                    }
+                } else {
+                    booking.bookRAC(p);
+                }
+            }
+            booking.finalise();
+        }
+    }
+
 }

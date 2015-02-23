@@ -192,9 +192,8 @@ public class CancellingClass {
             res.ReservationStatus = 3;
             UnderPassengerDO cdo = new UnderPassengerDO();
             List<UnderPassenger> child = cdo.getAll(pnr);
-            for(UnderPassenger u:child)
-            {
-                u.status_id=2;
+            for (UnderPassenger u : child) {
+                u.status_id = 2;
                 cdo.update(u);
             }
             rsdo.update(res);

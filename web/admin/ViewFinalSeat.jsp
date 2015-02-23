@@ -140,26 +140,26 @@
 <script>
     // var objlist=$(".filled").css("border", "9px solid blue");
     //console.log(objlist.size());
-   // function a() {
-        $(".filled").each(function (index) {
-            //console.log($(this).attr("name"));
-            //console.log(getColor($(this).attr("name")));
-            $(this).css("background-color", getColor($(this).attr("name")));
-        });
-        
-        var obj=$(".filled");
-        var before=new Array();
-        for(i=0;i<7;i++)
-        {
-        }
-        
+    // function a() {
+    $(".filled").each(function (index) {
+        //console.log($(this).attr("name"));
+        //console.log(getColor($(this).attr("name")));
+        $(this).css("background-color", getColor($(this).attr("name")));
+    });
+
+    var obj = $(".filled");
+    var before = new Array();
+    for (i = 0; i < 7; i++)
+    {
+    }
+
     //}
 
     function getColor(pnr)
     {
-        var r ="F"+ pnr.substring(11, 12);
-        var g = "F"+pnr.substring(9, 10);
-        var b = "F"+pnr.substring(10, 11);
+        var r = "F" + pnr.substring(11, 12);
+        var g = "F" + pnr.substring(9, 10);
+        var b = "F" + pnr.substring(10, 11);
         return "#" + r + "" + g + "" + b;
     }
 </script>

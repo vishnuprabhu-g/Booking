@@ -123,7 +123,7 @@ Ticket details:
 <script>
     function PrintT()
     {
-        elem=$("#ticket");
+        elem = $("#ticket");
         Popup($(elem).html());
     }
 </script>

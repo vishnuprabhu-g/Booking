@@ -347,4 +347,138 @@ public class TrainClassSeatStatusDO {
         return new int[]{minA, minB};
     }
 
+    public int[] getCloserOfSizeInCoach(int size, String coach) throws SQLException {
+        int free, total = 0, box[] = new int[20], ibox;
+        Connection con = util.ConnectionUtil.getConnection();
+        String q = " select count(*) as free,box from train_class_seat_status where availability=1 and train_class_status_id=? and compartment=? group by box;";
+        PreparedStatement ps = con.prepareStatement(q);
+        ps.setLong(1, 1);
+        ps.setString(2, coach);
+        ResultSet rs = ps.executeQuery();
+        List<BoxNFree> boxFree = new ArrayList<BoxNFree>();
+        while (rs.next()) {
+            free = rs.getInt("free");
+            ibox = rs.getInt("box");
+            total += free;
+            box[ibox] = free;
+            boxFree.add(new BoxNFree(ibox, free));
+        }
+        if (total <= size) {
+            return new int[0];
+        }
+
+        Collections.sort(boxFree, new Comparator<BoxNFree>() {
+            @Override
+            public int compare(BoxNFree t, BoxNFree t1) {
+                if (t.free > t1.free) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            }
+        });
+
+        for (BoxNFree bf : boxFree) {
+            System.out.println(bf.box + "-" + bf.free);
+        }
+        //int maxIndex = boxFree.size() - 1;
+        int maxIndex = 9;
+        int minWidth = 20, minA = 0, minB = 0;
+        for (BoxNFree bf : boxFree) {
+            int currBox = bf.box;
+            int currFree = 0;
+            int a = currBox, b = currBox;
+            int TotFree;
+            while (currFree < size) {
+                if (a > 0) {
+                    a--;
+                }
+                if (b < maxIndex) {
+                    b++;
+                }
+                TotFree = 0;
+                for (int x = a; x <= b; x++) {
+                    TotFree += box[x];
+                }
+                currFree = TotFree;
+            }
+            if ((b - a) < minWidth) {
+                minA = a;
+                minB = b;
+                minWidth = b - a;
+            }
+        }
+        System.out.println(minA + "--" + minB + "--" + minWidth);
+        return new int[]{minA, minB};
+    }
+
+    public TrainClassSeatStatus getPrefInCoach(long tcsid, int type_id, int near, int box, String coach) throws SQLException {
+        Connection con = util.ConnectionUtil.getConnection();
+        String q;
+        PreparedStatement ps;
+        if (box == 0) {
+            q = "select * from train_class_seat_status where train_class_status_id =? and seat_type_id=? and availability=1 and compartment=? order by abs(seat_no-?) limit 1;";
+            ps = con.prepareStatement(q);
+            ps.setLong(1, tcsid);
+            ps.setInt(2, type_id);
+            ps.setString(3, coach);
+            ps.setInt(4, near);
+        } else {
+            q = "select * from train_class_seat_status where train_class_status_id =? and seat_type_id=? and availability=1 and box=? and compartment=? order by abs(seat_no-?) limit 1;";
+            ps = con.prepareStatement(q);
+            ps.setLong(1, tcsid);
+            ps.setInt(2, type_id);
+            ps.setInt(3, box);
+            ps.setString(4, coach);
+            ps.setInt(5, near);
+        }
+        ResultSet rs = ps.executeQuery();
+        TrainClassSeatStatus obj = new TrainClassSeatStatus();
+        if (rs.next()) {
+            obj.seatNo = rs.getInt("seat_no");
+            obj.trainClassSeatStatusId = rs.getLong("train_class_seat_status_id");
+            obj.typeId = type_id;
+            obj.box = rs.getInt("box");
+        } else {
+            obj = null;
+        }
+
+        return obj;
+    }
+
+    public TrainClassSeatStatus getInCoach(long id, int near, int box, String coach) throws SQLException {
+        Connection con = util.ConnectionUtil.getConnection();
+        String q;
+        PreparedStatement ps;
+        if (box == 0) {
+            q = " select * from train_class_seat_status where availability=1 and train_class_status_id=? and compartment=? order by abs(seat_no-?) limit 1;";
+            ps = con.prepareStatement(q);
+            ps.setLong(1, id);
+            ps.setString(2, coach);
+            ps.setInt(3, near);
+        } else {
+            q = " select * from train_class_seat_status where availability=1 and train_class_status_id=? and box=? and compartment=? order by abs(seat_no-?) limit 1;";
+            ps = con.prepareStatement(q);
+            ps.setLong(1, id);
+            ps.setInt(2, box);
+            ps.setString(3, coach);
+            ps.setInt(4, near);
+        }
+        ResultSet rs = ps.executeQuery();
+        TrainClassSeatStatus obj;
+        if (rs.next()) {
+            obj = new TrainClassSeatStatus();
+            //obj.tClassStatusId = rs.getLong("t_class_status_id");
+            obj.seatNo = rs.getInt("seat_no");
+            //obj.availability = rs.getBoolean("availability");
+            obj.typeId = rs.getLong("seat_type_id");
+            obj.trainClassSeatStatusId = rs.getLong("train_class_seat_status_id");
+            obj.box = rs.getInt("box");
+        } else {
+            obj = null;
+        }
+
+        return obj;
+    }
+
 }

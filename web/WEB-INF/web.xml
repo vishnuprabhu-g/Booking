@@ -6,7 +6,7 @@
     <display-name>Railway ticket booking</display-name>
     <servlet>
         <servlet-name>Book</servlet-name>
-        <servlet-class>booking.BookNew</servlet-class>
+        <servlet-class>booking.BookCoach</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Cancel</servlet-name>
@@ -19,6 +19,10 @@
     <servlet>
         <servlet-name>BookNew</servlet-name>
         <servlet-class>booking.BookNew</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookCoach</servlet-name>
+        <servlet-class>booking.BookCoach</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Book</servlet-name>
@@ -35,6 +39,10 @@
     <servlet-mapping>
         <servlet-name>BookNew</servlet-name>
         <url-pattern>/BookNew</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookCoach</servlet-name>
+        <url-pattern>/BookCoach</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

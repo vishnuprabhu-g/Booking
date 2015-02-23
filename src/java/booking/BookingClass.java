@@ -486,6 +486,18 @@ public class BookingClass {
         }
     }
 
+    public boolean searchInBoxInCoach(int box, Passenger p, String Coach) throws SQLException {
+        if (p.seat_no == 0) {
+            return this.isAvailInBoxInCoach(box, Coach);
+        }
+        TrainClassSeatStatus tcs = tcsdo.getPrefInCoach(trianClassId, p.seat_no, 0, box, Coach);
+        if (tcs == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     void bookInBox(int x, Passenger p) throws SQLException {
         this.box = x;
         if (p.seat_no != 0) {
@@ -502,5 +514,118 @@ public class BookingClass {
         } else {
             return true;
         }
+    }
+
+    boolean isAvailInBoxInCoach(int box, String coach) throws SQLException {
+        TrainClassSeatStatus tcs = tcsdo.getInCoach(trianClassId, 0, box, coach);
+        if (tcs == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public int[] getNextSeat() throws SQLException {
+        int status[] = new int[4];
+        int a, b;
+        int x, y;
+        //status[0] gives the current_status.status[1]gives the current seat Next 2 for the initial status
+        TrainClassStatusDO tcsdo = new TrainClassStatusDO();
+        TrainClassStatus classStatus = tcsdo.get(trianClassId);
+        TrainClassRacStatusDO racdo = new TrainClassRacStatusDO();
+        int rac = racdo.getCount(1L);
+
+        long classStatusId = classStatus.trianClassStatusId;
+        TrainClassSeatStatusDO tcssdo = new TrainClassSeatStatusDO();
+        int lower = tcssdo.getCount(classStatusId, 1);
+        int middle = tcssdo.getCount(classStatusId, 2);
+        int upper = tcssdo.getCount(classStatusId, 3);
+        int side = tcssdo.getCount(classStatusId, 4);
+
+        String detailAvl = "";
+        String message = "";
+
+        int available = classStatus.available;
+        int maxRac = classStatus.maxRac;
+        int maxWaiting = classStatus.maxWaiting;
+        int waiting = classStatus.waiting;
+        int initial_waiting = classStatus.initialWaiting;
+        int racA = classStatus.rac;
+        int availbleA = lower + middle + upper + side;
+
+        if (available > 0 && racA == 1) {
+            a = 1;
+            b = 0;
+            x = 1;
+            y = 0;
+            message = "Available " + available;
+        } else if (available > 0 && racA > 1) {
+            if (racA <= maxRac) {
+                a = 1;
+                x = 2;
+                b = y = 0;
+                message = "RAC" + racA + "/ CNF";
+            } else {
+                a = 1;
+                x = 3;
+                b = y = 0;
+                message = "WL" + initial_waiting + "/ CNF";
+            }
+        } else if (available <= 0 && availbleA > 0) {
+            if (initial_waiting == 1) {
+                if (racA <= maxRac) {
+                    a = 1;
+                    x = 2;
+                    b = y = 0;
+                    message = "RAC " + racA + "/ CNF";
+                } else {
+                    a = 1;
+                    x = 3;
+                    b = y = 0;
+                    message = "WL " + initial_waiting + "/ CNF";
+                }
+            } else {
+                if (racA <= maxRac) {
+                    a = 1;
+                    x = 2;
+                    b = y = 0;
+                    message = "RAC " + racA + "/ CNF";
+                } else {
+                    a = 1;
+                    x = 3;
+                    b = y = 0;
+                    message = "WL " + initial_waiting + "/ CNF";
+                }
+            }
+        } else {
+            if (rac > 0) {
+                if (racA <= maxRac) {
+                    a = 2;
+                    x = 2;
+                    b = (maxRac - (rac - 1));
+                    y = racA;
+                    message = "RAC " + racA + "/ RAC" + (maxRac - (rac - 1));
+                    detailAvl = "Book in RAC(You can travel with RAC ticket.Ticket may be confirmed in future)";
+                } else {
+                    a = 2;
+                    x = 3;
+                    b = (maxRac - (rac - 1));
+                    y = initial_waiting;
+                    message = "WL " + initial_waiting + "/ RAC" + (maxRac - (rac - 1));
+                    detailAvl = "Book in RAC(You can travel with RAC ticket.Ticket may be confirmed in future)";
+                }
+            } else {
+                a = x = 3;
+                b = waiting;
+                y = initial_waiting;
+                message = "WL " + initial_waiting + "/WL " + waiting;
+                detailAvl = "Book in WaitingList(You can't travel with WL ticket.Fare will be refunded if ticket not confirmed.)";
+            }
+        }
+        status[0] = a;
+        status[1] = b;
+        status[2] = x;
+        status[3] = y;
+        return status;
     }
 }

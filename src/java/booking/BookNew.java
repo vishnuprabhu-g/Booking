@@ -1,14 +1,10 @@
 package booking;
 
-import Do.TrainClassStatusDO;
-import Domain.Passenger;
-import Domain.TrainClassStatus;
-import Domain.UnderPassenger;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import Do.*;
+import Domain.*;
+import java.io.*;
+import java.sql.*;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.servlet.ServletException;
@@ -137,44 +133,53 @@ public class BookNew extends HttpServlet {
             booking.adult = passengerList.size() - halfTicket;
             booking.child = childList;
             bookUtil.booking = booking;
+            /*
+             * Getting the bestCoach or noCoach for the passengers;
+             */
+            CoachDO cdo = new CoachDO();
+            String coach = cdo.getCoachesForPassengers(passengerList);
+            if (!coach.equalsIgnoreCase("NO")) {
+                bookUtil.bookInCoach(passengerList, coach);
+            } else {
 
-            int box;
-            //case 1 if passCount is > 5
-            if (passengerList.size() >= 5) {
-                box = bookUtil.getANewBox(passengerList.size());
-                System.out.println("In the booking of >5 tics and box=" + box);
-                if (box == 0) {
-                    bookUtil.openBook(passengerList);
-                } else {
-                    booking.box = box;
-                    bookUtil.booking = booking;
-                    bookUtil.arrangeABox(box, passengerList);
+                int box;
+                //case 1 if passCount is > 5
+                if (passengerList.size() >= 5) {
+                    box = bookUtil.getANewBox(passengerList.size());
+                    System.out.println("In the booking of >5 tics and box=" + box);
+                    if (box == 0) {
+                        bookUtil.openBook(passengerList);
+                    } else {
+                        booking.box = box;
+                        bookUtil.booking = booking;
+                        bookUtil.arrangeABox(box, passengerList);
+                    }
+                    response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
+                } //case 2 if passCount is < 2
+                else if (passengerList.size() <= 2) {
+                    box = bookUtil.getFew(passengerList);
+                    System.out.println("In the booking of <2 tics and box=" + box);
+                    if (box == 0) {
+                        bookUtil.openBook(passengerList);
+                    } else {
+                        booking.box = box;
+                        bookUtil.booking = booking;
+                        bookUtil.ArrangeFew(box, passengerList);
+                    }
+                    response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
+                }//case 3 if passcount is medium 
+                else {
+                    box = bookUtil.getANewBox(passengerList.size());
+                    System.out.println("In the booking of 3-4 tics and box=" + box);
+                    if (box == 0) {
+                        bookUtil.openBook(passengerList);
+                    } else {
+                        booking.box = box;
+                        bookUtil.booking = booking;
+                        bookUtil.arrangeABox(box, passengerList);
+                    }
+                    response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
                 }
-                response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
-            } //case 2 if passCount is < 2
-            else if (passengerList.size() <= 2) {
-                box = bookUtil.getFew(passengerList);
-                System.out.println("In the booking of <2 tics and box=" + box);
-                if (box == 0) {
-                    bookUtil.openBook(passengerList);
-                } else {
-                    booking.box = box;
-                    bookUtil.booking = booking;
-                    bookUtil.ArrangeFew(box, passengerList);
-                }
-                response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
-            }//case 3 if passcount is medium 
-            else {
-                box = bookUtil.getANewBox(passengerList.size());
-                System.out.println("In the booking of 3-4 tics and box=" + box);
-                if (box == 0) {
-                    bookUtil.openBook(passengerList);
-                } else {
-                    booking.box = box;
-                    bookUtil.booking = booking;
-                    bookUtil.arrangeABox(box, passengerList);
-                }
-                response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
             }
             util.CommitUtil.commit();
         } catch (SQLException ex) {
