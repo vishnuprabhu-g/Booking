@@ -10,12 +10,13 @@ package Domain;
  * @author vishnu-pt517
  */
 public class Box {
-    int boxNo;
-    int Lower;
-    int Middle;
-    int Upper;
-    int Side;
-    int[] Lowers=new int[2];
-    int[] Middles=new int[2];
-    int[] Uppers=new int[2];
+
+    public int boxNo;
+    public int Lower;
+    public int Middle;
+    public int Upper;
+    public int Side;
+    public int[] Lowers = new int[2];
+    public int[] Middles = new int[2];
+    public int[] Uppers = new int[2];
 }

@@ -119,10 +119,10 @@ public class BookCoach extends HttpServlet {
             booking.child = childList;
 
             CoachDO cdo = new CoachDO();
+            CoachBookUtil coachBookUtil=new CoachBookUtil();
             String coach = cdo.getCoachesForPassengers(passengerList);
             if (!coach.equals("NO")) {
-                
-
+                coachBookUtil.CoachBook(coach);
             } else {
 
             }

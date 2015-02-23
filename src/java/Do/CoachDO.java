@@ -10,7 +10,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -87,23 +86,54 @@ public class CoachDO {
         }
     }
 
-    public List<Coach> loadCoach(String coach) throws SQLException {
-        List<Coach> coachList = new ArrayList<>();
+    public Coach loadCoach(String coach) throws SQLException {
+        Coach c = new Coach();
         Connection con = util.ConnectionUtil.getConnection();
         String query = "select * from train_class_seat_status where compartment=? order by seat_no";
         PreparedStatement ps1 = con.prepareStatement(query);
         ps1.setString(1, coach);
         ResultSet rs = ps1.executeQuery();
+        int BoxNo = 1;
         while (rs.next()) {
-           Box box=new Domain.Box();
-           for(int i=0;i<7;i++)
-           {
-               TrainClassSeatStatus tcss=new TrainClassSeatStatus();
-               tcss.availability=rs.getBoolean("availability");
-               tcss.typeId=rs.getInt("seat_type_id");
-           }
+            Box box = new Domain.Box();
+            for (int i = 0; i < 7; i++) {
+                TrainClassSeatStatus tcss = new TrainClassSeatStatus();
+                tcss.availability = rs.getBoolean("availability");
+                tcss.typeId = rs.getInt("seat_type_id");
+                if (tcss.availability) {
+                    if (tcss.typeId == 1) {
+                        box.Lower++;
+                        if (i == 1) {
+                            box.Lowers[0] = 1;
+                        } else {
+                            box.Lowers[1] = 1;
+                        }
+                    } else if (tcss.typeId == 2) {
+                        box.Middle++;
+                        if (i == 2) {
+                            box.Middles[0] = 1;
+                        } else {
+                            box.Middles[1] = 1;
+                        }
+                    } else if (tcss.typeId == 3) {
+                        box.Upper++;
+                        if (i == 3) {
+                            box.Uppers[0] = 1;
+                        } else {
+                            box.Uppers[1] = 1;
+                        }
+                    } else {
+                        box.Side = 1;
+                    }
+                }
+                if (i != 6) {
+                    rs.next();
+                }
+            }
+            box.boxNo = BoxNo++;
+            c.boxs.add(box);
         }
-        return coachList;
+        return c;
     }
 
 }

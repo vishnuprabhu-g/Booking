@@ -6,12 +6,25 @@
 package booking;
 import Do.*;
 import Domain.*;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
- * @version 1.0
- * @since 0.1
  * @author vishnu-pt517
  */
 public class CoachBookUtil {
+
+    CoachDO cdo=new CoachDO();
+    void CoachBook(String coach,List<Passenger> pass) throws SQLException {
+        Coach selectedCoach=cdo.loadCoach(coach);
+        /*This is the coach i'm going to book in no other changes*/
+        int required=pass.size();
+        int noPref
+        for(Passenger p:pass)
+        {
+            if(p.seat_no==0)
+                
+        }
+    }
     
 }

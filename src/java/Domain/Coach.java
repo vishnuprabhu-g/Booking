@@ -5,6 +5,7 @@
  */
 package Domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,5 +13,9 @@ import java.util.List;
  * @author vishnu-pt517
  */
 public class Coach {
-    List <Box> boxs;
+    public List <Box> boxs;
+    public Coach()
+    {
+        boxs=new ArrayList<>();
+    }
 }
