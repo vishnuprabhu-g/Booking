@@ -34,7 +34,7 @@ public class Cancel extends HttpServlet {
             if (pnr == null) {
                 out.println("Invalid access..!");
             } else {
-                List<Integer> cancel = new ArrayList<Integer>();
+                List<Integer> cancel = new ArrayList<>();
                 for (int i = 1; i <= 6; i++) {
                     String val = request.getParameter("sno" + i);
                     if (val == null) {
@@ -103,6 +103,7 @@ public class Cancel extends HttpServlet {
                 Logger.getLogger(Cancel.class.getName()).log(Level.SEVERE, null, ex);
             }
             out.println("Cancellation Failed");
+            e.printStackTrace();
             System.out.println(e);
         } finally {
             out.close();

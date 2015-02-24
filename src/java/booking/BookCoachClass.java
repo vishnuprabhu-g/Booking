@@ -261,7 +261,6 @@ public class BookCoachClass {
                 } else {
                     pss.fare = (int) (oneTicketFare + reservationFare);
                 }
-                pss.coach = coach;
                 pdo.add(pss);
                 if (pss.initialStatusId != 0) {
                     lastSeat = pss.initialSeatNo;

@@ -38,11 +38,12 @@ public class TrainClassSeatStatusDO {
 
     public void updateAfter(TrainClassSeatStatus obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
-        String q = "update train_class_seat_status set availability= ? where train_class_status_id = ? and seat_no=?;";
+        String q = "update train_class_seat_status set availability= ? where train_class_status_id = ? and seat_no=? and compartment=?;";
         PreparedStatement ps = con.prepareStatement(q);
         ps.setBoolean(1, obj.availability);
         ps.setLong(2, obj.tClassStatusId);
         ps.setInt(3, obj.seatNo);
+        ps.setString(4, obj.compartment);
         ps.executeUpdate();
 
     }
@@ -172,12 +173,13 @@ public class TrainClassSeatStatusDO {
         return obj;
     }
 
-    public TrainClassSeatStatus getTrainClassSeat(long id, int seat_no) throws SQLException {
+    public TrainClassSeatStatus getTrainClassSeat(long id, int seat_no, String coach) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
-        String q = " select * from train_class_seat_status where seat_no=? and train_class_status_id=? ";
+        String q = " select * from train_class_seat_status where seat_no=? and train_class_status_id=? and compartment=?";
         PreparedStatement ps = con.prepareStatement(q);
         ps.setInt(1, seat_no);
         ps.setLong(2, id);
+        ps.setString(3, coach);
         ResultSet rs = ps.executeQuery();
         TrainClassSeatStatus obj;
         if (rs.next()) {

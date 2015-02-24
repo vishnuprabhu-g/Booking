@@ -170,6 +170,7 @@ public class PassengerDO {
             obj.sno = rs.getInt("sno");
             obj.initialSeatNo = rs.getInt("initial_seat_no");
             obj.initialStatusId = rs.getInt("initial_status_id");
+            obj.coach = rs.getString("coach");
             obj.fare = rs.getInt("fare");
 
         }

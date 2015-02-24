@@ -53,6 +53,7 @@ public class CoachDO {
                         return coachs[index];
                     } else if (preffFact > maxMatch) {
                         maxMatchCoach = coachs[index];
+                        maxMatch = preffFact;
                     }
                 }
             }
@@ -63,19 +64,27 @@ public class CoachDO {
     }
 
     public double getPrefFactor(List<Passenger> passengers, String coach) throws SQLException {
-        double fact = 0;
+        double fact = 0, fact2 = 0;
+        int box = 0;
         for (Passenger p : passengers) {
             TrainClassSeatStatus tcss = getInCoach(p.seat_no, coach);
             if (tcss == null) {
                 fact += 0.5;
             } else {
+                if (box == 0) {
+                    box = tcss.box;
+                }
+                if (box != tcss.box) {
+                    fact2 += 0.5;
+                }
                 fact += 1;
                 tcss.availability = false;
                 tcssdo.update(tcss);
+                box = tcss.box;
             }
         }
         util.CommitUtil.rollBack();
-        return fact;
+        return (fact - fact2);
     }
 
     /**

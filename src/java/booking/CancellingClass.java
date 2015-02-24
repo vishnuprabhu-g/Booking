@@ -43,13 +43,13 @@ public class CancellingClass {
         tcs.available++;
         trainClassStatusDO.update(tcs);
 
-        TrainClassSeatStatus tcss = tcssdo.getTrainClassSeat(trainClassStatusId, seat);
+        TrainClassSeatStatus tcss = tcssdo.getTrainClassSeat(trainClassStatusId, seat, p.coach);
 
         int racSize = this.RAC2CNF(seat);
         if (racSize == -1)//No rac hence seat should be set as available
         {
             System.out.println("Available the seat:" + seat);
-            this.availTheSeat(seat);
+            this.availTheSeat(seat, p.coach);
         } else if (racSize < maxRac) {
             this.availTheRac(racSize);//Just available the last rac
         } else {
@@ -156,12 +156,13 @@ public class CancellingClass {
         return wl.size();
     }
 
-    private boolean availTheSeat(int seat_no) throws SQLException {
+    private boolean availTheSeat(int seat_no, String coach) throws SQLException {
         TrainClassSeatStatusDO tcssdo = new TrainClassSeatStatusDO();
         TrainClassSeatStatus tcss = new TrainClassSeatStatus();
         tcss.tClassStatusId = this.trainClassStatusId;
         tcss.seatNo = seat_no;
         tcss.availability = true;
+        tcss.compartment = coach;
         tcssdo.updateAfter(tcss);
         return true;
     }
