@@ -34,7 +34,8 @@ public class CoachBookUtil {
             }
         }
         System.out.println("Out of first for loop");
-        Box[] boxArray = (Box[]) selectedCoach.boxs.toArray();
+        Box[] boxArray = new Box[2];
+        boxArray = selectedCoach.boxs.toArray(boxArray);
         System.out.println(boxArray.length);
         for (int i = 0; i < boxArray.length - 1; i++) {
             for (int j = i + 1; j < boxArray.length; j++) {
@@ -43,12 +44,16 @@ public class CoachBookUtil {
                 int aMiddle = boxArray[i].Middle + boxArray[j].Middle;
                 int aUpper = boxArray[i].Upper + boxArray[j].Upper;
                 int aSide = boxArray[i].Side + boxArray[j].Side;
-                System.out.println("The values in combined box:"+aTotal+aLower+aMiddle+aUpper+aSide);
                 if (aTotal >= required && aLower >= rLower && aMiddle >= rMiddle && aUpper >= rUpper && aSide >= rSide) {
-                    System.out.println("Book combined in the box " + i + j);
+                    System.out.println("Book combined in the box " + boxArray[i].boxNo + boxArray[j].boxNo);
+                    int boxs[] = new int[]{boxArray[i].boxNo, boxArray[j].boxNo};
+                    this.BookInTheCoachAndBoxs(coach, boxs, pass);
+                    return;
                 }
             }
         }
+        System.out.println("Out of second for loop");
+        this.BookInTheCoachAndBoxsV2(coach, new int[]{1, 2}, pass);
     }
 
     private void BookInTheCoachAndBox(String coach, int box, List<Passenger> passList) throws SQLException {
@@ -65,6 +70,62 @@ public class CoachBookUtil {
         }
         for (Passenger p : later) {
             TrainClassSeatStatus tcss = tcssNewDo.getInCoachInBoxWithOutPref(coach, box);
+            tcss.availability = false;
+            tcssdo.update(tcss);
+        }
+        util.CommitUtil.commit();
+    }
+
+    private void BookInTheCoachAndBoxs(String coach, int[] boxs, List<Passenger> passList) throws SQLException {
+        List<Passenger> later = new ArrayList<>();
+        TrainClassSeatNewDO tcssNewDo = new TrainClassSeatNewDO();
+        for (Passenger p : passList) {
+            if (p.seat_no == 0) {
+                later.add(p);
+            } else {
+                TrainClassSeatStatus tcss = tcssNewDo.getInCoachInBoxWithPref(coach, boxs[0], p.seat_no);
+                if (tcss == null) {
+                    tcss = tcssNewDo.getInCoachInBoxWithPref(coach, boxs[1], p.seat_no);
+                }
+                tcss.availability = false;
+                tcssdo.update(tcss);
+            }
+        }
+        for (Passenger p : later) {
+            TrainClassSeatStatus tcss = tcssNewDo.getInCoachInBoxWithOutPref(coach, boxs[0]);
+            if (tcss == null) {
+                tcss = tcssNewDo.getInCoachInBoxWithOutPref(coach, boxs[1]);
+            }
+            tcss.availability = false;
+            tcssdo.update(tcss);
+        }
+        util.CommitUtil.commit();
+    }
+
+    private void BookInTheCoachAndBoxsV2(String coach, int[] boxs, List<Passenger> passList) throws SQLException {
+        List<Passenger> later = new ArrayList<>();
+        TrainClassSeatNewDO tcssNewDo = new TrainClassSeatNewDO();
+        for (Passenger p : passList) {
+            if (p.seat_no == 0) {
+                later.add(p);
+            } else {
+                TrainClassSeatStatus tcss = tcssNewDo.getInCoachInBoxWithPref(coach, boxs[0], p.seat_no);
+                if (tcss == null) {
+                    tcss = tcssNewDo.getInCoachInBoxWithPref(coach, boxs[1], p.seat_no);
+                }
+                if (tcss == null) {
+                    later.add(p);
+                } else {
+                    tcss.availability = false;
+                    tcssdo.update(tcss);
+                }
+            }
+        }
+        for (Passenger p : later) {
+            TrainClassSeatStatus tcss = tcssNewDo.getInCoachInBoxWithOutPref(coach, boxs[0]);
+            if (tcss == null) {
+                tcss = tcssNewDo.getInCoachInBoxWithOutPref(coach, boxs[1]);
+            }
             tcss.availability = false;
             tcssdo.update(tcss);
         }

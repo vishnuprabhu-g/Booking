@@ -78,6 +78,13 @@ public class CoachDO {
         return fact;
     }
 
+    /**
+     * This method is used to calculate the pref factor.
+     * @param pref
+     * @param coach
+     * @return
+     * @throws SQLException
+     */
     public TrainClassSeatStatus getInCoach(int pref, String coach) throws SQLException {
         if (pref != 0) {
             return tcssdo.getPrefInCoach(tcsid, pref, 0, 0, coach);

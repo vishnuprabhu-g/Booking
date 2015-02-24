@@ -20,7 +20,8 @@ public class BookCoach extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        PrintWriter out = response.getWriter();
+        try {
             List<Passenger> passengerList = new ArrayList<>();
             List<UnderPassenger> childList = new ArrayList<>();
             Pattern pattern = Pattern.compile("^[a-zA-Z\\ ]*\\.?[a-zA-Z]*\\ ?[a-zA-Z]*$");
@@ -109,8 +110,12 @@ public class BookCoach extends HttpServlet {
                 System.out.println("Else block in main servlet");
             }
 
-        } catch (SQLException | NumberFormatException ex) {
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+            out.println("006");
+        } catch (NumberFormatException ex) {
+            System.out.println(ex.getMessage());
+            out.println("005");
         }
     }
 
