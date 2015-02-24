@@ -49,6 +49,7 @@ public class CoachDO {
             for (int index = 0; index < totalCoaches; index++) {
                 if (count[index] >= passCount) {
                     double preffFact = getPrefFactor(passengers, coachs[index]);
+                    System.out.println(preffFact);
                     if (preffFact == passCount) {
                         return coachs[index];
                     } else if (preffFact > maxMatch) {
@@ -66,8 +67,9 @@ public class CoachDO {
     public double getPrefFactor(List<Passenger> passengers, String coach) throws SQLException {
         double fact = 0, fact2 = 0;
         int box = 0;
+        int boxVal = tcssdo.maxBoxInCoach(coach);
         for (Passenger p : passengers) {
-            TrainClassSeatStatus tcss = getInCoach(p.seat_no, coach);
+            TrainClassSeatStatus tcss = getInCoach(p.seat_no, coach, boxVal);
             if (tcss == null) {
                 fact += 0.5;
             } else {
@@ -92,15 +94,24 @@ public class CoachDO {
      *
      * @param pref
      * @param coach
+     * @param box
      * @return
      * @throws SQLException
      */
-    public TrainClassSeatStatus getInCoach(int pref, String coach) throws SQLException {
+    public TrainClassSeatStatus getInCoach(int pref, String coach, int box) throws SQLException {
+        TrainClassSeatStatus tcss;
         if (pref != 0) {
-            return tcssdo.getPrefInCoach(tcsid, pref, 0, 0, coach);
+            tcss = tcssdo.getPrefInCoach(tcsid, pref, 0, box, coach);
+            if (tcss == null) {
+                tcss = tcssdo.getPrefInCoach(tcsid, pref, 0, 0, coach);
+            }
         } else {
-            return tcssdo.getInCoach(tcsid, 0, 0, coach);
+            tcss = tcssdo.getInCoach(tcsid, 0, box, coach);
+            if (tcss == null) {
+                tcss = tcssdo.getInCoach(tcsid, 0, 0, coach);
+            }
         }
+        return tcss;
     }
 
     public Coach loadCoach(String coach) throws SQLException {
@@ -156,7 +167,7 @@ public class CoachDO {
 
     public TrainClassSeatStatus getPrefInAllCoach(int pref) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
-        String query = "select * from train_class_seat_status where availablity=1 and seat_type_id=?";
+        String query = "select * from train_class_seat_status where availability=1 and seat_type_id=?";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setInt(1, pref);
         ResultSet rs = ps.executeQuery();
@@ -175,7 +186,7 @@ public class CoachDO {
 
     public TrainClassSeatStatus getInAllCoach() throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
-        String query = "select * from train_class_seat_status where availablity=1";
+        String query = "select * from train_class_seat_status where availability=1";
         PreparedStatement ps = con.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
         TrainClassSeatStatus tcss;

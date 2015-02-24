@@ -483,4 +483,15 @@ public class TrainClassSeatStatusDO {
         return obj;
     }
 
+    int maxBoxInCoach(String coach) throws SQLException {
+        Connection con = util.ConnectionUtil.getConnection();
+        String q = "select box,count(*) as counts from train_class_seat_status where availability=1 group by box order by counts desc";
+        PreparedStatement ps = con.prepareStatement(q);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt(1);
+        }
+        return 1;
+    }
+
 }

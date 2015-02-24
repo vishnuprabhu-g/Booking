@@ -38,7 +38,6 @@ public class CoachBookUtil {
         System.out.println("Out of first for loop");
         Box[] boxArray = new Box[2];
         boxArray = selectedCoach.boxs.toArray(boxArray);
-        System.out.println(boxArray.length);
         for (int i = 0; i < boxArray.length - 1; i++) {
             for (int j = i + 1; j < boxArray.length; j++) {
                 int aTotal = boxArray[i].total + boxArray[j].total;
