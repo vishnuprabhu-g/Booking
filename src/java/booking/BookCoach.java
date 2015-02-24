@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package booking;
 
 import Do.CoachDO;
@@ -20,21 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author vishnu-pt517
- */
 public class BookCoach extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -119,12 +101,12 @@ public class BookCoach extends HttpServlet {
             booking.child = childList;
 
             CoachDO cdo = new CoachDO();
-            CoachBookUtil coachBookUtil=new CoachBookUtil();
+            CoachBookUtil coachBookUtil = new CoachBookUtil();
             String coach = cdo.getCoachesForPassengers(passengerList);
             if (!coach.equals("NO")) {
-                coachBookUtil.CoachBook(coach);
+                coachBookUtil.CoachBook(coach, passengerList);
             } else {
-
+                System.out.println("Else block in main servlet");
             }
 
         } catch (SQLException | NumberFormatException ex) {

@@ -12,6 +12,7 @@ package Domain;
 public class Box {
 
     public int boxNo;
+    public int total;
     public int Lower;
     public int Middle;
     public int Upper;

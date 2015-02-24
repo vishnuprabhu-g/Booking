@@ -130,6 +130,7 @@ public class CoachDO {
                     rs.next();
                 }
             }
+            box.total = box.Lower + box.Middle + box.Upper + box.Side;
             box.boxNo = BoxNo++;
             c.boxs.add(box);
         }
