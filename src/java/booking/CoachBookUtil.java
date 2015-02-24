@@ -10,6 +10,7 @@ public class CoachBookUtil {
 
     CoachDO cdo = new CoachDO();
     TrainClassSeatStatusDO tcssdo = new TrainClassSeatStatusDO();
+    BookCoachClass bookCoachClass;
 
     void CoachBook(String coach, List<Passenger> pass) throws SQLException {
         System.out.println("---CoachBook----(coach=" + coach + ")");
@@ -30,6 +31,7 @@ public class CoachBookUtil {
             if (b.total >= required && b.Lower >= rLower && b.Middle >= rMiddle && b.Upper >= rUpper && b.Side >= rSide) {
                 System.out.println("This is the box");
                 this.BookInTheCoachAndBox(coach, b.boxNo, pass);
+                bookCoachClass.finalise();
                 return;
             }
         }
@@ -48,12 +50,15 @@ public class CoachBookUtil {
                     System.out.println("Book combined in the box " + boxArray[i].boxNo + boxArray[j].boxNo);
                     int boxs[] = new int[]{boxArray[i].boxNo, boxArray[j].boxNo};
                     this.BookInTheCoachAndBoxs(coach, boxs, pass);
+                    bookCoachClass.finalise();
                     return;
                 }
             }
         }
         System.out.println("Out of second for loop");
         this.BookInTheCoachAndBoxsV2(coach, new int[]{1, 2}, pass);
+
+        bookCoachClass.finalise();
     }
 
     private void BookInTheCoachAndBox(String coach, int box, List<Passenger> passList) throws SQLException {
@@ -66,12 +71,14 @@ public class CoachBookUtil {
                 TrainClassSeatStatus tcss = tcssNewDo.getInCoachInBoxWithPref(coach, box, p.seat_no);
                 tcss.availability = false;
                 tcssdo.update(tcss);
+                bookCoachClass.assignPassAndTCSS(p, tcss);
             }
         }
         for (Passenger p : later) {
             TrainClassSeatStatus tcss = tcssNewDo.getInCoachInBoxWithOutPref(coach, box);
             tcss.availability = false;
             tcssdo.update(tcss);
+            bookCoachClass.assignPassAndTCSS(p, tcss);
         }
         util.CommitUtil.commit();
     }
@@ -89,6 +96,7 @@ public class CoachBookUtil {
                 }
                 tcss.availability = false;
                 tcssdo.update(tcss);
+                bookCoachClass.assignPassAndTCSS(p, tcss);
             }
         }
         for (Passenger p : later) {
@@ -98,6 +106,7 @@ public class CoachBookUtil {
             }
             tcss.availability = false;
             tcssdo.update(tcss);
+            bookCoachClass.assignPassAndTCSS(p, tcss);
         }
         util.CommitUtil.commit();
     }
@@ -118,6 +127,7 @@ public class CoachBookUtil {
                 } else {
                     tcss.availability = false;
                     tcssdo.update(tcss);
+                    bookCoachClass.assignPassAndTCSS(p, tcss);
                 }
             }
         }
@@ -128,8 +138,37 @@ public class CoachBookUtil {
             }
             tcss.availability = false;
             tcssdo.update(tcss);
+            bookCoachClass.assignPassAndTCSS(p, tcss);
         }
         util.CommitUtil.commit();
     }
 
+    public void bookLikeOpen(List<Passenger> pass) throws SQLException {
+        List<Passenger> later = new ArrayList<>();
+        for (Passenger p : pass) {
+            if (p.seat_no == 0) {
+                later.add(p);
+            } else {
+                TrainClassSeatStatus tcss = cdo.getPrefInAllCoach(p.seat_no);
+                if (tcss == null) {
+                    later.add(p);
+                } else {
+                    tcss.availability = false;
+                    tcssdo.update(tcss);
+                    bookCoachClass.assignPassAndTCSS(p, tcss);
+                }
+            }
+        }
+        for (Passenger p : later) {
+            TrainClassSeatStatus tcss = cdo.getInAllCoach();
+            if (tcss != null) {
+                tcss.availability = false;
+                tcssdo.update(tcss);
+                bookCoachClass.assignPassAndTCSS(p, tcss);
+            } else {
+                bookCoachClass.bookRAC(p);
+            }
+        }
+        bookCoachClass.finalise();
+    }
 }

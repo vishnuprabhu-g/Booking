@@ -24,12 +24,14 @@
 <div id="to_print">
     <%
         List< TrainClassSeatStatus> allSeat = tcssdo.getAll(trainClassStatusID);
+        out.println("Coach:S1<br>");
         out.println("<table border=1 class=\"table table-bordered\"><thead><tr></tr></thead>");
         out.println("<tbody>");
         boolean unAssign = false;
         String same;
         TrainClassSeatStatus seat = null;
         long lastPnr = 0;
+        int row = 0;
         for (int i = 0; i < allSeat.size();) {
             out.println("<tr>");
             for (int j = 0; j < 7; j++) {
@@ -63,6 +65,10 @@
                 }
             }
             out.println("</tr>");
+            row++;
+            if (row == 2) {
+                out.println("</tbody></table>Coach:S2<br><table class=\"table table-bordered\"><tbody>");
+            }
         }
         out.println("</tbody></table>");
         if (unAssign) {

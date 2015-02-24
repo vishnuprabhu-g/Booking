@@ -80,6 +80,7 @@ public class CoachDO {
 
     /**
      * This method is used to calculate the pref factor.
+     *
      * @param pref
      * @param coach
      * @return
@@ -144,4 +145,40 @@ public class CoachDO {
         return c;
     }
 
+    public TrainClassSeatStatus getPrefInAllCoach(int pref) throws SQLException {
+        Connection con = util.ConnectionUtil.getConnection();
+        String query = "select * from train_class_seat_status where availablity=1 and seat_type_id=?";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setInt(1, pref);
+        ResultSet rs = ps.executeQuery();
+        TrainClassSeatStatus tcss;
+        if (rs.next()) {
+            tcss = new TrainClassSeatStatus();
+            tcss.compartment = rs.getString("compartment");
+            tcss.seatNo = rs.getInt("seat_no");
+            tcss.trainClassSeatStatusId = rs.getLong("train_class_seat_status_id");
+            tcss.typeId = pref;
+        } else {
+            tcss = null;
+        }
+        return tcss;
+    }
+
+    public TrainClassSeatStatus getInAllCoach() throws SQLException {
+        Connection con = util.ConnectionUtil.getConnection();
+        String query = "select * from train_class_seat_status where availablity=1";
+        PreparedStatement ps = con.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        TrainClassSeatStatus tcss;
+        if (rs.next()) {
+            tcss = new TrainClassSeatStatus();
+            tcss.compartment = rs.getString("compartment");
+            tcss.seatNo = rs.getInt("seat_no");
+            tcss.trainClassSeatStatusId = rs.getLong("train_class_seat_status_id");
+            tcss.typeId = rs.getInt("seat_type_id");
+        } else {
+            tcss = null;
+        }
+        return tcss;
+    }
 }

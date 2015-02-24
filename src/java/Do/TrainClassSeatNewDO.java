@@ -18,18 +18,19 @@ public class TrainClassSeatNewDO {
         ResultSet rs = ps.executeQuery();
         TrainClassSeatStatus tcss;
         if (rs.next()) {
-                tcss=new TrainClassSeatStatus();
-                tcss.compartment=coach;
-                tcss.availability=true;
-                tcss.box=box;
-                tcss.typeId=pref;
-                tcss.trainClassSeatStatusId = rs.getLong("train_class_seat_status_id");
+            tcss = new TrainClassSeatStatus();
+            tcss.compartment = coach;
+            tcss.availability = true;
+            tcss.box = box;
+            tcss.typeId = pref;
+            tcss.trainClassSeatStatusId = rs.getLong("train_class_seat_status_id");
+            tcss.seatNo=rs.getInt("seat_no");
         } else {
             tcss = null;
         }
         return tcss;
     }
-    
+
     public TrainClassSeatStatus getInCoachInBoxWithOutPref(String coach, int box) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String query = "select * from train_class_seat_status where availability=1 and compartment=? and box=?";
@@ -39,11 +40,12 @@ public class TrainClassSeatNewDO {
         ResultSet rs = ps.executeQuery();
         TrainClassSeatStatus tcss;
         if (rs.next()) {
-                tcss=new TrainClassSeatStatus();
-                tcss.compartment=coach;
-                tcss.availability=true;
-                tcss.box=box;
-                tcss.trainClassSeatStatusId = rs.getLong("train_class_seat_status_id");
+            tcss = new TrainClassSeatStatus();
+            tcss.compartment = coach;
+            tcss.availability = true;
+            tcss.box = box;
+            tcss.seatNo=rs.getInt("seat_no");
+            tcss.trainClassSeatStatusId = rs.getLong("train_class_seat_status_id");
         } else {
             tcss = null;
         }

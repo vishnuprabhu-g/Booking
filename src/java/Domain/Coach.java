@@ -13,9 +13,10 @@ import java.util.List;
  * @author vishnu-pt517
  */
 public class Coach {
-    public List <Box> boxs;
-    public Coach()
-    {
-        boxs=new ArrayList<>();
+
+    public List<Box> boxs;
+
+    public Coach() {
+        boxs = new ArrayList<>();
     }
 }

@@ -14,6 +14,7 @@ public class Passenger {
     public int fare;
     public String coach;
     public int no;
+    public long seat_status_id;
 
     @Override
     public String toString() {

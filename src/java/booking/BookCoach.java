@@ -93,23 +93,27 @@ public class BookCoach extends HttpServlet {
                 return;
             }
 
-            BookingClass booking = new BookingClass();
+            CoachDO cdo = new CoachDO();
+            CoachBookUtil coachBookUtil = new CoachBookUtil();
+            String coach = cdo.getCoachesForPassengers(passengerList);
+
+            BookCoachClass booking = new BookCoachClass();
             booking.totalPassenger = passengerList.size();
             booking.totalChild = childList.size();
             booking.half = halfTicket;
             booking.senior = seniorCount;
             booking.adult = passengerList.size() - halfTicket;
             booking.child = childList;
+            coachBookUtil.bookCoachClass = booking;
 
-            CoachDO cdo = new CoachDO();
-            CoachBookUtil coachBookUtil = new CoachBookUtil();
-            String coach = cdo.getCoachesForPassengers(passengerList);
             if (!coach.equals("NO")) {
                 coachBookUtil.CoachBook(coach, passengerList);
             } else {
                 System.out.println("Else block in main servlet");
+                coachBookUtil.bookLikeOpen(passengerList);
             }
-
+            util.CommitUtil.commit();
+            response.sendRedirect("user/ViewBookedTicket.jsp?pnr=" + booking.pnr);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             out.println("006");
