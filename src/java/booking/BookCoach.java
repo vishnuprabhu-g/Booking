@@ -101,7 +101,7 @@ public class BookCoach extends HttpServlet {
             String coach = cdo.getCoachesForPassengers(passengerList);
 
             BookCoachClass booking = new BookCoachClass();
-            booking.userId=(int)userId;
+            booking.userId = (int) userId;
             booking.totalPassenger = passengerList.size();
             booking.totalChild = childList.size();
             booking.half = halfTicket;

@@ -235,7 +235,7 @@ public class BookCoachClass {
             ptdo.add(pt);
 
             Reservation res = new Reservation();
-            res.userId=userId;
+            res.userId = userId;
             res.pnr = pnr;
             res.journeyID = journey_id;
             res.ReservationStatus = 1;
