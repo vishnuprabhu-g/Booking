@@ -8,4 +8,5 @@ public class Reservation {
     public long journeyID;
     public int ReservationStatus;
     public Date timestamp;
+    public int userId;
 }

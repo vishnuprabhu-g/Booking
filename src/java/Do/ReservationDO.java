@@ -12,11 +12,12 @@ public class ReservationDO {
 
     public void add(Reservation obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
-        String q = "insert into reservation (pnr ,journey_id ,reservation_status  ) values (? , ?, ? )";
+        String q = "insert into reservation (pnr ,journey_id ,reservation_status ,user_id ) values (? , ?, ?,? )";
         PreparedStatement ps = con.prepareStatement(q);
         ps.setLong(1, obj.pnr);
         ps.setLong(2, obj.journeyID);
         ps.setInt(3, obj.ReservationStatus);
+        ps.setInt(4, obj.userId);
         ps.executeUpdate();
 
     }
@@ -38,6 +39,25 @@ public class ReservationDO {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from reservation ";
         PreparedStatement ps = con.prepareStatement(q);
+        ResultSet rs = ps.executeQuery();
+        List<Reservation> out = new ArrayList<Reservation>();
+        while (rs.next()) {
+            Reservation obj = new Reservation();
+            obj.pnr = rs.getLong("pnr");
+            obj.journeyID = rs.getLong("journey_id");
+            obj.ReservationStatus = rs.getInt("reservation_status");
+            obj.timestamp = rs.getTimestamp("timestamp");
+            out.add(obj);
+        }
+
+        return out;
+    }
+
+    public List<Reservation> getAllWithUserId(int userId) throws SQLException {
+        Connection con = util.ConnectionUtil.getConnection();
+        String q = "select * from reservation where user_id=?";
+        PreparedStatement ps = con.prepareStatement(q);
+        ps.setInt(1, userId);
         ResultSet rs = ps.executeQuery();
         List<Reservation> out = new ArrayList<Reservation>();
         while (rs.next()) {

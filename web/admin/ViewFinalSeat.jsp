@@ -110,7 +110,7 @@
                     flg = false;
                     i++;
                 }
-                out.println("<tr><td>" + p.pnr + "</td><td> " + p.name + "</td><td>" + p.age + "</td><td>" + seatS + "</tr>");
+                out.println("<tr><td>" + p.pnr + "</td><td> " + p.name + "</td><td>" + p.age + "</td><td>" + "RAC" + p.seat_no + "</tr>");
             }
         } else {
             int singleCount = tcs.maxRac - finalRacCount, i;
@@ -131,7 +131,7 @@
                     flg = false;
                     i++;
                 }
-                out.println("<tr><td>" + p.pnr + "</td><td> " + p.name + "</td><td>" + p.age + "</td><td>" + seatS + "</tr>");
+                out.println("<tr><td>" + p.pnr + "</td><td> " + p.name + "</td><td>" + p.age + "</td><td>" + "RAC" + p.seat_no + "</tr>");
             }
         }
 

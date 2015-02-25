@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class BookCoach extends HttpServlet {
 
@@ -93,11 +94,14 @@ public class BookCoach extends HttpServlet {
                 return;
             }
 
+            HttpSession session = request.getSession();
+            long userId = (Long) session.getAttribute("user_id");
             CoachDO cdo = new CoachDO();
             CoachBookUtil coachBookUtil = new CoachBookUtil();
             String coach = cdo.getCoachesForPassengers(passengerList);
 
             BookCoachClass booking = new BookCoachClass();
+            booking.userId=(int)userId;
             booking.totalPassenger = passengerList.size();
             booking.totalChild = childList.size();
             booking.half = halfTicket;

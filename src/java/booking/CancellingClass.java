@@ -19,7 +19,7 @@ public class CancellingClass {
     TrainClassSeatStatusDO tcssdo;
     TrainClassStatus tcs;
     public long trainClassStatusId = 1;
-    public int maxRac = 18;
+    public int maxRac = 8;
     public int wait = 1, refund = 0;
     //public int initial_wait=1;
     boolean waitUpdated = false;
@@ -103,7 +103,6 @@ public class CancellingClass {
         List<Passenger> wl = pdo.getAllWl(trainClassStatusId);
         for (Passenger ps : wl) {
             if (ps.seat_no < waitno) {
-                continue;
             } else {
                 ps.seat_no -= 1;
                 wait = ps.seat_no;//
@@ -179,11 +178,11 @@ public class CancellingClass {
 
     public void finalise() throws SQLException {
         TrainClassStatusDO statusDo = new TrainClassStatusDO();
-        TrainClassStatus tcs = new TrainClassStatus();
-        tcs.trianClassStatusId = this.trainClassStatusId;
-        tcs.waiting = this.wait + 1;
+        TrainClassStatus tcsL = new TrainClassStatus();
+        tcsL.trianClassStatusId = this.trainClassStatusId;
+        tcsL.waiting = this.wait + 1;
         if (waitUpdated) {
-            statusDo.updateWaiting(tcs);
+            statusDo.updateWaiting(tcsL);
         }
 
         boolean anyTicket = pdo.checkUncancelled(pnr);

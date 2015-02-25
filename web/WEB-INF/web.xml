@@ -24,6 +24,10 @@
         <servlet-name>BookCoach</servlet-name>
         <servlet-class>booking.BookCoach</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>booking.Login</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Book</servlet-name>
         <url-pattern>/Book</url-pattern>
@@ -44,6 +48,10 @@
         <servlet-name>BookCoach</servlet-name>
         <url-pattern>/BookCoach</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             20
@@ -54,6 +62,6 @@
         <param-value>300</param-value>
     </context-param>
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

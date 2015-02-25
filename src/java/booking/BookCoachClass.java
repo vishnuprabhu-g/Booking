@@ -36,6 +36,7 @@ import java.util.List;
  */
 public class BookCoachClass {
 
+    public int userId;
     public boolean onlyConfirm;
     public boolean notConfirm;
     public boolean BookOnlyPreferred;
@@ -57,7 +58,7 @@ public class BookCoachClass {
     public long trianClassId = 1, journey_id = 1;
     int near = 1, adult = 0, half = 0, senior, box = 0;
     int bookedRac = 0;
-    public int wait, initial_wait, racVal, max_rac = 18, max_waiting = 50;//fetch it from db
+    public int wait, initial_wait, racVal, max_rac = 8, max_waiting = 50;//fetch it from db
     public int preferredLower;// How many selected lower
     public long class_id, from_id, to_id;
     public String message, coach = "";
@@ -234,6 +235,7 @@ public class BookCoachClass {
             ptdo.add(pt);
 
             Reservation res = new Reservation();
+            res.userId=userId;
             res.pnr = pnr;
             res.journeyID = journey_id;
             res.ReservationStatus = 1;

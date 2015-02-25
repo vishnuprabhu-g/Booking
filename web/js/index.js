@@ -3,7 +3,7 @@ function fn(val)
     var url;
     if (val == 1)
     {
-        url = "user/";
+        url = "user/index.jsp";
     }
     else if (val == 2)
     {

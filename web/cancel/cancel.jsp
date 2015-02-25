@@ -57,6 +57,7 @@
                     out.println("<tr><td> <input class=\"cb\" type=\"checkbox\" name=\"sno" + (i++) + "\" value=\"" + p.sno + " \" " + dis + " >");
                     out.println("</td><td>" + p.name + "</td><td>" + p.age + "</td>");
                     int status = p.statusId;
+                    int iniStatus=p.initialStatusId;
                     String clr = "";
                     if (status == 1) {
                         clr = "lightgreen";
@@ -71,7 +72,14 @@
                     out.println("<td style=\"background-color:" + clr + " \" >" + sd.get(p.statusId).name + "</td>");
                     String val = "";
                     if (status == 1) {
+                        if(iniStatus==1)
+                        {
                         val = "" + p.coach + "-" + p.seat_no;
+                        }
+                        else
+                        {
+                            val="CNF";
+                        }
                     }
                     if (status == 2) {
                         val = "RAC" + p.seat_no;

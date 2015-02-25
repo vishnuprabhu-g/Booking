@@ -24,7 +24,7 @@ public class TrainClassSeatNewDO {
             tcss.box = box;
             tcss.typeId = pref;
             tcss.trainClassSeatStatusId = rs.getLong("train_class_seat_status_id");
-            tcss.seatNo=rs.getInt("seat_no");
+            tcss.seatNo = rs.getInt("seat_no");
         } else {
             tcss = null;
         }
@@ -44,7 +44,7 @@ public class TrainClassSeatNewDO {
             tcss.compartment = coach;
             tcss.availability = true;
             tcss.box = box;
-            tcss.seatNo=rs.getInt("seat_no");
+            tcss.seatNo = rs.getInt("seat_no");
             tcss.trainClassSeatStatusId = rs.getLong("train_class_seat_status_id");
         } else {
             tcss = null;
