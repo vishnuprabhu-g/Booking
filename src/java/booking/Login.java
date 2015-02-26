@@ -42,14 +42,24 @@ public class Login extends HttpServlet {
             if (u == null) {
                 response.sendRedirect("login.jsp?login=error");
             } else {
+
+                HttpSession ses = request.getSession();
+                if (ses.getAttribute("user_id") != null) {
+                    int role = (Integer) ses.getAttribute("role_id");
+                    if (role == 1) {
+                        response.sendRedirect("admin.jsp?Message=LogOutFirst");
+                    } else {
+                        response.sendRedirect("user.jsp?Message=LogOutFirst");
+                    }
+                    return;
+                }
+
                 if (u.role == 1) {
-                    HttpSession ses = request.getSession();
                     ses.setAttribute("role_id", 1);
                     ses.setAttribute("user_id", u.id);
                     ses.setAttribute("username", username);
                     response.sendRedirect("admin.jsp");
                 } else {
-                    HttpSession ses = request.getSession();
                     ses.setAttribute("role_id", 2);
                     ses.setAttribute("user_id", u.id);
                     ses.setAttribute("username", username);

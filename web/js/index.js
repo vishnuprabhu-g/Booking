@@ -1,5 +1,16 @@
 function fn(val)
 {
+    $.get("valid.jsp", function (data)
+    {
+        //alert(data);
+        if (data == 0)
+        {
+            //alert("In zero");
+            document.location = "login.jsp?next="
+            document.reload();
+        }
+    });
+
     var url;
     if (val == 1)
     {

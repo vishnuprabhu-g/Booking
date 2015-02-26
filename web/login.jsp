@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/jquery-ui.css">
         <link rel="icon" href="css/logo.png">
+        <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0">
         <style>
             body {
@@ -58,10 +59,10 @@
 
                             <table> <h3>
                                     <tr class="spaceUnder"> 
-                                        <td>Username:</td><td><input type="text" name="username"></td>
+                                        <td>Username:</td><td><input type="text" name="username" required autofocus></td>
                                     </tr><br>
                                     <tr class="spaceUnder">
-                                        <td>Password:</td><td><input type="password" name="password"></td>
+                                        <td>Password:</td><td><input type="password" name="password" required></td>
                                     </tr>
                                     <tr>
                                         <td></td><td><input type="submit" value="Login"/></td>
@@ -94,11 +95,52 @@
                 </center>
                 <div class="col-lg-9" style="height: 78vh;max-height: 78vh;min-height: 78vh;padding-left:3%;padding-top:3%  ;overflow: auto ;background-color:ghostwhite ">
                     <div id="main">
-                        <h4>
-                            <br>
-                            A warm welcome to the online ticket reservation system.
-                            <br> </h4>
-                        <p>An advanced CRS(Computer reservation system) that gives you the best booking experience..!</p>
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4><i class="fa fa-fw fa-check">Detailed_Availability</i></h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        The system gives the detailed availability of the available berth.Which you can't get in any other system. 
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-5">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4><i class="fa fa-fw fa-check">Easy_Book</i></h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        The system gives you the seamless booking experience.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4><i class="fa fa-fw fa-check">Cancel_Effectively</i></h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        You can cancel the ticket anytime before the chart preparation of the travel.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-5">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4><i class="fa fa-fw fa-check">One_Click_Print</i></h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        Print your printer friendly version of the ticket with single click.Export the ticket as pdf too.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>               
             </div>
