@@ -44,6 +44,10 @@
         <servlet-name>Login</servlet-name>
         <servlet-class>booking.Login</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Register</servlet-name>
+        <servlet-class>booking.Register</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Book</servlet-name>
         <url-pattern>/Book</url-pattern>
@@ -67,6 +71,10 @@
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Register</servlet-name>
+        <url-pattern>/Register</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

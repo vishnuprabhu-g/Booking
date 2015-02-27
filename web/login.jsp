@@ -32,6 +32,7 @@
     <body>
         <script src="js/jquery.min.js" type="text/javascript"></script>
         <script src="js/jquery-ui.js"></script>
+        <script src="js/index.js" type="text/javascript"></script>
         <div style="width:94%;height: 100%;margin-left: 3%;margin-top: 0.2%;">
             <!--Top bar row -->
             <div class="row" style="background-color: #e6e6e6">
@@ -54,43 +55,25 @@
             <div class="row" style="height: 78vh">
                 <center>
                     <div class="col-lg-3" style="background-color: #ffffcc;height:78vh;min-height: 78vh ">
+                        <div id='side'>
 
-                        <form action="Login" method="post">
+                            <form id="regForm" action="Login" method="post">
 
-                            <table> <h3>
-                                    <tr class="spaceUnder"> 
-                                        <td>Username:</td><td><input type="text" name="username" required autofocus></td>
-                                    </tr><br>
-                                    <tr class="spaceUnder">
-                                        <td>Password:</td><td><input type="password" name="password" required></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td><td><input type="submit" value="Login"/></td>
-                                    </tr></h3>
-                            </table>
-                        </form>
-                        <br>
-                        <!-- Register:
-                         <form action="Login" method="post">
-                             <table> <h3>
-                                     <tr class="spaceUnder">
-                                         <td>Name</td><td><input type="text" name="name"></td>
-                                     </tr>
-                                     <tr class="spaceUnder">
-                                         <td>Username</td><td><input type="text" name="username"></td>
-                                     </tr>
-                                     <tr class="spaceUnder">
-                                         <td>Email</td><td><input type="text" name="email"></td>
-                                     </tr>
-                                     <tr class="spaceUnder">
-                                         <td>Password</td><td><input type="password" name="password"></td>
-                                     </tr>
-                                     <tr>
-                                         <td></td><td><input type="submit" value="Register"/></td>
-                                     </tr></h3>
-                             </table>
-                         </form>
-                        -->
+                                <table> <h3>
+                                        <tr class="spaceUnder"> 
+                                            <td>Username:</td><td><input type="text" name="username" required autofocus></td>
+                                        </tr><br>
+                                        <tr class="spaceUnder">
+                                            <td>Password:</td><td><input type="password" name="password" required></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td><td><input type="submit" value="Login"/></td>
+                                        </tr></h3>
+                                </table>
+                            </form>
+                            <br>
+                            <p>Don't have account,Sign up <a href="javascript:void(0)" onclick="fn2()">here</a></p>
+                        </div>
                     </div>
                 </center>
                 <div class="col-lg-9" style="height: 78vh;max-height: 78vh;min-height: 78vh;padding-left:3%;padding-top:3%  ;overflow: auto ;background-color:ghostwhite ">
@@ -150,6 +133,5 @@
         </div>
         <div id="dia" style="display: none;padding-left: 1px" title="Ticket Details" >
         </div>
-        <script src="js/index.js"></script>
     </body>
 </html>

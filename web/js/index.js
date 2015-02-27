@@ -1,3 +1,27 @@
+function fn2()
+{
+    $.get("signup.jsp", function (data) {
+        $("#side").html(data);
+    });
+}
+
+
+function reg()
+{
+    alert("REG method");
+    alert($("#regForm").serialize());
+    $.get("Register", $("#regForm").serialize(), function (data) {
+        alert("After get the data" + data);
+        if (data == 0)
+        {
+            $("#side").append("Username already taken. Try a different one.");
+        }
+        else
+        {
+            $("#side").html(data);
+        }
+    });
+}
 function fn(val)
 {
     $.get("valid.jsp", function (data)

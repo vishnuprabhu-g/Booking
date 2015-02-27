@@ -17,6 +17,16 @@ import java.sql.SQLException;
  */
 public class UserDO {
 
+    public void add(User u) throws SQLException {
+        Connection con = util.ConnectionUtil.getConnection();
+        String query = "insert into user values(NULL,?,?,?);";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setString(1, u.username);
+        ps.setString(2, u.password);
+        ps.setInt(3, u.role);
+        ps.execute();
+    }
+
     public User getUser(String username, String password) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from user where username=? and password=?";
@@ -35,5 +45,14 @@ public class UserDO {
         }
 
         return user;
+    }
+
+    public boolean isExist(String username) throws SQLException {
+        Connection con = util.ConnectionUtil.getConnection();
+        String q = "select * from user where username=?";
+        PreparedStatement ps = con.prepareStatement(q);
+        ps.setString(1, username);
+        ResultSet rs = ps.executeQuery();
+        return rs.next();
     }
 }
