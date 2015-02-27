@@ -1,3 +1,37 @@
+function addUser()
+{
+    var url = "signup_1.jsp";
+    $.get(url, function (data) {
+        $("#dia2").html(data);
+        //alert(data);
+        $(function () {
+            $("#dia2").dialog({
+                width: 400
+            }, {
+                height: 270
+            });
+        });
+    });
+}
+
+function addUserFinalClick()
+{
+    //alert("REG method");
+    //alert($("#regForm").serialize());
+    $.get("Register", $("#regForm").serialize(), function (data) {
+        //alert("After get the data" + data);
+        if (data == 0)
+        {
+            $("#dia2").append("Username already taken. Try a different one.");
+        }
+        else
+        {
+            $("#dia2").html(data.substr(0,32));
+        }
+        //$("#dia").dialog();
+    });
+}
+
 function fn2()
 {
     $.get("signup.jsp", function (data) {
@@ -8,10 +42,10 @@ function fn2()
 
 function reg()
 {
-    alert("REG method");
-    alert($("#regForm").serialize());
+    //alert("REG method");
+    //alert($("#regForm").serialize());
     $.get("Register", $("#regForm").serialize(), function (data) {
-        alert("After get the data" + data);
+        //alert("After get the data" + data);
         if (data == 0)
         {
             $("#side").append("Username already taken. Try a different one.");
@@ -63,6 +97,10 @@ function fn(val)
     else if (val == 0)
     {
         url = "admin/ViewFinalSeat.jsp?mode=view";
+    }
+    else if (val == -1)
+    {
+        url = "admin/admin.jsp";
     }
 
     if (val < 5)

@@ -46,6 +46,8 @@
                             <br><br>
                             <a href="javascript:void(0)" onclick="fn(3)" >View tickets</a>
                             <br><br>
+                            <a href="javascript:void(0)" onclick="fn(-1)" >Admin console</a>
+                            <br><br>
                             <a href="logout.jsp">Logout</a>
                             <br><br>
                         </h3>
@@ -66,6 +68,8 @@
             </div>
         </div>
         <div id="dia" style="display: none;padding-left: 1px" title="Ticket Details" >
+        </div>
+        <div id="dia2" style="display: none;padding-left: 1px" title="Add user" >
         </div>
         <script src="js/index.js"></script>
     </body>
