@@ -50,4 +50,14 @@ public class ProfileDO {
         ps.setLong(1, userID);
         ps.executeUpdate();
     }
+
+    public void update(Profile p) throws SQLException {
+        Connection con = util.ConnectionUtil.getConnection();
+        String query = "update user_profile set name=?,email=? where user_id=?";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setLong(3, p.userID);
+        ps.setString(1, p.name);
+        ps.setString(2, p.email);
+        ps.executeUpdate();
+    }
 }

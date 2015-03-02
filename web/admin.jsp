@@ -73,6 +73,8 @@
         </div>
         <div id="dia2" style="display: none;padding-left: 1px" title="Add user" >
         </div>
+        <div id="dia3" style="display: none;padding-left: 1px" title="Update user" >
+        </div>
         <script src="js/index.js"></script>
     </body>
 </html>

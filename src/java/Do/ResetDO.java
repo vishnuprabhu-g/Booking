@@ -34,6 +34,11 @@ public class ResetDO {
         ps.setLong(2, reset.key);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
+            String q2 = "delete from reset where uid=? and reset_key=?";
+            PreparedStatement ps2 = con.prepareStatement(q2);
+            ps2.setLong(1, reset.uid);
+            ps2.setLong(2, reset.key);
+            ps2.executeUpdate();
             return true;
         } else {
             return false;

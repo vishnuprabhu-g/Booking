@@ -17,11 +17,10 @@
             <td>Name:</td><td><input name="name" value="<%=up.name%>" required/></td>
         </tr>
         <tr>
-            <td>Email:</td><td><input value="<%=up.email%>" required>
-                <input style="display: none" name="userId" value="<%= up.userID%>">
+            <td>Email:</td><td><input type="email" name="email" value="<%=up.email%>" required>
+                <input style="display: none" name="user_id" value="<%= up.userID%>">
             </td>
-
         </tr>
     </table>
 </form>
-<button onClick="processUpdateUser">Update</button>
+<button onClick="processUpdateUser()">Update</button>

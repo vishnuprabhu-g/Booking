@@ -42,6 +42,7 @@ public class Reset extends HttpServlet {
             reset.key = key;
             reset.uid = uid;
             boolean rt = rdo.isValid(reset);
+            util.CommitUtil.commit();
             out.println("<body>");
             out.println("<div style=\"margin:50px 200px;background-color:#FFFFCC;height:200px \">");
             if (!rt) {
@@ -51,7 +52,7 @@ public class Reset extends HttpServlet {
                 session.setAttribute("uid", new Long(uid).toString());
                 out.println("<form action=\" setPass.jsp\">");
                 out.println("New password:<input typr=\"password\" name=\"password\" />");
-                out.println("<button>Reset</button>");
+                out.println("<br><button>Reset</button>");
                 out.println("</form>");
             }
             out.println("</div>");

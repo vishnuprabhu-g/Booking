@@ -1,6 +1,6 @@
 <br><br>
 <form action="ResetPassword">
-    Username: <input name="username"/> <br><br>
+    Username: <input name="username" required/> <br><br>
     <center> <button onclick="isValid()">Send password reset mail</button></center>
 </form>
 

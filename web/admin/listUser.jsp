@@ -1,3 +1,5 @@
+<%@page import="Domain.Profile"%>
+<%@page import="Do.ProfileDO"%>
 <%@page import="Domain.User"%>
 <%@page import="java.util.List"%>
 <%@page import="Do.UserDO"%>
@@ -10,8 +12,10 @@
         } else {
             out.println("<thead><tr><th class=\"col-md-2\">S.No</th><th class=\"col-md-3\">Username</th><th class=\"col-md-4\">Name</th><th class=\"col-md-3\">Actions</th><tr/></thead>");
             int i = 1;
+            ProfileDO pdo = new ProfileDO();
             for (User u : allUsers) {
-                out.println("<tr><td>" + i++ + "</td><td>" + u.username + "</td><td>" + u.username + "</td><td><img src=\"img/update profile.png \" height=30 width=30 title=\"Update\" onclick=\"editU(" + u.id + ")\"></img><img style=\"margin-left:3%\" src=\"img/reset password.png \" height=30 width=30 title=\"Reset password\" onclick=\"resetU(" + u.id + ")\"></img><img style=\"margin-left:3%\" src=\"img/remove user.png \" height=30 width=30 title=\"Delete user\" onclick=\"deleteU(" + u.id + ")\"></img></td></tr>");
+                Profile p = pdo.getProfile(u.id);
+                out.println("<tr><td>" + i++ + "</td><td>" + u.username + "</td><td>" + p.name + "</td><td><img src=\"img/update profile.png \" height=30 width=30 title=\"Update\" onclick=\"editU(" + u.id + ")\"></img><img style=\"margin-left:3%\" src=\"img/reset password.png \" height=30 width=30 title=\"Reset password\" onclick=\"resetU('" + u.username + "')\"></img><img style=\"margin-left:3%\" src=\"img/remove user.png \" height=30 width=30 title=\"Delete user\" onclick=\"deleteU(" + u.id + ")\"></img></td></tr>");
             }
         }
     %>

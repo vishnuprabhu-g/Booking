@@ -36,19 +36,28 @@ function addUserFinalClick()
 {
     //alert("REG method");
     //alert(j("#regForm").serialize());
-    j.get("Register", j("#regForm").serialize(), function (data) {
-        //alert("After get the data" + data);
-        if (data == 0)
-        {
-            j("#dia2").append("Username already taken. Try a different one.");
-        }
-        else
-        {
-            j("#dia2").html(data.substr(0, 32));
-        }
-        //j("#dia").dialog();
-    });
+    var obj = j("#regForm2");
+    if (obj[0].checkValidity() !== false)
+    {
+        j.get("Register", j("#regForm2").serialize(), function (data) {
+            //alert("After get the data" + data);
+            if (data == 0)
+            {
+                j("#dia2").append("Username already taken. Try a different one.");
+            }
+            else
+            {
+                j("#dia2").html(data.substr(0, 32));
+            }
+            //j("#dia").dialog();
+        });
+    }
+    else
+    {
+        j("#regForm2").append("Check the input data.");
+    }
 }
+
 
 function fn2()
 {
@@ -62,17 +71,27 @@ function reg()
 {
     //alert("REG method");
     //alert(j("#regForm").serialize());
-    j.get("Register", j("#regForm").serialize(), function (data) {
-        //alert("After get the data" + data);
-        if (data == 0)
-        {
-            j("#side").append("Username already taken. Try a different one.");
-        }
-        else
-        {
-            j("#side").html(data);
-        }
-    });
+    //document.getElementById("regForm").validate();
+    var i;
+    var obj = j("#regForm");
+    if (obj[0].checkValidity() !== false)
+    {
+        j.get("Register", j("#regForm").serialize(), function (data) {
+            //alert("After get the data" + data);
+            if (data == 0)
+            {
+                j("#side").append("Username already taken. Try a different one.");
+            }
+            else
+            {
+                j("#side").html(data);
+            }
+        });
+    }
+    else
+    {
+        j("#side").append("Invalid submit.");
+    }
 }
 function fn(val)
 {

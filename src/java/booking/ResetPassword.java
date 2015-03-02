@@ -56,20 +56,23 @@ public class ResetPassword extends HttpServlet {
                 r.key = keyV;
                 r.uid = uid;
                 rdo.add(r);
+                util.CommitUtil.commit();
 
                 String key = "" + keyV;
                 String link = "http://vishnu-pt517:8080/Booking/Reset?key=" + key + "&uid=" + up.userID;
-                String message = "Hello " + up.name + "\n";
+                String message = "Hello " + up.name + ",\n";
                 message += "\tIf you want to reset your password,please use the follwing link.\n";
                 message += link;
                 message += "\n";
-                message += "Thanks for using the system.";
+                message += "\nThanks for using the system.";
 
                 util.MailUtil.SendMail(email, message, sub);
                 out.println("Successfull..Check your mail!");
+                
             } else {
                 out.println("No user found for the username:" + username);
             }
+            out.println("<br><a href=\"login.jsp\">Home</a>");
             out.println("</div>");
             out.println("</div>");
             out.println("</body>");
