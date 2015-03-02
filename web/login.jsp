@@ -73,6 +73,8 @@
                             </form>
                             <br>
                             <p>Don't have account,Sign up <a href="javascript:void(0)" onclick="fn2()">here</a></p>
+                            <p>Forgot your password,Reset it <a href="javascript:void(0)" onclick="resetP()">here</a></p>
+                            <p id="messageP"></p>
                         </div>
                     </div>
                 </center>
@@ -133,5 +135,28 @@
         </div>
         <div id="dia" style="display: none;padding-left: 1px" title="Ticket Details" >
         </div>
+        <script type="text/javascript">
+            var message;
+            loginParam = getParameterByName("login");
+            if (loginParam == "logout")
+            {
+                message = "<font color=\"Blue\"> Logged out successfully.</font>";
+            }
+            else if (loginParam == "error")
+            {
+                message = "<font color=\"Red\">Invalid login.Please check your username and password.</font>";
+            }
+            if (message != undefined)
+            {
+                document.getElementById("messageP").innerHTML = message;
+            }
+
+            function getParameterByName(name) {
+                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                        results = regex.exec(location.search);
+                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+        </script>
     </body>
 </html>

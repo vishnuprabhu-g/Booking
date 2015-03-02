@@ -1,11 +1,29 @@
+var j = jQuery.noConflict();
+
+function listUser()
+{
+    var url = "admin/listUser.jsp";
+    j.get(url, function (data) {
+        j("#user").html(data);
+    });
+}
+
+function resetP()
+{
+    var url = "reset.jsp";
+    j.get(url, function (data) {
+        j("#side").html(data);
+    });
+}
+
 function addUser()
 {
     var url = "signup_1.jsp";
-    $.get(url, function (data) {
-        $("#dia2").html(data);
+    j.get(url, function (data) {
+        j("#dia2").html(data);
         //alert(data);
-        $(function () {
-            $("#dia2").dialog({
+        j(function () {
+            j("#dia2").dialog({
                 width: 400
             }, {
                 height: 270
@@ -17,25 +35,25 @@ function addUser()
 function addUserFinalClick()
 {
     //alert("REG method");
-    //alert($("#regForm").serialize());
-    $.get("Register", $("#regForm").serialize(), function (data) {
+    //alert(j("#regForm").serialize());
+    j.get("Register", j("#regForm").serialize(), function (data) {
         //alert("After get the data" + data);
         if (data == 0)
         {
-            $("#dia2").append("Username already taken. Try a different one.");
+            j("#dia2").append("Username already taken. Try a different one.");
         }
         else
         {
-            $("#dia2").html(data.substr(0,32));
+            j("#dia2").html(data.substr(0, 32));
         }
-        //$("#dia").dialog();
+        //j("#dia").dialog();
     });
 }
 
 function fn2()
 {
-    $.get("signup.jsp", function (data) {
-        $("#side").html(data);
+    j.get("signup.jsp", function (data) {
+        j("#side").html(data);
     });
 }
 
@@ -43,22 +61,22 @@ function fn2()
 function reg()
 {
     //alert("REG method");
-    //alert($("#regForm").serialize());
-    $.get("Register", $("#regForm").serialize(), function (data) {
+    //alert(j("#regForm").serialize());
+    j.get("Register", j("#regForm").serialize(), function (data) {
         //alert("After get the data" + data);
         if (data == 0)
         {
-            $("#side").append("Username already taken. Try a different one.");
+            j("#side").append("Username already taken. Try a different one.");
         }
         else
         {
-            $("#side").html(data);
+            j("#side").html(data);
         }
     });
 }
 function fn(val)
 {
-    $.get("valid.jsp", function (data)
+    j.get("valid.jsp", function (data)
     {
         //alert(data);
         if (data == 0)
@@ -105,18 +123,18 @@ function fn(val)
 
     if (val < 5)
     {
-        $.get(url, function (data) {
-            $("#main").html(data);
+        j.get(url, function (data) {
+            j("#main").html(data);
         });
     }
     else if (val == 5) {
-        $.get(url, function (data) {
+        j.get(url, function (data) {
             alert("Chart prepared successfully.Now you can view the chart!");
         });
     }
     else if (val == 6)
     {
-        $.get(url, function (data) {
+        j.get(url, function (data) {
             data = data.trim();
             if (data.substr(0, 3) == 900)
             {
@@ -124,7 +142,7 @@ function fn(val)
             }
             else
             {
-                $("#main").html(data);
+                j("#main").html(data);
             }
         });
     }
@@ -133,23 +151,23 @@ function fn(val)
 function cancel(pnr) {
     if (pnr !== undefined) {
         var url = "cancel/cancel.jsp?pnr=" + pnr;
-        $.get(url, function (data) {
-            $("#main").html(data);
+        j.get(url, function (data) {
+            j("#main").html(data);
         });
     }
 }
 
 function showBook() {
     var url = "user/book.jsp";
-    $.get(url, function (data) {
-        $("#main").html(data);
+    j.get(url, function (data) {
+        j("#main").html(data);
     });
 }
 
 function getBooked() {
     var url = "Book";
-    var Frmdata = $("#form1").serialize();
-    $.get(url, Frmdata, function doP(data) {
+    var Frmdata = j("#form1").serialize();
+    j.get(url, Frmdata, function doP(data) {
         var reply = data.substr(0, 3);
         var mess = data.substr(3, 60);
         if (reply == 101)
@@ -164,8 +182,8 @@ function getBooked() {
             }
             else
             {
-                $.get(url, Frmdata + "&ignore=1", function (dataIn) {
-                    $("#main").html(dataIn);
+                j.get(url, Frmdata + "&ignore=1", function (dataIn) {
+                    j("#main").html(dataIn);
                 });
 
             }
@@ -182,8 +200,8 @@ function getBooked() {
              }
              else*/
             {
-                $.get(url, Frmdata + "&ignore=1", function (dataIn) {
-                    //$("#main").html(data);
+                j.get(url, Frmdata + "&ignore=1", function (dataIn) {
+                    //j("#main").html(data);
                     doP(dataIn);
                 });
 
@@ -206,22 +224,22 @@ function getBooked() {
         else if (reply == 006)
             alert("Exception while processing your request..!");
         else
-            $("#main").html(data);
+            j("#main").html(data);
     });
 }
 
-$(function ()
+j(function ()
 {
-    $(document).tooltip();
+    j(document).tooltip();
 });
 
 function viewTic(pnr)
 {
     var url = "user/ViewBookedTicket.jsp?pnr=" + pnr;
-    $.get(url, function (data) {
-        $("#dia").html(data);
-        $(function () {
-            $("#dia").dialog({
+    j.get(url, function (data) {
+        j("#dia").html(data);
+        j(function () {
+            j("#dia").dialog({
                 width: 700
             }, {
                 height: 500
@@ -232,15 +250,15 @@ function viewTic(pnr)
 
 function cancelLast() {
     var url = "Cancel";
-    var data = $("#form2").serialize();
-    $.get(url, data, function (data) {
-        $("#dia").html(data);
-        $(function () {
-            $("#dia").dialog({
+    var data = j("#form2").serialize();
+    j.get(url, data, function (data) {
+        j("#dia").html(data);
+        j(function () {
+            j("#dia").dialog({
                 modal: true,
                 buttons: {
                     Ok: function () {
-                        $(this).dialog("close");
+                        j(this).dialog("close");
                         fn(3);
                     }
                 }
@@ -252,17 +270,17 @@ function cancelLast() {
 function price()
 {
     var url = "user/policy.txt";
-    $.get(url, function (data) {
-        $("#dia").html(data);
-        $(function () {
-            $("#dia").dialog({
+    j.get(url, function (data) {
+        j("#dia").html(data);
+        j(function () {
+            j("#dia").dialog({
                 modal: true,
                 title: 'Policy',
                 height: 470,
                 width: 700,
                 buttons: {
                     Ok: function () {
-                        $(this).dialog("close");
+                        j(this).dialog("close");
                     }
                 }
             });
@@ -271,7 +289,7 @@ function price()
 }
 function ProcessCancel()
 {
-    var data = $("#form3").serialize();
+    var data = j("#form3").serialize();
     var pnr = data.split("=");
     cancel(pnr[1]);
 }
@@ -279,10 +297,10 @@ function ProcessCancel()
 function PrintElem(val)
 {
     if (val == 1)
-        elem = $("#ticket");
+        elem = j("#ticket");
     else
-        elem = $("#to_print");
-    Popup($(elem).html());
+        elem = j("#to_print");
+    Popup(j(elem).html());
 }
 
 function Popup(data)
@@ -300,8 +318,8 @@ function Popup(data)
 
 function selectAll()
 {
-    //console.log($(".cb").size());
-    $(".cb").each(function ()
+    //console.log(j(".cb").size());
+    j(".cb").each(function ()
     {
         this.checked = true;
     });

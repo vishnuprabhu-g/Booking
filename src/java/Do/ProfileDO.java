@@ -42,4 +42,12 @@ public class ProfileDO {
         }
         return p;
     }
+
+    public void delete(long userID) throws SQLException {
+        Connection con = util.ConnectionUtil.getConnection();
+        String q = "delete from user_profile where user_id=?";
+        PreparedStatement ps = con.prepareStatement(q);
+        ps.setLong(1, userID);
+        ps.executeUpdate();
+    }
 }

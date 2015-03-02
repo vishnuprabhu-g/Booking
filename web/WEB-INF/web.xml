@@ -48,6 +48,14 @@
         <servlet-name>Register</servlet-name>
         <servlet-class>booking.Register</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ResetPassword</servlet-name>
+        <servlet-class>booking.ResetPassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Reset</servlet-name>
+        <servlet-class>booking.Reset</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Book</servlet-name>
         <url-pattern>/Book</url-pattern>
@@ -75,6 +83,14 @@
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/Register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPassword</servlet-name>
+        <url-pattern>/ResetPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Reset</servlet-name>
+        <url-pattern>/Reset</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

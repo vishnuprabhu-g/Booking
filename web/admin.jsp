@@ -19,6 +19,8 @@
     <body>
         <script src="js/jquery.min.js" type="text/javascript"></script>
         <script src="js/jquery-ui.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/admin.js"></script>
         <div style="width:94%;height: 100%;margin-left: 3%;margin-top: 0.2%;">
             <!--Top bar row -->
             <div class="row" style="background-color: #e6e6e6">

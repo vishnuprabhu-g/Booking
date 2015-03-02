@@ -9,3 +9,4 @@
     </table>
 </form>
 <center><button onclick="reg()">Register</button></center>
+Go to <a href="login.jsp">login</a> page.

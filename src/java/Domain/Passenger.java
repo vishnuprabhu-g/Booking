@@ -1,6 +1,6 @@
 package Domain;
 
-public class Passenger {
+public class Passenger{
 
     public long pnr;
     public String name;
