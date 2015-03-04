@@ -1,0 +1,9 @@
+title="<% if (!classStatus.chart) {
+                out.print(detailAvl);
+            }%>">
+                <%= message%><br> <% if (classStatus.chart) {
+                        out.print(" <!-- ");
+                    } %><a href="javascript:void(0)" onclick="showBook()"  >Book now</a><% if (classStatus.chart) {
+                            out.print(" --> ");
+                        }%>
+                <% System.out.println("detailMsg=" + detailAvl);%>

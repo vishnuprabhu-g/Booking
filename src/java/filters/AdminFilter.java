@@ -24,17 +24,17 @@ import javax.servlet.http.HttpSession;
  * @author vishnu-pt517
  */
 public class AdminFilter implements Filter {
-    
+
     private static final boolean debug = true;
 
     // The filter configuration object we are associated with.  If
     // this value is null, this filter instance is not currently
     // configured. 
     private FilterConfig filterConfig = null;
-    
+
     public AdminFilter() {
     }
-    
+
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
@@ -42,13 +42,19 @@ public class AdminFilter implements Filter {
         }
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession ses = req.getSession();
-        int role = (Integer) ses.getAttribute("role_id");
-        if (role != 1) {
-            HttpServletResponse res = (HttpServletResponse) response;
-            res.sendRedirect("unAuth.jsp");
+        HttpServletResponse res = (HttpServletResponse) response;
+        Object o = ses.getAttribute("role_id");
+        System.out.println(o);
+        if (o != null) {
+            int role = (Integer) o;
+            if (role != 1) {
+                res.sendRedirect("unAuth.jsp");
+            }
+        } else {
+            //res.sendRedirect("login.jsp?login=timeout");
         }
     }
-    
+
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
@@ -68,13 +74,13 @@ public class AdminFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-        
+
         if (debug) {
             log("AdminFilter:doFilter()");
         }
-        
+
         doBeforeProcessing(request, response);
-        
+
         Throwable problem = null;
         try {
             chain.doFilter(request, response);
@@ -85,7 +91,7 @@ public class AdminFilter implements Filter {
             problem = t;
             t.printStackTrace();
         }
-        
+
         doAfterProcessing(request, response);
 
         // If there was a problem, we want to rethrow it if it is
@@ -148,10 +154,10 @@ public class AdminFilter implements Filter {
         sb.append(")");
         return (sb.toString());
     }
-    
+
     private void sendProcessingError(Throwable t, ServletResponse response) {
         String stackTrace = getStackTrace(t);
-        
+
         if (stackTrace != null && !stackTrace.equals("")) {
             try {
                 response.setContentType("text/html");
@@ -178,7 +184,7 @@ public class AdminFilter implements Filter {
             }
         }
     }
-    
+
     public static String getStackTrace(Throwable t) {
         String stackTrace = null;
         try {
@@ -192,9 +198,9 @@ public class AdminFilter implements Filter {
         }
         return stackTrace;
     }
-    
+
     public void log(String msg) {
         filterConfig.getServletContext().log(msg);
     }
-    
+
 }

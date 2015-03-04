@@ -43,10 +43,16 @@ public class UserFilter implements Filter {
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession ses = req.getSession();
-        int role = (Integer) ses.getAttribute("role_id");
-        if (role != 2) {
-            HttpServletResponse res = (HttpServletResponse) response;
-            res.sendRedirect("unAuth.jsp");
+        HttpServletResponse res = (HttpServletResponse) response;
+        Object o = ses.getAttribute("role_id");
+        if (o != null) {
+            int role = (Integer) o;
+            if (role != 2) {
+                res.sendRedirect("unAuth.jsp");
+            }
+        } else {
+            //res.sendRedirect("login.jsp?login=timeout");
+            //return;
         }
     }
 

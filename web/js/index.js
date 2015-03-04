@@ -343,3 +343,11 @@ function selectAll()
         this.checked = true;
     });
 }
+
+function getTrainClass(trainID,classID)
+{
+    data="trainID="+trainID+"&classID="+classID;
+    j.get("user/getTrainDetailAvail.jsp",data,function(reply){
+       j("#classAvailable").html(reply); 
+    });
+}

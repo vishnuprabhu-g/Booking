@@ -119,8 +119,8 @@ public class TrainClassSeatStatusDO {
     public void addSleeper(long classStatusId) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         int i;
-        for (i = 1; i <= 72; i++) {
-            String q = "insert into train_class_seat_status (train_class_status_id ,seat_no ,availability ,seat_type_id ) values (? , ?, ?, ? )";
+        for (i = 1; i <= 64; i++) {
+            String q = "insert into r5.train_class_seat_status (train_class_status_id ,seat_no ,availability ,seat_type_id ) values (? , ?, ?, ? )";
             PreparedStatement ps = con.prepareStatement(q);
             ps.setLong(1, classStatusId);
             ps.setInt(2, i);

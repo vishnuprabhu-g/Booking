@@ -1,33 +1,11 @@
-<%@page import="java.util.List"%>
-<%@page import="java.sql.SQLException"%>
-<%@page import="Do.*"%>
-<%@page import="Domain.*"%>
+<%@page import="Do.TrainClassRacStatusDO"%>
+<%@page import="Do.TrainClassStatusDO"%>
+<%@page import="Domain.TrainClassStatus"%>
+<%@page import="Do.TrainClassSeatStatusDO"%>
 <%
-    TrainStatusDO tsdo = new Do.TrainStatusDO();
-    TrainStatus ts = tsdo.get(1);
-    long statusId = ts.statusId;
-    long from = 1, to = 2, classId = 1, trainID = 1;
-    double fare, distance;
-
-    try {
-        distance = new StationDistanceDO().getDistance(from, to);
-        double farePerKM = new ClassDistanceFare().getFare(classId);
-        fare = util.FareCalculater.CalculateFare(distance, farePerKM);
-    } catch (SQLException ex) {
-        out.println("Error in fetching the fare..!");
-        System.err.println(ex);
-        return;
-    }
-
-    StationDO sdo = new StationDO();
+    long statusId = Long.parseLong(request.getParameter("classID"));
     TrainClassStatusDO tcsdo = new TrainClassStatusDO();
     TrainClassStatus classStatus = tcsdo.get(statusId);
-    TrainClassRacStatusDO racdo = new TrainClassRacStatusDO();
-    int rac = racdo.getCount(1L);
-
-    TrainClassDO trainClassDO = new TrainClassDO();
-    ClassDO cdo = new ClassDO();
-
     long classStatusId = classStatus.trianClassStatusId;
     TrainClassSeatStatusDO tcssdo = new TrainClassSeatStatusDO();
     int lower = tcssdo.getCount(classStatusId, 1);
@@ -36,6 +14,8 @@
     int side = tcssdo.getCount(classStatusId, 4);
     //tcssdo.addSleeper(classStatusId);
     session.setAttribute("journey", 1);
+    TrainClassRacStatusDO racdo = new TrainClassRacStatusDO();
+    int rac = racdo.getCount(1L);
 
     String detailAvl = "";
     String message = "";
@@ -93,27 +73,16 @@
         detailAvl = "Lower Berth:" + lower + " \nMiddle Berth:" + middle + " \nUpper Berth:" + upper + " \nSide Upper:" + side;
     }
 %>
-<h4>Available trains</h4>
-<table class="table table-bordered table-hover">
-    <thead>
-        <tr><th>Train Number</th><th>Name</th><th>From</th><th>To</th><th>Distance(KM)</th><th>Available classes</th></tr>
-    </thead>
-    <tbody>
-        <tr class="success">
-            <td>1001</td><td>CBE express</td><td><%=sdo.get(from).name%></td><td><%=sdo.get(to).name%></td><td><%=(int) distance%> </td>
-            <td>
-                <%
-                    for (TrainClass tc : trainClassDO.getAll(trainID)) {
-                        String clasCode = cdo.get(tc.classID).code;
-                        out.println("<button class=\"btn btn-default\" onclick=\"getTrainClass(" + trainID + "," + tc.classID + ")\">" + clasCode + "</button>");
-                    }
-                %>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<div id="classAvailable"></div>
-<br><br>
-<div>
-    Click<a href="javascript:void(0)" onclick="price()" > here </a>to know the pricing policy.
-</div>
+<td title="<% if (!classStatus.chart) {
+        out.print(detailAvl);
+    }%>">
+
+    <%= message%><br> 
+    <% if (classStatus.chart) {
+            out.print(" <!-- ");
+        } %><a href="javascript:void(0)" onclick="showBook()"  >Book now</a><% if (classStatus.chart) {
+                out.print(" --> ");
+            }%>
+    <% System.out.println("detailMsg=" + detailAvl);
+    %>
+</td>
