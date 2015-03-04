@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="Do.*"%>
 <%@page import="Domain.*"%>
@@ -5,7 +6,7 @@
     TrainStatusDO tsdo = new Do.TrainStatusDO();
     TrainStatus ts = tsdo.get(1);
     long statusId = ts.statusId;
-    long from = 1, to = 2, classId = 1;
+    long from = 1, to = 2, classId = 1,trainID=1;
     double fare, distance;
 
     try {
@@ -23,6 +24,9 @@
     TrainClassStatus classStatus = tcsdo.get(statusId);
     TrainClassRacStatusDO racdo = new TrainClassRacStatusDO();
     int rac = racdo.getCount(1L);
+    
+    TrainClassDO trainClassDO=new TrainClassDO();
+    List<TrainClass> trainClasses=trainClassDO.getAll(trainID);
 
     long classStatusId = classStatus.trianClassStatusId;
     TrainClassSeatStatusDO tcssdo = new TrainClassSeatStatusDO();
