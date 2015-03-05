@@ -19,7 +19,7 @@ import javax.mail.internet.MimeMessage;
  */
 public class MailUtil {
 
-    public static void SendMail(String to,String messageS,String subject) {
+    public static void SendMail(String to, String messageS, String subject) {
 
         String from = "noreply@OnlineTrainTicketReservation.16mb.com";
         String host = "smtp";

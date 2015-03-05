@@ -61,13 +61,13 @@ public class Register extends HttpServlet {
                 p.userID = u.id;
                 profileDO.addProfile(p);
                 util.CommitUtil.commit();
-                String message="Hello "+p.name+"\n\n";
-                message+="\tYour account is created for the online ticket reservation system.\n\n";
-                message+="\t\tUsername:"+username;
-                message+="\n\t\tPassword   :"+password;
-                message+="\n\tYou can login to the system at http://vishnu-pt517:8080";
-                message+="\n\nThank you for using the system.";
-                util.MailUtil.SendMail(email, message,"Your account created.");
+                String message = "Hello " + p.name + "\n\n";
+                message += "\tYour account is created for the online ticket reservation system.\n\n";
+                message += "\t\tUsername:" + username;
+                message += "\n\t\tPassword   :" + password;
+                message += "\n\tYou can login to the system at http://vishnu-pt517:8080";
+                message += "\n\nThank you for using the system.";
+                util.MailUtil.SendMail(email, message, "Your account created.");
                 out.println("<br><br>Registered successfully.Login <a href=\"/\"> here </a> ");
             }
 

@@ -65,7 +65,7 @@ public class TrainClassStatusDO {
 
     public TrainClassStatus get(long id) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
-        String q = "select * from train_class_status where status_id =?;";
+        String q = "select * from train_class_status where train_class_status_id =?;";
         PreparedStatement ps = con.prepareStatement(q);
         ps.setLong(1, id);
         ResultSet rs = ps.executeQuery();

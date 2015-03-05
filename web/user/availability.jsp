@@ -3,9 +3,13 @@
 <%@page import="Domain.TrainClassStatus"%>
 <%@page import="Do.TrainClassSeatStatusDO"%>
 <%
+    System.out.println("Availability:");
+
     long statusId = Long.parseLong(request.getParameter("classID"));
+    session.setAttribute("classID", Long.parseLong(request.getParameter("classID")));
     TrainClassStatusDO tcsdo = new TrainClassStatusDO();
     TrainClassStatus classStatus = tcsdo.get(statusId);
+
     long classStatusId = classStatus.trianClassStatusId;
     TrainClassSeatStatusDO tcssdo = new TrainClassSeatStatusDO();
     int lower = tcssdo.getCount(classStatusId, 1);
@@ -80,7 +84,7 @@
     <%= message%><br> 
     <% if (classStatus.chart) {
             out.print(" <!-- ");
-        } %><a href="javascript:void(0)" onclick="showBook()"  >Book now</a><% if (classStatus.chart) {
+        }%><a href="javascript:void(0)" onclick="showBook(<%=statusId%>)"  >Book now</a><% if (classStatus.chart) {
                 out.print(" --> ");
             }%>
     <% System.out.println("detailMsg=" + detailAvl);

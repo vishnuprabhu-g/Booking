@@ -68,7 +68,7 @@ public class ResetPassword extends HttpServlet {
 
                 util.MailUtil.SendMail(email, message, sub);
                 out.println("Successfull..Check your mail!");
-                
+
             } else {
                 out.println("No user found for the username:" + username);
             }

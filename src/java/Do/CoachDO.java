@@ -25,10 +25,11 @@ public class CoachDO {
         tcssdo = new TrainClassSeatStatusDO();
     }
 
-    public String getCoachesForPassengers(List<Passenger> passengers) throws SQLException {
+    public String getCoachesForPassengers(List<Passenger> passengers,long tcsID) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
-        String query = "select compartment,count(*) from train_class_seat_status where availability=1 group by compartment";
+        String query = "select compartment,count(*) from train_class_seat_status where availability=1 and train_class_status_id=? group by compartment";
         PreparedStatement ps1 = con.prepareCall(query);
+        ps1.setLong(1, tcsID);
         ResultSet rs = ps1.executeQuery();
         String[] coachs = new String[10];
         int[] count = new int[10];

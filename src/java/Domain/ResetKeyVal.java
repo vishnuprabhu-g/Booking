@@ -10,6 +10,7 @@ package Domain;
  * @author vishnu-pt517
  */
 public class ResetKeyVal {
+
     public long uid;
     public long key;
 }

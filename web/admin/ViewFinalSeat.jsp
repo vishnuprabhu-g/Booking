@@ -3,8 +3,8 @@
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    long trainClassId = 1;
-    TrainClassStatus tcs = new TrainClassStatusDO().get(trainClassId);
+    long trainClassStatusID =Long.parseLong(request.getParameter("classID"));
+    TrainClassStatus tcs = new TrainClassStatusDO().get(trainClassStatusID);
     String mode = request.getParameter("mode");
     if (!tcs.chart && mode == null) {
         out.println("900");
@@ -14,11 +14,11 @@
     ChartDO chartDO = new ChartDO();
     TrainClassSeatStatusDO tcssdo = new TrainClassSeatStatusDO();
     PassengerDO pdo = new PassengerDO();
-    long trainClassStatusID = 1;
+    //long trainClassStatusID = 1;
     SeatPassengerDO seatPassengerDO = new SeatPassengerDO();
     SeatTypeDO seatTypeDO = new SeatTypeDO();
 %>
-<button onclick="PrintElem(0)">Print this chart</button>
+<button class="btn btn-default" onclick="showDefault()" style="margin-right: 3%">Close this chart</button> <button onclick="PrintElem(0)">Print this chart</button>
 <br><br>
 
 <div id="to_print">

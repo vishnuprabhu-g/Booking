@@ -1,5 +1,5 @@
 var j = jQuery.noConflict();
-
+var dMain = j("#main").html();
 function listUser()
 {
     var url = "admin/listUser.jsp";
@@ -133,7 +133,7 @@ function fn(val)
     }
     else if (val == 0)
     {
-        url = "admin/ViewFinalSeat.jsp?mode=view";
+        url = "admin/ViewCurrentStatus.jsp?mode=view";
     }
     else if (val == -1)
     {
@@ -176,8 +176,8 @@ function cancel(pnr) {
     }
 }
 
-function showBook() {
-    var url = "user/book.jsp";
+function showBook(trainClassStatusId) {
+    var url = "user/book.jsp?tcsID=" + trainClassStatusId;
     j.get(url, function (data) {
         j("#main").html(data);
     });
@@ -344,10 +344,15 @@ function selectAll()
     });
 }
 
-function getTrainClass(trainID,classID)
+function getTrainClass(trainID, classID)
 {
-    data="trainID="+trainID+"&classID="+classID;
-    j.get("user/getTrainDetailAvail.jsp",data,function(reply){
-       j("#classAvailable").html(reply); 
+    data = "trainID=" + trainID + "&classID=" + classID;
+    j.get("user/getTrainDetailAvail.jsp", data, function (reply) {
+        j("#classAvailable").html(reply);
     });
+}
+
+function showDefault()
+{
+    j("#main").html = dMain;
 }
