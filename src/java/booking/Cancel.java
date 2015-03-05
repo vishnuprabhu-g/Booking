@@ -28,7 +28,7 @@ public class Cancel extends HttpServlet {
             UnderPassengerDO udo = new UnderPassengerDO();
             PassengerTicketDO ptdo = new PassengerTicketDO();
             Long pnr = (Long) session.getAttribute("pnr");
-            Long trainClassStatusId = 1L;
+            Long trainClassStatusId = (Long) session.getAttribute("cancelTcsID");
             int refund = 0;
             boolean childDeleted = false;
             if (pnr == null) {
@@ -72,6 +72,8 @@ public class Cancel extends HttpServlet {
                 } else {
                     CancellingClass can = new CancellingClass();
                     can.pnr = pnr;
+                    can.trainClassStatusId=trainClassStatusId;
+                    can.afterInit();
                     PassengerTicket pt = ptdo.get(pnr);
                     for (Integer sno : cancel) {
                         Passenger p = pdo.get(pnr, sno);

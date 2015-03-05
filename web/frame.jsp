@@ -18,9 +18,9 @@
     </head>
     <body>
         <script src="js/jquery.min.js" type="text/javascript"></script>
-        <script src="js/jquery-ui.js"></script>
         <script src="js/index.js"></script>
-        <script src="js/bootstrap.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <script src="js/bootstrap.min.js"></script>
         <script src="js/admin.js"></script>
         <div style="width:94%;height: 100%;margin-left: 3%;margin-top: 0.2%;">
             <!--Top bar row -->
@@ -58,11 +58,6 @@
                 </center>
                 <div class="col-lg-9" style="height: 78vh;max-height: 78vh;min-height: 78vh;padding-left:3%;padding-top:3%  ;overflow: auto ;background-color:ghostwhite ">
                     <div id="main">
-                        <h4>
-                            <br>
-                            A warm welcome to the online ticket reservation system.
-                            <br> </h4>
-                        <p>An advanced CRS(Computer reservation system) that gives you the best booking experience..!</p>
                     </div>
                 </div>               
             </div>
@@ -76,6 +71,5 @@
         </div>
         <div id="dia3" style="display: none;padding-left: 1px" title="Update user" >
         </div>
-        
     </body>
 </html>

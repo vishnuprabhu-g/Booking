@@ -26,20 +26,18 @@
 
 <div id="to_print">
     <%
-        //List< TrainClassSeatStatus> allSeat = tcssdo.getAll(trainClassStatusID);
+        List< TrainClassSeatStatus> allSeat = tcssdo.getAll(trainClassStatusID);
         boolean unAssign = false;
         for (String coach : coachList) {
-            List< TrainClassSeatStatus> allSeat = tcssdo.getAllOfCoach(trainClassStatusID, coach);
-            out.println("Coach:" + coach + "<br>");
+            out.println("Coach:"+coach+"<br>");
             out.println("<table border=1 class=\"table table-bordered\"><thead><tr></tr></thead>");
-            out.println("<thead><tr><th style=\"maxwidth:3%\">SeatNo</th><th>LB</th><th>MB</th><th>UB</th><th>LB</th><th>MB</th><th>UB</th><th>SU</th></tr></thead>");
             out.println("<tbody>");
             String same;
             TrainClassSeatStatus seat = null;
             long lastPnr = 0;
-            int row = 1;
+            int row = 0;
             for (int i = 0; i < allSeat.size();) {
-                out.println("<tr><td>"+(((row-1)*8)+1)+"-"+(row*8)+"</td>");
+                out.println("<tr>");
                 for (int j = 0; j < 7; j++) {
                     if (i < 63) {
                         seat = allSeat.get(i);
@@ -72,13 +70,12 @@
                 }
                 out.println("</tr>");
                 row++;
-                /*if (row == 2) {
+                if (row == 2) {
                     out.println("</tbody></table>Coach:S2<br><table class=\"table table-bordered\"><tbody>");
-                }*/
+                }
             }
-            out.println("</tbody></table><br>");
         }
-        
+        out.println("</tbody></table>");
         if (unAssign) {
             out.println("<span style=\"color:blue\">*</span> Prepare chart to view the final seat assignment.");
         }
@@ -155,23 +152,25 @@
     // var objlist=$(".filled").css("border", "9px solid blue");
     //console.log(objlist.size());
     // function a() {
-        j(".filled").each(function (index) {
+    $(".filled").each(function (index) {
         //console.log($(this).attr("name"));
         //console.log(getColor($(this).attr("name")));
-    j(this).css("background-color", getColor(j(this).attr("name")));
-    }); 
-    var obj = j(".filled");
-    var before = new Array();     for (i = 0; i < 7; i++)
+        $(this).css("background-color", getColor($(this).attr("name")));
+    });
+
+    var obj = $(".filled");
+    var before = new Array();
+    for (i = 0; i < 7; i++)
     {
     }
 
     //}
 
-        function getColor(pnr)
+    function getColor(pnr)
     {
         var r = "F" + pnr.substring(11, 12);
         var g = "F" + pnr.substring(9, 10);
         var b = "F" + pnr.substring(10, 11);
-    return "#" + r + "" + g + "" + b;
+        return "#" + r + "" + g + "" + b;
     }
 </script>

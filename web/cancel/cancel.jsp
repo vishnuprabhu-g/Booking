@@ -2,10 +2,14 @@
 <%@page import="Do.*"%>
 <%@page import="Domain.*" %>
 <%
-    long trainClassId = 1;
+    ReservationDO resDO=new ReservationDO();
+   
+    //long trainClassId = 1;
     PassengerTicketDO ptdo = new PassengerTicketDO();
     PassengerDO pdo = new PassengerDO();
     long pnr = Long.parseLong(request.getParameter("pnr"));
+    long trainClassId=resDO.get(pnr).trainClassStausID;
+    session.setAttribute("cancelTcsID", trainClassId);
 
     TrainClassStatusDO tcsdo = new TrainClassStatusDO();
     TrainClassStatus tcs = tcsdo.get(trainClassId);

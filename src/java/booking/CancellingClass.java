@@ -18,7 +18,7 @@ public class CancellingClass {
     TrainClassStatusDO trainClassStatusDO;
     TrainClassSeatStatusDO tcssdo;
     TrainClassStatus tcs;
-    public long trainClassStatusId = 1;
+    public long trainClassStatusId;
     public int maxRac = 8;
     public int wait = 1, refund = 0;
     //public int initial_wait=1;
@@ -28,6 +28,9 @@ public class CancellingClass {
     public CancellingClass() {
         tcssdo = new TrainClassSeatStatusDO();
         this.trainClassStatusDO = new TrainClassStatusDO();
+    }
+
+    public void afterInit() {
         try {
             tcs = trainClassStatusDO.get(trainClassStatusId);
         } catch (SQLException ex) {

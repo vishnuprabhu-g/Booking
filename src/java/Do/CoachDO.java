@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ public class CoachDO {
         tcssdo = new TrainClassSeatStatusDO();
     }
 
-    public String getCoachesForPassengers(List<Passenger> passengers,long tcsID) throws SQLException {
+    public String getCoachesForPassengers(List<Passenger> passengers, long tcsID) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String query = "select compartment,count(*) from train_class_seat_status where availability=1 and train_class_status_id=? group by compartment";
         PreparedStatement ps1 = con.prepareCall(query);
@@ -201,5 +202,18 @@ public class CoachDO {
             tcss = null;
         }
         return tcss;
+    }
+
+    public List<String> getAllCoachOfTrainClassStatus(long tcsID) throws SQLException {
+        Connection con = util.ConnectionUtil.getConnection();
+        String query = "select distinct compartment from train_class_seat_status where train_class_status_id=?";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setLong(1, tcsID);
+        ResultSet rs = ps.executeQuery();
+        List<String> coachList = new ArrayList<>();
+        while (rs.next()) {
+            coachList.add(rs.getString(1));
+        }
+        return coachList;
     }
 }

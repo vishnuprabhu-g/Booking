@@ -67,6 +67,27 @@ public class TrainClassSeatStatusDO {
 
         return out;
     }
+    
+    public List<TrainClassSeatStatus> getAllOfCoach(long id,String compartment) throws SQLException {
+        Connection con = util.ConnectionUtil.getConnection();
+        String q = "select * from train_class_seat_status where train_class_status_id =? and compartment=?";
+        PreparedStatement ps = con.prepareStatement(q);
+        ps.setLong(1, id);
+        ps.setString(2, compartment);
+        ResultSet rs = ps.executeQuery();
+        List<TrainClassSeatStatus> out = new ArrayList<TrainClassSeatStatus>();
+        while (rs.next()) {
+            TrainClassSeatStatus obj = new TrainClassSeatStatus();
+            obj.trainClassSeatStatusId = rs.getLong("train_class_seat_status_id");
+            obj.tClassStatusId = rs.getLong("train_class_status_id");
+            obj.seatNo = rs.getInt("seat_no");
+            obj.availability = rs.getBoolean("availability");
+            obj.typeId = rs.getLong("seat_type_id");
+            out.add(obj);
+        }
+
+        return out;
+    }
 
     public TrainClassSeatStatus get(long id, int near, int box) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();

@@ -39,6 +39,20 @@
         </div>
         <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
             <div class="panel-body">
+                <div class="row">
+                    <button type="button" class="btn btn-default" onclick="addTrain()" style="margin-left: 3%">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Train
+                    </button>
+                    <button type="button" class="btn btn-default" onclick="listTrain()" style="margin-left: 3%">
+                        <span class="glyphicon glyphicon-list" aria-hidden="true"></span> List Train
+                    </button>
+                    <button type="button" class="btn btn-default" onclick="searchTrain()" style="margin-left: 3%">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search Train
+                    </button>
+                </div>
+                <div id="train" class="row" style="margin: 1%">
+
+                </div>
             </div>
         </div>
     </div>

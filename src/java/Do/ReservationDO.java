@@ -12,12 +12,14 @@ public class ReservationDO {
 
     public void add(Reservation obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
-        String q = "insert into reservation (pnr ,journey_id ,reservation_status ,user_id ) values (? , ?, ?,? )";
+        String q = "insert into reservation (pnr ,journey_id ,reservation_status ,user_id,class_id,train_class_status_id ) values (? , ?, ?,? ,? ,?)";
         PreparedStatement ps = con.prepareStatement(q);
         ps.setLong(1, obj.pnr);
         ps.setLong(2, obj.journeyID);
         ps.setInt(3, obj.ReservationStatus);
         ps.setInt(4, obj.userId);
+        ps.setLong(5, obj.classId);
+        ps.setLong(6, obj.trainClassStausID);
         ps.executeUpdate();
 
     }
@@ -47,6 +49,7 @@ public class ReservationDO {
             obj.journeyID = rs.getLong("journey_id");
             obj.ReservationStatus = rs.getInt("reservation_status");
             obj.timestamp = rs.getTimestamp("timestamp");
+            obj.classId = rs.getLong("class_id");
             out.add(obj);
         }
 
@@ -66,6 +69,7 @@ public class ReservationDO {
             obj.journeyID = rs.getLong("journey_id");
             obj.ReservationStatus = rs.getInt("reservation_status");
             obj.timestamp = rs.getTimestamp("timestamp");
+            obj.classId = rs.getLong("class_id");
             out.add(obj);
         }
 
@@ -84,6 +88,8 @@ public class ReservationDO {
             obj.journeyID = rs.getLong("journey_id");
             obj.ReservationStatus = rs.getInt("reservation_status");
             obj.timestamp = rs.getTimestamp("timestamp");
+            obj.classId = rs.getLong("class_id");
+            obj.trainClassStausID = rs.getLong("train_class_status_id");
         }
 
         return obj;

@@ -9,4 +9,6 @@ public class Reservation {
     public int ReservationStatus;
     public Date timestamp;
     public int userId;
+    public long classId;
+    public long trainClassStausID;
 }

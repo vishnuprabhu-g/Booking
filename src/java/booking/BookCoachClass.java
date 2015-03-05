@@ -15,6 +15,7 @@ import Do.TrainClassRacStatusDO;
 import Do.TrainClassSeatStatusDO;
 import Do.TrainClassStatusDO;
 import Do.UnderPassengerDO;
+import Do.UserProfileDO;
 import Domain.Passenger;
 import Domain.PassengerTicket;
 import Domain.Reservation;
@@ -23,6 +24,7 @@ import Domain.TrainClassRacStatus;
 import Domain.TrainClassSeatStatus;
 import Domain.TrainClassStatus;
 import Domain.UnderPassenger;
+import Domain.UserProfile;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -55,7 +57,7 @@ public class BookCoachClass {
     List<TrainClassSeatStatus> undo = new ArrayList<>();
     public int sno;
     long pnr;
-    public long trianClassId, journey_id = 1;
+    public long trianClassId, journey_id = 1, t_train_class_id = -1;
     int near = 1, adult = 0, half = 0, senior, box = 0;
     int bookedRac = 0;
     public int wait, initial_wait, racVal, max_rac = 8, max_waiting = 50;//fetch it from db
@@ -79,8 +81,12 @@ public class BookCoachClass {
         racDo = new TrainClassRacStatusDO();
         pdo = new PassengerDO();
         trainClassStatusDO = new TrainClassStatusDO();
+
+    }
+
+    public void afterInit() {
         try {
-            trainClassStatus = trainClassStatusDO.get(trianClassId);
+            trainClassStatus = trainClassStatusDO.get(t_train_class_id);
             sno = trainClassStatus.sno;
             wait = trainClassStatus.waiting;
             initial_wait = trainClassStatus.initialWaiting;
@@ -238,10 +244,23 @@ public class BookCoachClass {
             res.userId = userId;
             res.pnr = pnr;
             res.journeyID = journey_id;
+            res.classId=class_id;
             res.ReservationStatus = 1;
+            res.trainClassStausID=t_train_class_id;
             ReservationDO rsdo = new ReservationDO();
             rsdo.add(res);
+            //*This is added to send email for every succssfull ticket booking*//
+            if (userId != 1) {
+                UserProfile up = new UserProfileDO().get(userId);
+                String messageEmail = "Hello " + up.name + ",\n";
+                messageEmail += "\tYour ticket is booked,Please find the details of the ticket below.\n";
+                messageEmail += "\nPNR\t:" + pnr;
+                messageEmail += "\nTotal Passengers\t:" + totalPassenger;
+                messageEmail += "\nCheck your pnr status at http://vishnu-pt517:8080/Booking/PNR";
+                messageEmail += "\n\nThank you fo using the system";
 
+                util.MailUtil.SendMail(up.email, messageEmail, "Ticket Book Confirmation");
+            }
             Collections.sort(queue, new Comparator<Passenger>() {
                 @Override
                 public int compare(Passenger t, Passenger t1) {

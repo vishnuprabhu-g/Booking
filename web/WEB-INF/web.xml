@@ -56,6 +56,10 @@
         <servlet-name>Reset</servlet-name>
         <servlet-class>booking.Reset</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PNR</servlet-name>
+        <servlet-class>booking.PNR</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Book</servlet-name>
         <url-pattern>/Book</url-pattern>
@@ -91,6 +95,10 @@
     <servlet-mapping>
         <servlet-name>Reset</servlet-name>
         <url-pattern>/Reset</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PNR</servlet-name>
+        <url-pattern>/PNR</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

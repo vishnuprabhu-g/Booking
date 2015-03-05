@@ -3,7 +3,7 @@
 <%@page import="Domain.TrainClassStatus"%>
 <%@page import="Do.TrainClassSeatStatusDO"%>
 <%
-    System.out.println("Availability:");
+    //System.out.println("Availability:");
 
     long statusId = Long.parseLong(request.getParameter("classID"));
     session.setAttribute("classID", Long.parseLong(request.getParameter("classID")));
@@ -87,6 +87,6 @@
         }%><a href="javascript:void(0)" onclick="showBook(<%=statusId%>)"  >Book now</a><% if (classStatus.chart) {
                 out.print(" --> ");
             }%>
-    <% System.out.println("detailMsg=" + detailAvl);
-    %>
+    <% //System.out.println("detailMsg=" + detailAvl);
+%>
 </td>

@@ -88,6 +88,11 @@ public class TrainClassStatusDO {
             obj.a_available = rs.getInt("a_available");
 
         }
+        else
+        {
+            System.out.println("Cannot load tcs of given id in the tcsdo");
+            System.out.println("Debug info: param-"+id);
+        }
 
         return obj;
     }

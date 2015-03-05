@@ -3,14 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/web/user/availability.jsp</file>
-            <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/web/valid.jsp</file>
-            <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/web/check.jsp</file>
-            <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/web/user/index.jsp</file>
-            <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/web/login.jsp</file>
-            <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/web/user/indexOld.jsp</file>
-            <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/web/user/getTrainDetailAvail.jsp</file>
+            <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/src/java/Do/CoachDO.java</file>
+            <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/web/admin/ViewFinalSeat.jsp</file>
+            <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/web/js/index.js</file>
+            <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/web/admin/reset.jsp</file>
             <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/src/java/Do/TrainClassSeatStatusDO.java</file>
+            <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/web/admin/ViewCurrentStatus.jsp</file>
         </group>
     </open-files>
 </project-private>

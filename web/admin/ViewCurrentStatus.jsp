@@ -18,7 +18,7 @@
 <script type="text/javascript">
     function showCurrentClass(trainID, classID)
     {
-        j.get("admin/ViewFinalSeat.jsp?mode=view&classID=" + classID, function rt(data) {
+        j.get("admin/ViewFinalSeat.jsp?mode=view&classID=" + classID, function (data) {
             j("#main").html(data);
         });
     }

@@ -8,6 +8,14 @@ function listUser()
     });
 }
 
+function listTrain()
+{
+    var url = "admin/listTrain.jsp";
+    j.get(url, function (data) {
+        j("#train").html(data);
+    });
+}
+
 function resetP()
 {
     var url = "reset.jsp";
@@ -249,7 +257,7 @@ function getBooked() {
 
 j(function ()
 {
-    j(document).tooltip();
+    //j(document).tooltip();
 });
 
 function viewTic(pnr)

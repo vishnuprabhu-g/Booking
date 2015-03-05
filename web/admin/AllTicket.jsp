@@ -35,20 +35,21 @@ View booked tickets:
     <table class="table table-bordered table-hover">
         <thead>
             <tr>
-                <th>Select</th><th>S.No</th> <th>PNR</th><th>Status</th><th>No of passengers</th><th>Date of booking</th><th>View Ticket</th>
+                <th>Select</th><th>S.No</th> <th>PNR</th><th>Status</th><th>No of passengers</th><th>Class</th><th>Date of booking</th><th>View Ticket</th>
             </tr>
         </thead>
         <tbody>
             <%
                 if (resList != null) {
                     int i = 1;
+                    ClassDO classDO=new ClassDO();
                     for (Reservation res : resList) {
                         PassengerTicket pt = ptdo.get(res.pnr);
                         String dis = "";
                         if (res.ReservationStatus == 3) {
                             dis = "disabled";
                         }
-                        out.println("<tr><td><input type=\"radio\" name=\"pnr\" value=\"" + res.pnr + "\" " + dis + " > " + "</td><td>" + (i++) + "</td><td>" + res.pnr + "</td><td>" + rsdo.get(res.ReservationStatus).status + "<td>" + pt.Adult + "</td><td>" + res.timestamp + "</td><td><a href=\"javascript:void(0)\" onClick=\"viewTic(" + pt.pnr + ") \" > <img height=\"20\" src=\"css/view.jpg \"> </a></td></tr>");
+                        out.println("<tr><td><input type=\"radio\" name=\"pnr\" value=\"" + res.pnr + "\" " + dis + " > " + "</td><td>" + (i++) + "</td><td>" + res.pnr + "</td><td>" + rsdo.get(res.ReservationStatus).status + "<td>" + pt.Adult + "</td><td>"+classDO.get(res.classId).name+"</td><td>" + res.timestamp + "</td><td><a href=\"javascript:void(0)\" onClick=\"viewTic(" + pt.pnr + ") \" > <img height=\"20\" src=\"css/view.jpg \"> </a></td></tr>");
                     }
                 }
             %>
