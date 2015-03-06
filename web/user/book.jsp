@@ -1,3 +1,8 @@
+<%
+    Long tcsID = Long.parseLong(request.getParameter("tcsID"));
+    session.setAttribute("tcsID", tcsID);
+%>
+
 <div class="row">
 
     <!--   <div style="height:23px;background-color: #357ebd">

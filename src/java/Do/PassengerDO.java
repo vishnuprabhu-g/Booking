@@ -101,8 +101,6 @@ public class PassengerDO {
 
             out.add(obj);
         }
-        //System.out.println(out.size());
-
         return out;
     }
 
@@ -112,7 +110,7 @@ public class PassengerDO {
         PreparedStatement ps = con.prepareStatement(q);
         ps.setLong(1, trainClassId);
         ResultSet rs = ps.executeQuery();
-        List<Passenger> out = new ArrayList<Passenger>();
+        List<Passenger> out = new ArrayList<>();
         while (rs.next()) {
             Passenger obj = new Passenger();
             obj.pnr = rs.getLong("pnr");
@@ -172,6 +170,7 @@ public class PassengerDO {
             obj.sno = rs.getInt("sno");
             obj.initialSeatNo = rs.getInt("initial_seat_no");
             obj.initialStatusId = rs.getInt("initial_status_id");
+            obj.coach = rs.getString("coach");
             obj.fare = rs.getInt("fare");
 
         }

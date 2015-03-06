@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <description>
+        Railway ticket booking app
+    </description>
+    <display-name>Railway ticket booking</display-name>
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>filters.AdminFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>UserFilter</filter-name>
+        <filter-class>filters.UserFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UserFilter</filter-name>
+        <url-pattern>/user.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/admin.jsp</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>Book</servlet-name>
-        <servlet-class>booking.BookNew</servlet-class>
+        <servlet-class>booking.BookCoach</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Cancel</servlet-name>
@@ -15,6 +35,30 @@
     <servlet>
         <servlet-name>BookNew</servlet-name>
         <servlet-class>booking.BookNew</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookCoach</servlet-name>
+        <servlet-class>booking.BookCoach</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>booking.Login</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Register</servlet-name>
+        <servlet-class>booking.Register</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResetPassword</servlet-name>
+        <servlet-class>booking.ResetPassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Reset</servlet-name>
+        <servlet-class>booking.Reset</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PNR</servlet-name>
+        <servlet-class>booking.PNR</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Book</servlet-name>
@@ -32,12 +76,40 @@
         <servlet-name>BookNew</servlet-name>
         <url-pattern>/BookNew</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookCoach</servlet-name>
+        <url-pattern>/BookCoach</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Register</servlet-name>
+        <url-pattern>/Register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPassword</servlet-name>
+        <url-pattern>/ResetPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Reset</servlet-name>
+        <url-pattern>/Reset</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PNR</servlet-name>
+        <url-pattern>/PNR</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            20
         </session-timeout>
     </session-config>
+    <context-param>
+        <param-name>unloadDelay</param-name>
+        <param-value>300</param-value>
+    </context-param>
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

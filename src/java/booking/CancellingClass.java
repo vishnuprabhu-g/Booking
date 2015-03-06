@@ -8,6 +8,8 @@ import Domain.TrainClassRacStatus;
 import Domain.TrainClassSeatStatus;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CancellingClass {
 
@@ -18,8 +20,8 @@ public class CancellingClass {
     TrainClassStatusDO trainClassStatusDO;
     TrainClassSeatStatusDO tcssdo;
     TrainClassStatus tcs;
-    public long trainClassStatusId = 1;
-    public int maxRac = 4;
+    public long trainClassStatusId;
+    public int maxRac;
     public int wait = 1, refund = 0;
     //public int initial_wait=1;
     boolean waitUpdated = false;
@@ -28,10 +30,18 @@ public class CancellingClass {
     public CancellingClass() {
         tcssdo = new TrainClassSeatStatusDO();
         this.trainClassStatusDO = new TrainClassStatusDO();
+    }
+
+    public void afterInit() {
         try {
             tcs = trainClassStatusDO.get(trainClassStatusId);
         } catch (SQLException ex) {
             System.out.println(ex);
+        }
+        try {
+            maxRac = new TrainClassStatusDO().get(trainClassStatusId).maxRac;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -43,13 +53,13 @@ public class CancellingClass {
         tcs.available++;
         trainClassStatusDO.update(tcs);
 
-        TrainClassSeatStatus tcss = tcssdo.getTrainClassSeat(trainClassStatusId, seat);
+        TrainClassSeatStatus tcss = tcssdo.getTrainClassSeat(trainClassStatusId, seat, p.coach);
 
         int racSize = this.RAC2CNF(seat);
         if (racSize == -1)//No rac hence seat should be set as available
         {
             System.out.println("Available the seat:" + seat);
-            this.availTheSeat(seat);
+            this.availTheSeat(seat, p.coach);
         } else if (racSize < maxRac) {
             this.availTheRac(racSize);//Just available the last rac
         } else {
@@ -103,7 +113,6 @@ public class CancellingClass {
         List<Passenger> wl = pdo.getAllWl(trainClassStatusId);
         for (Passenger ps : wl) {
             if (ps.seat_no < waitno) {
-                continue;
             } else {
                 ps.seat_no -= 1;
                 wait = ps.seat_no;//
@@ -156,12 +165,13 @@ public class CancellingClass {
         return wl.size();
     }
 
-    private boolean availTheSeat(int seat_no) throws SQLException {
+    private boolean availTheSeat(int seat_no, String coach) throws SQLException {
         TrainClassSeatStatusDO tcssdo = new TrainClassSeatStatusDO();
         TrainClassSeatStatus tcss = new TrainClassSeatStatus();
         tcss.tClassStatusId = this.trainClassStatusId;
         tcss.seatNo = seat_no;
         tcss.availability = true;
+        tcss.compartment = coach;
         tcssdo.updateAfter(tcss);
         return true;
     }
@@ -178,11 +188,11 @@ public class CancellingClass {
 
     public void finalise() throws SQLException {
         TrainClassStatusDO statusDo = new TrainClassStatusDO();
-        TrainClassStatus tcs = new TrainClassStatus();
-        tcs.trianClassStatusId = this.trainClassStatusId;
-        tcs.waiting = this.wait + 1;
+        TrainClassStatus tcsL = new TrainClassStatus();
+        tcsL.trianClassStatusId = this.trainClassStatusId;
+        tcsL.waiting = this.wait + 1;
         if (waitUpdated) {
-            statusDo.updateWaiting(tcs);
+            statusDo.updateWaiting(tcsL);
         }
 
         boolean anyTicket = pdo.checkUncancelled(pnr);
@@ -190,6 +200,12 @@ public class CancellingClass {
             refund = 1;
             Reservation res = rsdo.get(pnr);
             res.ReservationStatus = 3;
+            UnderPassengerDO cdo = new UnderPassengerDO();
+            List<UnderPassenger> child = cdo.getAll(pnr);
+            for (UnderPassenger u : child) {
+                u.status_id = 2;
+                cdo.update(u);
+            }
             rsdo.update(res);
         } else {
             Reservation res = rsdo.get(pnr);

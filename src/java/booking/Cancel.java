@@ -28,13 +28,13 @@ public class Cancel extends HttpServlet {
             UnderPassengerDO udo = new UnderPassengerDO();
             PassengerTicketDO ptdo = new PassengerTicketDO();
             Long pnr = (Long) session.getAttribute("pnr");
-            Long trainClassStatusId = 1L;
+            Long trainClassStatusId = (Long) session.getAttribute("cancelTcsID");
             int refund = 0;
             boolean childDeleted = false;
             if (pnr == null) {
                 out.println("Invalid access..!");
             } else {
-                List<Integer> cancel = new ArrayList<Integer>();
+                List<Integer> cancel = new ArrayList<>();
                 for (int i = 1; i <= 6; i++) {
                     String val = request.getParameter("sno" + i);
                     if (val == null) {
@@ -50,10 +50,11 @@ public class Cancel extends HttpServlet {
                         String name = nameAge[0];
                         int age = Integer.parseInt(nameAge[1]);
                         UnderPassenger up = new UnderPassenger();
-                        up.age = age;
+                        up.no = age;
                         up.name = name;
                         up.pnr = pnr;
-                        udo.delete(up);
+                        up.status_id = 2;
+                        udo.update(up);
                         childDeleted = true;
                         PassengerTicket pt = ptdo.get(pnr);
                         pt.Children--;
@@ -66,10 +67,13 @@ public class Cancel extends HttpServlet {
                     return;
                 }
                 if (cancel.isEmpty() && childDeleted) {
+                    util.CommitUtil.commit();
                     out.println("Children ticket cancelled");
                 } else {
                     CancellingClass can = new CancellingClass();
                     can.pnr = pnr;
+                    can.trainClassStatusId=trainClassStatusId;
+                    can.afterInit();
                     PassengerTicket pt = ptdo.get(pnr);
                     for (Integer sno : cancel) {
                         Passenger p = pdo.get(pnr, sno);
@@ -101,6 +105,7 @@ public class Cancel extends HttpServlet {
                 Logger.getLogger(Cancel.class.getName()).log(Level.SEVERE, null, ex);
             }
             out.println("Cancellation Failed");
+            e.printStackTrace();
             System.out.println(e);
         } finally {
             out.close();

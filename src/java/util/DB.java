@@ -4,6 +4,7 @@
  */
 package util;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -34,7 +35,7 @@ public class DB {
     public static String getUsername() {
         String val = new DB().getPropValues("user");
         if (val == null) {
-            val = "";
+            val = "root";
         }
         return val;
     }
@@ -50,7 +51,7 @@ public class DB {
     public static String getDb() {
         String val = new DB().getPropValues("db");
         if (val == null) {
-            val = "";
+            val = "r5";
         }
         return val;
     }
@@ -58,7 +59,7 @@ public class DB {
     public static String getDomain() {
         String val = new DB().getPropValues("domain");
         if (val == null) {
-            val = "";
+            val = "localhost:3306";
         }
         return val;
     }

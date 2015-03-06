@@ -65,7 +65,7 @@ public class TrainClassStatusDO {
 
     public TrainClassStatus get(long id) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
-        String q = "select * from train_class_status where status_id =?;";
+        String q = "select * from train_class_status where train_class_status_id =?;";
         PreparedStatement ps = con.prepareStatement(q);
         ps.setLong(1, id);
         ResultSet rs = ps.executeQuery();
@@ -87,6 +87,11 @@ public class TrainClassStatusDO {
             obj.last_seat_no = rs.getInt("last_seat_no");
             obj.a_available = rs.getInt("a_available");
 
+        }
+        else
+        {
+            System.out.println("Cannot load tcs of given id in the tcsdo");
+            System.out.println("Debug info: param-"+id);
         }
 
         return obj;

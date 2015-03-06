@@ -14,9 +14,10 @@ public class Passenger {
     public int fare;
     public String coach;
     public int no;
+    public long seat_status_id;
 
     @Override
     public String toString() {
-        return this.name + this.age + this.seat_no;
+        return this.name + " " + this.age + " " + this.seat_no;
     }
 }

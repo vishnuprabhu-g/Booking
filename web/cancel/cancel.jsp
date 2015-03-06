@@ -2,15 +2,18 @@
 <%@page import="Do.*"%>
 <%@page import="Domain.*" %>
 <%
-    long trainClassId=1;
+    ReservationDO resDO=new ReservationDO();
+   
+    //long trainClassId = 1;
     PassengerTicketDO ptdo = new PassengerTicketDO();
     PassengerDO pdo = new PassengerDO();
     long pnr = Long.parseLong(request.getParameter("pnr"));
-    
-    TrainClassStatusDO tcsdo=new TrainClassStatusDO();
-    TrainClassStatus tcs=tcsdo.get(trainClassId);
-    if(tcs.chart)
-    {
+    long trainClassId=resDO.get(pnr).trainClassStausID;
+    session.setAttribute("cancelTcsID", trainClassId);
+
+    TrainClassStatusDO tcsdo = new TrainClassStatusDO();
+    TrainClassStatus tcs = tcsdo.get(trainClassId);
+    if (tcs.chart) {
         out.println("Chart prepared..No cancellaction allowed");
         return;
     }
@@ -55,9 +58,10 @@
                     if (p.statusId == 4) {
                         dis = "disabled";
                     }
-                    out.println("<tr><td> <input type=\"checkbox\" name=\"sno" + (i++) + "\" value=\"" + p.sno + " \" " + dis + " >");
+                    out.println("<tr><td> <input class=\"cb\" type=\"checkbox\" name=\"sno" + (i++) + "\" value=\"" + p.sno + " \" " + dis + " >");
                     out.println("</td><td>" + p.name + "</td><td>" + p.age + "</td>");
                     int status = p.statusId;
+                    int iniStatus=p.initialStatusId;
                     String clr = "";
                     if (status == 1) {
                         clr = "lightgreen";
@@ -72,7 +76,14 @@
                     out.println("<td style=\"background-color:" + clr + " \" >" + sd.get(p.statusId).name + "</td>");
                     String val = "";
                     if (status == 1) {
-                        val = ""+p.coach +"-"+ p.seat_no;
+                        if(iniStatus==1)
+                        {
+                        val = "" + p.coach + "-" + p.seat_no;
+                        }
+                        else
+                        {
+                            val="CNF";
+                        }
                     }
                     if (status == 2) {
                         val = "RAC" + p.seat_no;
@@ -94,15 +105,22 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Select</th><th>Name</th><th>Age</th>
+                    <th>Select</th><th>Name</th><th>Age</th><th>Status</th>
                 </tr>
             </thead>
             <tbody>
                 <%
                     i = 1;
                     for (UnderPassenger up : child) {
-                        out.println("<tr><td> <input type=\"checkbox\" name=\"child" + (i++) + "\" value=\"" + up.name + "-" + up.age + "\" " + " >");
-                        out.println("</td><td>" + up.name + "</td><td>" + up.age + "</td></tr>");
+                        String dis = "", status = "";
+                        if (up.status_id == 2) {
+                            dis = "disabled";
+                            status = "cancelled";
+                        } else {
+                            status = "booked";
+                        }
+                        out.println("<tr><td> <input type=\"checkbox\" name=\"child" + (i++) + "\" value=\"" + up.name + "-" + up.no + "\" " + " " + dis + " >");
+                        out.println("</td><td>" + up.name + "</td><td>" + up.age + "</td><td>" + status + "</td></tr>");
                     }
                 %>
             </tbody>
@@ -112,6 +130,7 @@
                 out.println("-->");
             }
         %>
-    </form> 
-    <button href="#" onclick="cancelLast()" >Cancel selected tickets</button>   
+    </form>
+    <button href="javascript:void(0)" onclick="selectAll()" >Select all</button> 
+    <button href="javascript:void(0)" onclick="cancelLast()" >Cancel selected tickets</button>   
 </center>

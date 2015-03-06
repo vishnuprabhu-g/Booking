@@ -2,9 +2,9 @@ package Domain;
 
 public class Train {
 
-    public long id;
+    public long trainId;
     public String name;
-    public Station fromId;
-    public Station toId;
+    public long fromStationId;
+    public long toStationId;
     public int travelTime;
 }

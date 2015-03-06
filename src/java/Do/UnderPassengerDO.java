@@ -12,25 +12,25 @@ public class UnderPassengerDO {
 
     public void add(UnderPassenger obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
-        String q = "insert into under_passenger (pnr ,name ,age ,gender ) values (? , ?, ?, ? )";
+        String q = "insert into under_passenger (pnr ,name ,age ,gender ,status_id,no) values (? , ?, ?, ? ,?,?)";
         PreparedStatement ps = con.prepareStatement(q);
         ps.setLong(1, obj.pnr);
         ps.setString(2, obj.name);
         ps.setInt(3, obj.age);
         ps.setInt(4, obj.gender);
+        ps.setLong(5, obj.status_id);
+        ps.setInt(6, obj.no);
         ps.executeUpdate();
 
     }
 
     public void update(UnderPassenger obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
-        String q = "update under_passenger set pnr= ?,name= ?,age= ?,gender= ? where pnr = ?;";
+        String q = "update under_passenger set status_id=? where pnr = ? and no=?;";
         PreparedStatement ps = con.prepareStatement(q);
-        ps.setLong(1, obj.pnr);
-        ps.setString(2, obj.name);
-        ps.setInt(3, obj.age);
-        ps.setInt(4, obj.gender);
-        ps.setLong(5, obj.pnr);
+        ps.setLong(1, obj.status_id);
+        ps.setLong(2, obj.pnr);
+        ps.setInt(3, obj.no);
         ps.executeUpdate();
 
     }
@@ -48,6 +48,8 @@ public class UnderPassengerDO {
             obj.name = rs.getString("name");
             obj.age = rs.getInt("age");
             obj.gender = rs.getInt("gender");
+            obj.status_id = rs.getLong("status_id");
+            obj.no = rs.getInt("no");
             out.add(obj);
         }
 

@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="Do.*"%>
 <%@page import="Domain.*"%>
@@ -5,7 +6,7 @@
     TrainStatusDO tsdo = new Do.TrainStatusDO();
     TrainStatus ts = tsdo.get(1);
     long statusId = ts.statusId;
-    long from = 1, to = 2, classId = 1;
+    long from = 1, to = 2, classId = 1, trainID = 1;
     double fare, distance;
 
     try {
@@ -19,11 +20,13 @@
     }
 
     StationDO sdo = new StationDO();
-
     TrainClassStatusDO tcsdo = new TrainClassStatusDO();
     TrainClassStatus classStatus = tcsdo.get(statusId);
     TrainClassRacStatusDO racdo = new TrainClassRacStatusDO();
     int rac = racdo.getCount(1L);
+
+    TrainClassDO trainClassDO = new TrainClassDO();
+    ClassDO cdo = new ClassDO();
 
     long classStatusId = classStatus.trianClassStatusId;
     TrainClassSeatStatusDO tcssdo = new TrainClassSeatStatusDO();
@@ -48,7 +51,6 @@
     if (classStatus.chart) {
         message = "Chart prepared..No more bookings..!";
     } else {
-
         if (available > 0 && racA == 1) {
             message = "Available " + available;
         } else if (available > 0 && racA > 1) {
@@ -59,6 +61,12 @@
             }
         } else if (available <= 0 && availbleA > 0) {
             if (initial_waiting == 1) {
+                if (racA <= maxRac) {
+                    message = "RAC " + racA + "/ CNF";
+                } else {
+                    message = "WL " + initial_waiting + "/ CNF";
+                }
+            } else {
                 if (racA <= maxRac) {
                     message = "RAC " + racA + "/ CNF";
                 } else {
@@ -88,20 +96,24 @@
 <h4>Available trains</h4>
 <table class="table table-bordered table-hover">
     <thead>
-        <tr><th>Train Number</th><th>Name</th><th>From</th><th>To</th><th>Distance(KM)</th> <th>Fare (&#8377) </th> <th>Current Status</th></tr>
+        <tr><th>Train Number</th><th>Name</th><th>From</th><th>To</th><th>Distance(KM)</th><th>Available classes</th></tr>
     </thead>
     <tbody>
-        <tr class="success"> <td>1001</td><td>CBE express</td><td><%=sdo.get(from).name%></td><td><%=sdo.get(to).name%></td><td><%=(int) distance%> </td> <td><%= fare%> </td> <td title="<% if (!classStatus.chart) {
-                    out.print(detailAvl);
-                                                                                                                                                                               }%>"><%= message%><br> <% if (classStatus.chart) {
-                                                                                                                                                                                           out.print(" <!-- ");
-                                                                                                                                                                                       } %><a href="#" onclick="showBook()"  >Book now</a><% if (classStatus.chart) {
-                                out.print(" --> ");
-                            }%>
-            </td></tr>
+        <tr class="success">
+            <td>1001</td><td>CBE express</td><td><%=sdo.get(from).name%></td><td><%=sdo.get(to).name%></td><td><%=(int) distance%> </td>
+            <td>
+                <%
+                    for (TrainClass tc : trainClassDO.getAll(trainID)) {
+                        String clasCode = cdo.get(tc.classID).code;
+                        out.println("<button class=\"btn btn-default\" onclick=\"getTrainClass(" + trainID + "," + tc.classID + ")\">" + clasCode + "</button>");
+                    }
+                %>
+            </td>
+        </tr>
     </tbody>
 </table>
-<br>
+<div id="classAvailable"></div>
+<br><br>
 <div>
-    Click<a href="#" onclick="price()" > here </a>to know the pricing policy.
+    Click<a href="javascript:void(0)" onclick="price()" > here </a>to know the pricing policy.
 </div>
