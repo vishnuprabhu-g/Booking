@@ -17,4 +17,9 @@ public class TrainClassStatus {
     public int last_status_id;
     public int last_seat_no;
     public int a_available;
+
+    @Override
+    public String toString() {
+        return "TCSID:" + trianClassStatusId + "StatusID:" + statusId + "maxRac:" + maxRac + "RAC:" + rac;
+    }
 }

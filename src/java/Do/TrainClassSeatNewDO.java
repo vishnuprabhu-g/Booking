@@ -10,6 +10,11 @@ public class TrainClassSeatNewDO {
 
     public TrainClassSeatStatus getInCoachInBoxWithPref(String coach, int box, int pref) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
+        if (coach.contains("B")) {
+            System.out.println("Getting seat:" + pref);
+            pref += 4;
+            System.out.println("After seat:" + pref);
+        }
         String query = "select * from train_class_seat_status where availability=1 and compartment=? and box=? and seat_type_id=?";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setString(1, coach);

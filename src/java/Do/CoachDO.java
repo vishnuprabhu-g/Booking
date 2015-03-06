@@ -18,14 +18,14 @@ import java.util.List;
  * @author vishnu-pt517
  */
 public class CoachDO {
-
+    
     TrainClassSeatStatusDO tcssdo;
     long tcsid = 1;
-
+    
     public CoachDO() {
         tcssdo = new TrainClassSeatStatusDO();
     }
-
+    
     public String getCoachesForPassengers(List<Passenger> passengers, long tcsID) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String query = "select compartment,count(*) from train_class_seat_status where availability=1 and train_class_status_id=? group by compartment";
@@ -65,7 +65,7 @@ public class CoachDO {
             return "NO";
         }
     }
-
+    
     public double getPrefFactor(List<Passenger> passengers, String coach) throws SQLException {
         double fact = 0, fact2 = 0;
         int box = 0;
@@ -115,7 +115,7 @@ public class CoachDO {
         }
         return tcss;
     }
-
+    
     public Coach loadCoach(String coach) throws SQLException {
         Coach c = new Coach();
         Connection con = util.ConnectionUtil.getConnection();
@@ -131,21 +131,21 @@ public class CoachDO {
                 tcss.availability = rs.getBoolean("availability");
                 tcss.typeId = rs.getInt("seat_type_id");
                 if (tcss.availability) {
-                    if (tcss.typeId == 1) {
+                    if (tcss.typeId == 1 || tcss.typeId == 5) {
                         box.Lower++;
                         if (i == 1) {
                             box.Lowers[0] = 1;
                         } else {
                             box.Lowers[1] = 1;
                         }
-                    } else if (tcss.typeId == 2) {
+                    } else if (tcss.typeId == 2 || tcss.typeId == 6) {
                         box.Middle++;
                         if (i == 2) {
                             box.Middles[0] = 1;
                         } else {
                             box.Middles[1] = 1;
                         }
-                    } else if (tcss.typeId == 3) {
+                    } else if (tcss.typeId == 3 || tcss.typeId == 7) {
                         box.Upper++;
                         if (i == 3) {
                             box.Uppers[0] = 1;
@@ -166,12 +166,16 @@ public class CoachDO {
         }
         return c;
     }
-
-    public TrainClassSeatStatus getPrefInAllCoach(int pref) throws SQLException {
+    
+    public TrainClassSeatStatus getPrefInAllCoach(long tcsID, int pref) throws SQLException {
+        if (tcsID == 2) {
+            pref += 4;
+        }
         Connection con = util.ConnectionUtil.getConnection();
-        String query = "select * from train_class_seat_status where availability=1 and seat_type_id=?";
+        String query = "select * from train_class_seat_status where availability=1 and seat_type_id=? and train_class_status_id=?";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setInt(1, pref);
+        ps.setLong(2, tcsID);
         ResultSet rs = ps.executeQuery();
         TrainClassSeatStatus tcss;
         if (rs.next()) {
@@ -185,11 +189,12 @@ public class CoachDO {
         }
         return tcss;
     }
-
-    public TrainClassSeatStatus getInAllCoach() throws SQLException {
+    
+    public TrainClassSeatStatus getInAllCoach(long tcsID) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
-        String query = "select * from train_class_seat_status where availability=1";
+        String query = "select * from train_class_seat_status where availability=1 and train_class_status_id=?";
         PreparedStatement ps = con.prepareStatement(query);
+        ps.setLong(1, tcsID);
         ResultSet rs = ps.executeQuery();
         TrainClassSeatStatus tcss;
         if (rs.next()) {
@@ -203,7 +208,7 @@ public class CoachDO {
         }
         return tcss;
     }
-
+    
     public List<String> getAllCoachOfTrainClassStatus(long tcsID) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String query = "select distinct compartment from train_class_seat_status where train_class_status_id=?";

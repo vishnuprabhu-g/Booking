@@ -19,7 +19,7 @@
     //tcssdo.addSleeper(classStatusId);
     session.setAttribute("journey", 1);
     TrainClassRacStatusDO racdo = new TrainClassRacStatusDO();
-    int rac = racdo.getCount(1L);
+    int rac = racdo.getCount(classStatusId);
 
     String detailAvl = "";
     String message = "";
@@ -31,7 +31,7 @@
     int initial_waiting = classStatus.initialWaiting;
     int racA = classStatus.rac;
     int availbleA = lower + middle + upper + side;
-
+    System.out.println(classStatus);
     if (classStatus.chart) {
         message = "Chart prepared..No more bookings..!";
     } else {
@@ -60,6 +60,7 @@
         } else {
             if (rac > 0) {
                 if (racA <= maxRac) {
+                    System.out.println("This condtion:(max:Aval)" + maxRac + ":" + racA);
                     message = "RAC " + racA + "/ RAC" + (maxRac - (rac - 1));
                     detailAvl = "Book in RAC(You can travel with RAC ticket.Ticket may be confirmed in future)";
                 } else {

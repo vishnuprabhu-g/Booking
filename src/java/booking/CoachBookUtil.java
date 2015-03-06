@@ -11,6 +11,7 @@ public class CoachBookUtil {
     CoachDO cdo = new CoachDO();
     TrainClassSeatStatusDO tcssdo = new TrainClassSeatStatusDO();
     BookCoachClass bookCoachClass;
+    long trainClassSatatusId;
 
     void CoachBook(String coach, List<Passenger> pass) throws SQLException {
         System.out.println("---CoachBook----(coach=" + coach + ")");
@@ -29,7 +30,7 @@ public class CoachBookUtil {
         int rLower = pref[0], rMiddle = pref[1], rUpper = pref[2], rSide = pref[3];
         for (Box b : selectedCoach.boxs) {
             if (b.total >= required && b.Lower >= rLower && b.Middle >= rMiddle && b.Upper >= rUpper && b.Side >= rSide) {
-                System.out.println("This is the box");
+                System.out.println("This is the box:" + coach + b.boxNo);
                 this.BookInTheCoachAndBox(coach, b.boxNo, pass);
                 bookCoachClass.finalise();
                 return;
@@ -63,23 +64,31 @@ public class CoachBookUtil {
     private void BookInTheCoachAndBox(String coach, int box, List<Passenger> passList) throws SQLException {
         List<Passenger> later = new ArrayList<>();
         TrainClassSeatNewDO tcssNewDo = new TrainClassSeatNewDO();
-        for (Passenger p : passList) {
-            if (p.seat_no == 0) {
-                later.add(p);
-            } else {
-                TrainClassSeatStatus tcss = tcssNewDo.getInCoachInBoxWithPref(coach, box, p.seat_no);
+        try {
+            for (Passenger p : passList) {
+                if (p.seat_no == 0) {
+                    later.add(p);
+                } else {
+                    TrainClassSeatStatus tcss = tcssNewDo.getInCoachInBoxWithPref(coach, box, p.seat_no);
+                    if (tcss == null) {
+                        System.out.println("Fetching error:");
+                    }
+                    tcss.availability = false;
+                    tcssdo.update(tcss);
+                    bookCoachClass.assignPassAndTCSS(p, tcss);
+                }
+            }
+            for (Passenger p : later) {
+                TrainClassSeatStatus tcss = tcssNewDo.getInCoachInBoxWithOutPref(coach, box);
                 tcss.availability = false;
                 tcssdo.update(tcss);
                 bookCoachClass.assignPassAndTCSS(p, tcss);
             }
+            util.CommitUtil.commit();
+        } catch (NullPointerException e) {
+            System.out.println("Null P E in book in coach and box:" + e.getMessage());
+            throw new NullPointerException();
         }
-        for (Passenger p : later) {
-            TrainClassSeatStatus tcss = tcssNewDo.getInCoachInBoxWithOutPref(coach, box);
-            tcss.availability = false;
-            tcssdo.update(tcss);
-            bookCoachClass.assignPassAndTCSS(p, tcss);
-        }
-        util.CommitUtil.commit();
     }
 
     private void BookInTheCoachAndBoxs(String coach, int[] boxs, List<Passenger> passList) throws SQLException {
@@ -148,7 +157,7 @@ public class CoachBookUtil {
             if (p.seat_no == 0) {
                 later.add(p);
             } else {
-                TrainClassSeatStatus tcss = cdo.getPrefInAllCoach(p.seat_no);
+                TrainClassSeatStatus tcss = cdo.getPrefInAllCoach(bookCoachClass.trianClassId, p.seat_no);
                 if (tcss == null) {
                     later.add(p);
                 } else {
@@ -159,7 +168,7 @@ public class CoachBookUtil {
             }
         }
         for (Passenger p : later) {
-            TrainClassSeatStatus tcss = cdo.getInAllCoach();
+            TrainClassSeatStatus tcss = cdo.getInAllCoach(bookCoachClass.trianClassId);
             if (tcss != null) {
                 tcss.availability = false;
                 tcssdo.update(tcss);

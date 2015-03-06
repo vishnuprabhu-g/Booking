@@ -32,7 +32,7 @@
                 <table class="table table-bordered">
                     <tr>
                         <td>Train number:</td>
-                        <td><%=trainId%></td>
+                        <td><%=1001%></td>
                     </tr>
                     <tr>
                         <td>Selected class</td>

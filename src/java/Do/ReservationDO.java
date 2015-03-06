@@ -50,6 +50,7 @@ public class ReservationDO {
             obj.ReservationStatus = rs.getInt("reservation_status");
             obj.timestamp = rs.getTimestamp("timestamp");
             obj.classId = rs.getLong("class_id");
+            obj.userId = rs.getInt("user_id");
             out.add(obj);
         }
 

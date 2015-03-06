@@ -110,7 +110,7 @@ public class PassengerDO {
         PreparedStatement ps = con.prepareStatement(q);
         ps.setLong(1, trainClassId);
         ResultSet rs = ps.executeQuery();
-        List<Passenger> out = new ArrayList<Passenger>();
+        List<Passenger> out = new ArrayList<>();
         while (rs.next()) {
             Passenger obj = new Passenger();
             obj.pnr = rs.getLong("pnr");

@@ -8,6 +8,8 @@ import Domain.TrainClassRacStatus;
 import Domain.TrainClassSeatStatus;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CancellingClass {
 
@@ -19,7 +21,7 @@ public class CancellingClass {
     TrainClassSeatStatusDO tcssdo;
     TrainClassStatus tcs;
     public long trainClassStatusId;
-    public int maxRac = 8;
+    public int maxRac;
     public int wait = 1, refund = 0;
     //public int initial_wait=1;
     boolean waitUpdated = false;
@@ -35,6 +37,11 @@ public class CancellingClass {
             tcs = trainClassStatusDO.get(trainClassStatusId);
         } catch (SQLException ex) {
             System.out.println(ex);
+        }
+        try {
+            maxRac = new TrainClassStatusDO().get(trainClassStatusId).maxRac;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 
