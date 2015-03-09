@@ -87,11 +87,9 @@ public class TrainClassStatusDO {
             obj.last_seat_no = rs.getInt("last_seat_no");
             obj.a_available = rs.getInt("a_available");
 
-        }
-        else
-        {
+        } else {
             System.out.println("Cannot load tcs of given id in the tcsdo");
-            System.out.println("Debug info: param-"+id);
+            System.out.println("Debug info: param-" + id);
         }
 
         return obj;

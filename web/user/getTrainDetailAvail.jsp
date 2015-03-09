@@ -20,37 +20,37 @@
         return;
     }
 %>
-    
-    <div class="row" >
-        <div class="col-lg-3"/>
-        <div class="col-lg-6">
-            <h4 style="display: inline">Selected Class Availability:</h4>
-            <div style="border: #269abc">
-                <button class="btn btn-sm btn-info" style="margin-bottom: 1%" onclick="RefreshClass()">Refresh this</button>
-                <button class="btn btn-sm pull-right btn-danger" style="display: inline;margin-bottom: 1%" onclick="hideClass()">Hide this</button>
 
-                <table class="table table-bordered">
-                    <tr>
-                        <td>Train number:</td>
-                        <td><%=1001%></td>
-                    </tr>
-                    <tr>
-                        <td>Selected class</td>
-                        <td><%=className%></td>
-                    </tr>
-                    <tr>
-                        <td>Basic fare(&#8377)</td>
-                        <td><%=(int) fare%></td>
-                    </tr>
-                    <tr>
-                        <td>Availability</td>
-                        <jsp:include page="<%= fileN%>" flush="true"/>
-                    </tr>
-                </table>
-            </div>
+<div class="row" >
+    <div class="col-lg-3"/>
+    <div class="col-lg-6">
+        <h4 style="display: inline">Selected Class Availability:</h4>
+        <div style="border: #269abc">
+            <button class="btn btn-sm btn-info" style="margin-bottom: 1%" onclick="RefreshClass()">Refresh this</button>
+            <button class="btn btn-sm pull-right btn-danger" style="display: inline;margin-bottom: 1%" onclick="hideClass()">Hide this</button>
+
+            <table class="table table-bordered">
+                <tr>
+                    <td>Train number:</td>
+                    <td><%=1001%></td>
+                </tr>
+                <tr>
+                    <td>Selected class</td>
+                    <td><%=className%></td>
+                </tr>
+                <tr>
+                    <td>Basic fare(&#8377)</td>
+                    <td><%=(int) fare%></td>
+                </tr>
+                <tr>
+                    <td>Availability</td>
+                    <jsp:include page="<%= fileN%>" flush="true"/>
+                </tr>
+            </table>
         </div>
+    </div>
 
-    </div></center>
+</div></center>
 <script type="text/javascript">
     function hideClass() {
         j("#classAvailable").html("");

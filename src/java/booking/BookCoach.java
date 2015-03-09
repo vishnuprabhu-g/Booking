@@ -97,15 +97,16 @@ public class BookCoach extends HttpServlet {
             HttpSession session = request.getSession();
             long userId = (Long) session.getAttribute("user_id");
             long tcsID = (Long) session.getAttribute("tcsID");
-            long classID=(Long) session.getAttribute("classID");
-            System.out.println("Debug info:"+"user-"+userId+" tcs-"+tcsID+" classID-"+classID);
+            long classID = (Long) session.getAttribute("classID");
+            System.out.println("Debug info:" + "user-" + userId + " tcs-" + tcsID + " classID-" + classID);
             CoachDO cdo = new CoachDO();
             CoachBookUtil coachBookUtil = new CoachBookUtil();
-            String coach = cdo.getCoachesForPassengers(passengerList,tcsID);
+            String coach = cdo.getCoachesForPassengers(passengerList, tcsID);
 
             BookCoachClass booking = new BookCoachClass();
-            booking.trianClassId=tcsID;booking.t_train_class_id=tcsID;
-            booking.class_id=classID;
+            booking.trianClassId = tcsID;
+            booking.t_train_class_id = tcsID;
+            booking.class_id = classID;
             booking.userId = (int) userId;
             booking.totalPassenger = passengerList.size();
             booking.totalChild = childList.size();
@@ -113,7 +114,7 @@ public class BookCoach extends HttpServlet {
             booking.senior = seniorCount;
             booking.adult = passengerList.size() - halfTicket;
             booking.child = childList;
-            
+
             booking.afterInit();
             coachBookUtil.bookCoachClass = booking;
 

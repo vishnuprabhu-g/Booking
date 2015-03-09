@@ -86,6 +86,7 @@
     <br>
 
     <%
+        chartDO.trainClassStausId=trainClassStatusID;
         List<Passenger> racList = chartDO.getAllByStatus(2);
 
         if (racList.size()
@@ -155,23 +156,24 @@
     // var objlist=$(".filled").css("border", "9px solid blue");
     //console.log(objlist.size());
     // function a() {
-        j(".filled").each(function (index) {
+    j(".filled").each(function (index) {
         //console.log($(this).attr("name"));
         //console.log(getColor($(this).attr("name")));
-    j(this).css("background-color", getColor(j(this).attr("name")));
-    }); 
+        j(this).css("background-color", getColor(j(this).attr("name")));
+    });
     var obj = j(".filled");
-    var before = new Array();     for (i = 0; i < 7; i++)
+    var before = new Array();
+    for (i = 0; i < 7; i++)
     {
     }
 
     //}
 
-        function getColor(pnr)
+    function getColor(pnr)
     {
         var r = "F" + pnr.substring(11, 12);
         var g = "F" + pnr.substring(9, 10);
         var b = "F" + pnr.substring(10, 11);
-    return "#" + r + "" + g + "" + b;
+        return "#" + r + "" + g + "" + b;
     }
 </script>

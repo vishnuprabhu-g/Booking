@@ -67,8 +67,8 @@ public class TrainClassSeatStatusDO {
 
         return out;
     }
-    
-    public List<TrainClassSeatStatus> getAllOfCoach(long id,String compartment) throws SQLException {
+
+    public List<TrainClassSeatStatus> getAllOfCoach(long id, String compartment) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select * from train_class_seat_status where train_class_status_id =? and compartment=?";
         PreparedStatement ps = con.prepareStatement(q);

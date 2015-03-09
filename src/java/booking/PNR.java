@@ -35,7 +35,7 @@ public class PNR extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet PNR</title>");            
+            out.println("<title>Servlet PNR</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>You can use this page to check pnr status later.</h1>");

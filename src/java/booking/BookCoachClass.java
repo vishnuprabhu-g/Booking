@@ -244,9 +244,9 @@ public class BookCoachClass {
             res.userId = userId;
             res.pnr = pnr;
             res.journeyID = journey_id;
-            res.classId=class_id;
+            res.classId = class_id;
             res.ReservationStatus = 1;
-            res.trainClassStausID=t_train_class_id;
+            res.trainClassStausID = t_train_class_id;
             ReservationDO rsdo = new ReservationDO();
             rsdo.add(res);
             //*This is added to send email for every succssfull ticket booking*//

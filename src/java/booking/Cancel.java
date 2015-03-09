@@ -72,7 +72,7 @@ public class Cancel extends HttpServlet {
                 } else {
                     CancellingClass can = new CancellingClass();
                     can.pnr = pnr;
-                    can.trainClassStatusId=trainClassStatusId;
+                    can.trainClassStatusId = trainClassStatusId;
                     can.afterInit();
                     PassengerTicket pt = ptdo.get(pnr);
                     for (Integer sno : cancel) {

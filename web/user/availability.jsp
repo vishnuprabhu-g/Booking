@@ -89,5 +89,5 @@
                 out.print(" --> ");
             }%>
     <% //System.out.println("detailMsg=" + detailAvl);
-%>
+    %>
 </td>
