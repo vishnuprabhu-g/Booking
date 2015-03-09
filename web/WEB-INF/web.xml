@@ -116,7 +116,7 @@
 
         <web-resource-collection>
 
-            <web-resource-name>YourAppsName</web-resource-name>
+            <web-resource-name>Booking</web-resource-name>
 
             <url-pattern>/*</url-pattern>
 
@@ -124,7 +124,7 @@
 
         <user-data-constraint>
 
-            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+            <transport-guarantee>NONE</transport-guarantee>
 
         </user-data-constraint>
 
