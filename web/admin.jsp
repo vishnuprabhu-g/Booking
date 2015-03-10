@@ -6,6 +6,7 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/jquery-ui.css">
+        <link rel="stylesheet" href="css/ticket.css">
         <link rel="icon" href="css/logo.png">
         <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0">
         <style>

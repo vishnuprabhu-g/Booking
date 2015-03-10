@@ -1,0 +1,14 @@
+body {
+    zoom: 0.98;
+    -moz-transform: scale(0.98);
+    -moz-transform-origin: 0 0;
+}
+tr.spaceUnder > td
+{
+    padding-bottom: 0.7em;
+}
+
+td.spaceLeft
+{
+    padding-left: 0.7em;
+}

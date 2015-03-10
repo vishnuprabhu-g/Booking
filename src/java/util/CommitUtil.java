@@ -28,6 +28,10 @@ public class CommitUtil {
         if (con != null) {
             con.rollback();
         }
+        else
+        {
+            System.out.println("Null object can't be rolled back");
+        }
     }
 
     public static void init() throws SQLException {

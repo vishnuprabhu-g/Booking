@@ -18,7 +18,8 @@
     </filter>
     <filter-mapping>
         <filter-name>LoggingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>*.jsp</url-pattern>
+        <url-pattern>/Book</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>UserFilter</filter-name>

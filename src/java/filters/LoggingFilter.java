@@ -38,11 +38,11 @@ public class LoggingFilter implements Filter {
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("LoggingFilter:DoBeforeProcessing");
+            log("LoggingFilter:Logging the requests");
         }
 
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-        Logger.getLogger("TicketSystem").log(Level.INFO, "Request From: {0}", httpServletRequest.getRemoteAddr());
+        Logger.getLogger("TicketSystem").log(Level.INFO, "Request From: {0}", httpServletRequest.getRemoteAddr() + "For the path" + httpServletRequest.getRequestURI());
     }
 
     private void doAfterProcessing(ServletRequest request, ServletResponse response)

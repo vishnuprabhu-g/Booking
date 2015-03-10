@@ -29,13 +29,12 @@ public class StationDO {
         ps.executeUpdate();
     }
 
-    public List<Station> getAll(long id) throws SQLException {
+    public List<Station> getAll() throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
-        String q = "select * from station where id =?;";
+        String q = "select * from station";
         PreparedStatement ps = con.prepareStatement(q);
-        ps.setLong(1, id);
         ResultSet rs = ps.executeQuery();
-        List<Station> out = new ArrayList<Station>();
+        List<Station> out = new ArrayList<>();
         while (rs.next()) {
             Station obj = new Station();
             obj.id = rs.getLong("id");
