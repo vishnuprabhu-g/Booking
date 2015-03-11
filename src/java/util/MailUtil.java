@@ -69,41 +69,97 @@ public class MailUtil {
         }
     }
 
-    public static void SendMail(String to, String messageS, String subject) {
-        Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.zoho.com");
-        props.put("mail.smtp.socketFactory.port", "465");
-        props.put("mail.smtp.socketFactory.class",
-                "javax.net.ssl.SSLSocketFactory");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.port", "465");
+    public void SendMail(String to, String messageS, String subject) {
+        sendMailViaThread mail = new sendMailViaThread();
+        mail.messageS = messageS;
+        mail.subject = subject;
+        mail.to = to;
+        mail.start();
 
-        String user = "vishnuprabhu.g@zohocorp.com";
-        String pass = "k1u7i8zrmiwu";
+        /*Properties props = new Properties();
+         props.put("mail.smtp.host", "smtp.zoho.com");
+         props.put("mail.smtp.socketFactory.port", "465");
+         props.put("mail.smtp.socketFactory.class",
+         "javax.net.ssl.SSLSocketFactory");
+         props.put("mail.smtp.auth", "true");
+         props.put("mail.smtp.port", "465");
 
-        Session session = Session.getDefaultInstance(props,
-                new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(user, pass);
-                    }
-                });
+         String user = "vishnuprabhu.g@zohocorp.com";
+         String pass = "k1u7i8zrmiwu";
 
-        try {
+         Session session = Session.getDefaultInstance(props,
+         new javax.mail.Authenticator() {
+         protected PasswordAuthentication getPasswordAuthentication() {
+         return new PasswordAuthentication(user, pass);
+         }
+         });
 
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(user));
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(to));
-            message.setSubject(subject);
-            message.setText(messageS);
+         try {
 
-            Transport.send(message);
+         Message message = new MimeMessage(session);
+         message.setFrom(new InternetAddress(user));
+         message.setRecipients(Message.RecipientType.TO,
+         InternetAddress.parse(to));
+         message.setSubject(subject);
+         message.setText(messageS);
 
-            System.out.println("Done");
+         Transport.send(message);
 
-        } catch (MessagingException e) {
-            System.out.println(e.getMessage());
+         System.out.println("Done");
+
+         } catch (MessagingException e) {
+         System.out.println(e.getMessage());
+         }*/
+    }
+
+    class sendMailViaThread extends Thread {
+
+        String to;
+        String messageS;
+        String subject;
+
+        @Override
+        public void run() {
+            SendMail();
         }
+
+        public void SendMail() {
+            Properties props = new Properties();
+            props.put("mail.smtp.host", "smtp.zoho.com");
+            props.put("mail.smtp.socketFactory.port", "465");
+            props.put("mail.smtp.socketFactory.class",
+                    "javax.net.ssl.SSLSocketFactory");
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.port", "465");
+
+            String user = "vishnuprabhu.g@zohocorp.com";
+            String pass = "k1u7i8zrmiwu";
+
+            Session session = Session.getDefaultInstance(props,
+                    new javax.mail.Authenticator() {
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(user, pass);
+                        }
+                    });
+
+            try {
+
+                Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(user));
+                message.setRecipients(Message.RecipientType.TO,
+                        InternetAddress.parse(to));
+                message.setSubject(subject);
+                message.setText(messageS);
+
+                Transport.send(message);
+
+                System.out.println("Done");
+
+            } catch (MessagingException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
     }
 
 }

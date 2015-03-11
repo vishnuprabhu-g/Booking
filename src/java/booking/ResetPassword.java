@@ -66,7 +66,7 @@ public class ResetPassword extends HttpServlet {
                 message += "\n";
                 message += "\nThanks for using the system.";
 
-                util.MailUtil.SendMail(email, message, sub);
+                new util.MailUtil().SendMail(email, message, sub);
                 out.println("Successfull..Check your mail!");
 
             } else {

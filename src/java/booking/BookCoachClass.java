@@ -261,7 +261,7 @@ public class BookCoachClass {
                 messageEmail += "\nCheck your pnr status at http://vishnu-pt517:8080/Booking/PNR";
                 messageEmail += "\n\nThank you fo using the system";
 
-                util.MailUtil.SendMail(up.email, messageEmail, "Ticket Book Confirmation");
+                new util.MailUtil().SendMail(up.email, messageEmail, "Ticket Book Confirmation");
             }
             Collections.sort(queue, new Comparator<Passenger>() {
                 @Override
