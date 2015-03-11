@@ -114,7 +114,8 @@ public class BookCoach extends HttpServlet {
             booking.senior = seniorCount;
             booking.adult = passengerList.size() - halfTicket;
             booking.child = childList;
-
+            booking.from_id = (Long) session.getAttribute("from");
+            booking.to_id = (Long) session.getAttribute("to");
             booking.afterInit();
             coachBookUtil.bookCoachClass = booking;
 

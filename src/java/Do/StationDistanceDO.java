@@ -25,10 +25,8 @@ public class StationDistanceDO {
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
             double temp = rs.getDouble("distance");
-
             return temp;
         } else {
-
             return -1;
         }
     }

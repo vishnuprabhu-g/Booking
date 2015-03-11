@@ -7,7 +7,7 @@
     long classId = Long.parseLong(request.getParameter("classID"));
     String className = new ClassDO().get(classId).name;
 
-    long from = 1, to = 2;
+    long from = (Long) session.getAttribute("from"), to = (Long) session.getAttribute("to");
     double fare, distance;
     String fileN = "availability.jsp?classID=" + classId;
     try {

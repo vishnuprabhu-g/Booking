@@ -10,10 +10,19 @@
     double fare, distance;
     String fromStr = request.getParameter("from");
     String toStr = request.getParameter("to");
-    boolean toGet = false;
-    
+    StationDO stationDO = new StationDO();
+    Station f = stationDO.getByName(fromStr.trim());
+    Station t = stationDO.getByName(toStr.trim());
+    from = f.id;
+    to = t.id;
     try {
         distance = new StationDistanceDO().getDistance(from, to);
+        if (distance == -1) {
+            out.println("<label>No trains available on this route now</label>");
+            return;
+        }
+        session.setAttribute("from", from);
+        session.setAttribute("to", to);
         double farePerKM = new ClassDistanceFare().getFare(classId);
         fare = util.FareCalculater.CalculateFare(distance, farePerKM);
     } catch (SQLException ex) {

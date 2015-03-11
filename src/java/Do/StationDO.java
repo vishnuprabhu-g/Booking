@@ -58,4 +58,19 @@ public class StationDO {
         return obj;
     }
 
+    public Station getByName(String name) throws SQLException {
+        Connection con = util.ConnectionUtil.getConnection();
+        String q = "select * from station where name =?;";
+        PreparedStatement ps = con.prepareStatement(q);
+        ps.setString(1, name);
+        ResultSet rs = ps.executeQuery();
+        Station obj=null;
+        if (rs.next()) {
+            obj = new Station();
+            obj.id = rs.getLong("id");
+            obj.name = rs.getString("name");
+        }
+        return obj;
+    }
+
 }

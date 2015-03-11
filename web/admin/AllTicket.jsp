@@ -42,13 +42,14 @@ View booked tickets:
                         if (showUser) {
                             out.println("<th>Booked By</th>");
                         } %>
-                <th>PNR</th><th>Status</th><th>No of passengers</th><th>Class</th><th>Date of booking</th><th>View Ticket</th>
+                <th>PNR</th><th>Status</th><th>No of passengers</th><th>From</th><th>To</th><th>Class</th><th>Date of booking</th><th>View Ticket</th>
             </tr>
         </thead>
         <tbody>
             <%
                 if (resList != null) {
                     int i = 1;
+                    StationDO sdo = new StationDO();
                     ClassDO classDO = new ClassDO();
                     UserProfileDO udo = new UserProfileDO();
                     for (Reservation res : resList) {
@@ -70,7 +71,7 @@ View booked tickets:
                         if (showUser) {
                             out.println("<td>" + user + "</td>");
                         }
-                        out.println("<td>" + res.pnr + "</td><td>" + rsdo.get(res.ReservationStatus).status + "<td>" + pt.Adult + "</td><td>" + classDO.get(res.classId).name + "</td><td>" + res.timestamp + "</td><td><a href=\"javascript:void(0)\" onClick=\"viewTic(" + pt.pnr + ") \" > <img height=\"20\" src=\"css/view.jpg \"> </a></td></tr>");
+                        out.println("<td>" + res.pnr + "</td><td>" + rsdo.get(res.ReservationStatus).status + "<td>" + pt.Adult + "</td><td>" + sdo.get(pt.fromStationId).name + "</td><td>" + sdo.get(pt.toStationId).name + "</td><td>" + classDO.get(res.classId).name + "</td><td>" + res.timestamp + "</td><td><a href=\"javascript:void(0)\" onClick=\"viewTic(" + pt.pnr + ") \" > <img height=\"20\" src=\"css/view.jpg \"> </a></td></tr>");
                     }
                 }
             %>

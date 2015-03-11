@@ -27,10 +27,17 @@
             }
             else
             {
-                j("#fromToError").hide();
-                j("#fromToDiv").hide(1000);
                 j.get("user/index2.jsp", j("#getTrain").serialize(), function (data) {
-                    j("#showTrains").html(data);
+                    if (data.trim().substr(0, 3) == '<la')
+                    {
+                        document.getElementById("fromToError").innerHTML = data;
+                    }
+                    else
+                    {
+                        j("#fromToError").hide();
+                        j("#fromToDiv").hide(500);
+                        j("#showTrains").html(data);
+                    }
                 });
             }
         });
