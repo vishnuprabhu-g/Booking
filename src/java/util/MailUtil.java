@@ -23,9 +23,9 @@ public class MailUtil {
     /*This method is no longer supported*/
     public static void SendMailOld(String to, String messageS, String subject) {
 
-        String from = "vishnuprabhu.g@zohocorp.com";
+        String from = "";
         String host = "smtp";
-        //to = "vishnuprabhu.g@zohocorp.com";
+        
 
         // Get system properties
         Properties properties = System.getProperties();
@@ -57,7 +57,7 @@ public class MailUtil {
             //Transport.send(message);
             try {
                 Transport transport = session.getTransport("smtps");
-                transport.connect(host, 25, from, "k1u7i8zrmiwu");
+                transport.connect(host, 25, from, "");
                 transport.sendMessage(message, message.getAllRecipients());
                 transport.close();
             } catch (Exception e) {
@@ -84,8 +84,6 @@ public class MailUtil {
          props.put("mail.smtp.auth", "true");
          props.put("mail.smtp.port", "465");
 
-         String user = "vishnuprabhu.g@zohocorp.com";
-         String pass = "k1u7i8zrmiwu";
 
          Session session = Session.getDefaultInstance(props,
          new javax.mail.Authenticator() {
@@ -125,15 +123,15 @@ public class MailUtil {
 
         public void SendMail() {
             Properties props = new Properties();
-            props.put("mail.smtp.host", "smtp.zoho.com");
+            props.put("mail.smtp.host", MAIL.getHost().trim());
             props.put("mail.smtp.socketFactory.port", "465");
             props.put("mail.smtp.socketFactory.class",
                     "javax.net.ssl.SSLSocketFactory");
             props.put("mail.smtp.auth", "true");
-            props.put("mail.smtp.port", "465");
+            props.put("mail.smtp.port", MAIL.getPort());
 
-            String user = "vishnuprabhu.g@zohocorp.com";
-            String pass = "k1u7i8zrmiwu";
+            String user = MAIL.getUsername().trim();
+            String pass = MAIL.getPassword().trim();
 
             Session session = Session.getDefaultInstance(props,
                     new javax.mail.Authenticator() {
