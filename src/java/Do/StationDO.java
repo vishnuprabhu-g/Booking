@@ -64,7 +64,7 @@ public class StationDO {
         PreparedStatement ps = con.prepareStatement(q);
         ps.setString(1, name);
         ResultSet rs = ps.executeQuery();
-        Station obj=null;
+        Station obj = null;
         if (rs.next()) {
             obj = new Station();
             obj.id = rs.getLong("id");

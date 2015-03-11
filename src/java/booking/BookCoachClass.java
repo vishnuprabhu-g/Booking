@@ -237,8 +237,8 @@ public class BookCoachClass {
             pt.reservationFare = (int) reservationFare * totalPassenger;
             pt.serviceCharge = serviceCharg;
             pt.totalFare = (int) (pt.basicfare + pt.reservationFare + pt.serviceCharge);
-            pt.fromStationId=from_id;
-            pt.toStationId=to_id;
+            pt.fromStationId = from_id;
+            pt.toStationId = to_id;
             PassengerTicketDO ptdo = new PassengerTicketDO();
             ptdo.add(pt);
 
