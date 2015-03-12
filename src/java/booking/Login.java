@@ -9,6 +9,7 @@ import Do.UserDO;
 import Domain.User;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Locale;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,6 +45,8 @@ public class Login extends HttpServlet {
             } else {
 
                 HttpSession ses = request.getSession();
+                java.util.Locale locale = Locale.ENGLISH;
+                ses.setAttribute("java.util.Locale", locale);
                 if (ses.getAttribute("user_id") != null) {
                     int role = (Integer) ses.getAttribute("role_id");
                     if (role == 1) {
@@ -65,6 +68,7 @@ public class Login extends HttpServlet {
                     ses.setAttribute("username", username);
                     response.sendRedirect("user.jsp");
                 }
+
             }
         } catch (SQLException e) {
             System.out.println(e);

@@ -216,6 +216,30 @@ public class TrainClassSeatStatusDO {
 
         return obj;
     }
+    
+    public TrainClassSeatStatus getTrainClassSeatOld(long id, int seat_no, String coach) throws SQLException {
+        Connection con = util.ConnectionUtil.getConnection();
+        String q = " select * from train_class_seat_status where seat_no=? and train_class_status_id=? and compartment=?";
+        PreparedStatement ps = con.prepareStatement(q);
+        ps.setInt(1, seat_no);
+        ps.setLong(2, id);
+        ps.setString(3, coach);
+        ResultSet rs = ps.executeQuery();
+        TrainClassSeatStatus obj;
+        if (rs.next()) {
+            obj = new TrainClassSeatStatus();
+            //obj.tClassStatusId = rs.getLong("t_class_status_id");
+            obj.seatNo = rs.getInt("seat_no");
+            //obj.availability = rs.getBoolean("availability");
+            obj.typeId = rs.getLong("seat_type_id");
+            obj.trainClassSeatStatusId = rs.getLong("train_class_seat_status_id");
+        } else {
+            obj = null;
+        }
+
+        return obj;
+    }
+
 
     public int getBoxFreeforPassengers(long tcsID, int noOfpassengers) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
