@@ -131,7 +131,7 @@
                 }
             %>
         </div>
-        <a href="user/downloadTicket.jsp">Save to PDF </a>
+        <a href="user/downloadTicket.jsp"><button>Save to PDF</button> </a>
         <script>
             function PrintT()
             {

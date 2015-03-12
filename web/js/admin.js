@@ -56,3 +56,26 @@ function searchUser()
         });
     }
 }
+
+function listUser()
+{
+    var url = "admin/listUser.jsp";
+    j.get(url, function (data) {
+        j("#user").html(data);
+    });
+}
+
+function listTrain()
+{
+    var url = "admin/listTrain.jsp";
+    j.get(url, function (data) {
+        j("#train").html(data);
+    });
+}
+function listStation()
+{
+    var url = "admin/listStation.jsp";
+    j.get(url, function (data) {
+        j("#station").html(data);
+    });
+}

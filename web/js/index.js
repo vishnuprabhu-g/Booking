@@ -1,20 +1,6 @@
 var j = jQuery.noConflict();
 var dMain = j("#main").html();
-function listUser()
-{
-    var url = "admin/listUser.jsp";
-    j.get(url, function (data) {
-        j("#user").html(data);
-    });
-}
 
-function listTrain()
-{
-    var url = "admin/listTrain.jsp";
-    j.get(url, function (data) {
-        j("#train").html(data);
-    });
-}
 
 function resetP()
 {

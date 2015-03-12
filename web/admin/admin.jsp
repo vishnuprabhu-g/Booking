@@ -37,7 +37,7 @@
                 </a>
             </h4>
         </div>
-        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+        <div id="collapseTwo" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingTwo">
             <div class="panel-body">
                 <div class="row">
                     <button type="button" class="btn btn-default" onclick="addTrain()" style="margin-left: 3%">
@@ -64,8 +64,22 @@
                 </a>
             </h4>
         </div>
-        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+        <div id="collapseThree" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingThree">
             <div class="panel-body">
+                <div class="row">
+                    <button type="button" class="btn btn-default" onclick="addStation()" style="margin-left: 3%">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Station
+                    </button>
+                    <button type="button" class="btn btn-default" onclick="listStation()" style="margin-left: 3%">
+                        <span class="glyphicon glyphicon-list" aria-hidden="true"></span> List Station
+                    </button>
+                    <button type="button" class="btn btn-default" onclick="searchStation()" style="margin-left: 3%">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search Station
+                    </button>
+                </div>
+                <div id="station" class="row" style="margin: 1%">
+
+                </div>
             </div>
         </div>
     </div>
