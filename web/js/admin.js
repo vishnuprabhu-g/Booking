@@ -94,7 +94,7 @@ function addTrain()
 
 function train2()
 {
-    alert(j("#trainForm1").validate());
+    //alert(j("#trainForm1").validate());
     var url = "admin/addTrain2.jsp";
     j.get(url, j("#trainForm1").serialize(), function (data) {
         j("#diaAdmin").html(data);
@@ -117,4 +117,11 @@ function train3()
         });
     });
 
+}
+
+function addTrainFinal() {
+    j.get("admin/addTrainFinal.jsp", function (data) {
+        alert(data.trim());
+        j("#diaAdmin").dialog('close');
+    });
 }

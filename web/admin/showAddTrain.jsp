@@ -59,4 +59,4 @@ Stations:
 </tbody>
 </table>
 <hr>
-<button>Add Train</button>
+<button onclick="addTrainFinal()">Add Train</button>

@@ -111,7 +111,7 @@
     </servlet-mapping>
     <session-config>
         <session-timeout>
-            20
+            45
         </session-timeout>
     </session-config>
     <context-param>
