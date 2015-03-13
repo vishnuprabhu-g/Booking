@@ -37,13 +37,13 @@ public class TrainStationDO {
 
     public void add(TrainStation obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
-        String q = "insert into train_station (train_id ,station_id ,departure ,arrival ,order ) values (? , ?, ?, ?, ? )";
+        String q = "insert into train_station (train_id ,station_id,order ) values (? , ?, ?)";
         PreparedStatement ps = con.prepareStatement(q);
         ps.setLong(1, obj.trainId);
         ps.setLong(2, obj.stationId);
-        ps.setTime(3, obj.dept);
-        ps.setTime(4, obj.arrival);
-        ps.setInt(5, obj.order);
+        //ps.setTime(3, obj.dept);
+        //ps.setTime(4, obj.arrival);
+        ps.setInt(3, obj.order);
         ps.executeUpdate();
     }
 
