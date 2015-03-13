@@ -20,6 +20,7 @@
     <body>
         <script src="js/jquery.min.js" type="text/javascript"></script>
         <script src="js/jquery-ui.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
         <script src="js/index.js"></script>
         <script src="js/bootstrap.js"></script>
         <script src="js/admin.js"></script>

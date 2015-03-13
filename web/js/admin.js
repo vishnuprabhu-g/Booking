@@ -79,3 +79,42 @@ function listStation()
         j("#station").html(data);
     });
 }
+
+function addTrain()
+//~~Train1()
+{
+    var url = "admin/addTrain1.jsp";
+    j.get(url, function (data) {
+        j("#diaAdmin").html(data);
+        j("#diaAdmin").dialog({
+            title: "Train details"
+        });
+    });
+}
+
+function train2()
+{
+    alert(j("#trainForm1").validate());
+    var url = "admin/addTrain2.jsp";
+    j.get(url,j("#trainForm1").serialize(), function (data) {
+        j("#diaAdmin").html(data);
+        j("#diaAdmin").dialog({
+            title: "Station Details",
+            height: 400,
+            width: 550
+        });
+    });
+}
+
+function train3()
+{
+    j.get("admin/showAddTrain.jsp", j("#trainForm2").serialize(), function (data) {
+        j("#diaAdmin").html(data);
+        j("#diaAdmin").dialog({
+            title: "Verify details",
+            height: 400,
+            width: 550
+        });
+    });
+
+}
