@@ -53,9 +53,9 @@ Stations:
             int km = Kms.get(i);
     %>
     <tr><td style="width: 130px">Station</td><td style="width: 40px"><%=km%></td></tr>
-    <%
-        }
-    %>
+        <%
+            }
+        %>
 </tbody>
 </table>
 <hr>

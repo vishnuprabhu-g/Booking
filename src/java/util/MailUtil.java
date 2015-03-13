@@ -25,7 +25,6 @@ public class MailUtil {
 
         String from = "";
         String host = "smtp";
-        
 
         // Get system properties
         Properties properties = System.getProperties();

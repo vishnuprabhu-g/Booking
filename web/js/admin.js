@@ -96,7 +96,7 @@ function train2()
 {
     alert(j("#trainForm1").validate());
     var url = "admin/addTrain2.jsp";
-    j.get(url,j("#trainForm1").serialize(), function (data) {
+    j.get(url, j("#trainForm1").serialize(), function (data) {
         j("#diaAdmin").html(data);
         j("#diaAdmin").dialog({
             title: "Station Details",

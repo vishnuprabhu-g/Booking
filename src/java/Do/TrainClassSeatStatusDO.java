@@ -216,7 +216,7 @@ public class TrainClassSeatStatusDO {
 
         return obj;
     }
-    
+
     public TrainClassSeatStatus getTrainClassSeatOld(long id, int seat_no, String coach) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
         String q = " select * from train_class_seat_status where seat_no=? and train_class_status_id=? and compartment=?";
@@ -239,7 +239,6 @@ public class TrainClassSeatStatusDO {
 
         return obj;
     }
-
 
     public int getBoxFreeforPassengers(long tcsID, int noOfpassengers) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
