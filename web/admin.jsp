@@ -20,10 +20,17 @@
     <body>
         <script src="js/jquery.min.js" type="text/javascript"></script>
         <script src="js/jquery-ui.js"></script>
-        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+        <script src="js/jquery.validate.min.js"></script>
         <script src="js/index.js"></script>
         <script src="js/bootstrap.js"></script>
         <script src="js/admin.js"></script>
+        <!-- <div id="alertDiv">
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <div id="alertDivMessage">
+                </div>
+            </div>
+        </div> -->
         <div style="width:94%;height: 100%;margin-left: 3%;margin-top: 0.2%;">
             <!--Top bar row -->
             <div class="row" style="background-color: #e6e6e6">

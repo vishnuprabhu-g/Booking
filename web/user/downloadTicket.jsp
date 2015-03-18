@@ -14,7 +14,7 @@
         while ((line = bf.readLine()) != null) {
             sb.append(line);
         }
-        String file = util.pdf.htmlToPdf(sb.toString());
+        String file = util.pdf.htmlToPdf(sb.toString(), pnr.toString());
         String filename = file;
         String filepath = "e:\\pdfs\\";
 

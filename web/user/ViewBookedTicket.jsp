@@ -17,6 +17,10 @@
             long pnr = Long.parseLong(request.getParameter("pnr"));
             session.setAttribute("pnr", pnr);
 
+            ReservationDO rdo = new ReservationDO();
+            Reservation r = rdo.get(pnr);
+            StationDO sdo=new StationDO();
+
             PassengerTicket pt = ptdo.get(pnr);
             List<Passenger> pass = pdo.getAll(pnr);
 
@@ -30,7 +34,17 @@
             TrainClassStatus tcs = tcsdo.get(trainClassId);
             boolean afterChart = tcs.chart;
         %>
-        <button onclick="PrintT()">Print Ticket</button><br>
+        <table class="table table-bordered tab"> 
+            <tr>
+                <td>From</td><td><%=sdo.get(pt.fromStationId).name %></td>
+            </tr>
+            <tr>
+                <td>To</td><td><%=sdo.get(pt.toStationId).name %></td>
+            </tr>
+            <tr>
+                <td>Date of booking</td><td><%=r.timestamp.getDate()+"-"+(r.timestamp.getMonth()+1)+"-15"%></td>
+            </tr>
+        </table>
         Ticket details:
         <div id="ticket">
             <table class="table table-bordered tab">
@@ -131,7 +145,6 @@
                 }
             %>
         </div>
-        <a href="user/downloadTicket.jsp"><button>Save to PDF</button> </a>
         <script>
             function PrintT()
             {

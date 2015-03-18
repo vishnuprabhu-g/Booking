@@ -10,21 +10,6 @@ function resetP()
     });
 }
 
-function addUser()
-{
-    var url = "signup_1.jsp";
-    j.get(url, function (data) {
-        j("#dia2").html(data);
-        //alert(data);
-        j(function () {
-            j("#dia2").dialog({
-                width: 400
-            }, {
-                height: 270
-            });
-        });
-    });
-}
 
 function addUserFinalClick()
 {
@@ -251,11 +236,13 @@ function viewTic(pnr)
     var url = "user/ViewBookedTicket.jsp?pnr=" + pnr;
     j.get(url, function (data) {
         j("#dia").html(data);
+        j("#dia").append("<a href='user/downloadTicket.jsp'><button>Save to PDF</button> </a>");
+        j("#dia").prepend("<button onclick='PrintT()'>Print Ticket</button><br>");
         j(function () {
             j("#dia").dialog({
                 width: 700
             }, {
-                height: 500
+                height: 600
             });
         });
     });

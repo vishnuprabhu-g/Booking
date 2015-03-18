@@ -1,3 +1,19 @@
+//j("#alertDiv").hide();
+function addUser()
+{
+    var url = "signup_1.jsp";
+    j.get(url, function (data) {
+        j("#dia2").html(data);
+        //alert(data);
+        j(function () {
+            j("#dia2").dialog({
+                width: 400
+            }, {
+                height: 270
+            });
+        });
+    });
+}
 function editU(userID)
 {
     var url = "admin/editUser.jsp?userID=" + userID;
@@ -123,5 +139,21 @@ function addTrainFinal() {
     j.get("admin/addTrainFinal.jsp", function (data) {
         alert(data.trim());
         j("#diaAdmin").dialog('close');
+    });
+}
+
+function addStation()
+{
+    var url = "admin/addStation.jsp";
+    j.get(url, function (data) {
+        j("#dia2").html(data);
+        //alert(data);
+        j(function () {
+            j("#dia2").dialog({
+                width: 400
+            }, {
+                height: 170
+            });
+        });
     });
 }

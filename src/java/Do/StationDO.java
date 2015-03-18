@@ -12,10 +12,9 @@ public class StationDO {
 
     public void add(Station obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
-        String q = "insert into station (id ,name ) values (? , ? )";
+        String q = "insert into station (id ,name ) values (NULL , ? )";
         PreparedStatement ps = con.prepareStatement(q);
-        ps.setLong(1, obj.id);
-        ps.setString(2, obj.name);
+        ps.setString(1, obj.name);
         ps.executeUpdate();
     }
 

@@ -5,8 +5,7 @@ import java.io.*;
 
 public class pdf {
 
-    public static String htmlToPdf(String html) {
-        String fileName = "";
+    public static String htmlToPdf(String html,String fileName) {
         try {
             FileOutputStream fileStream;
             System.setProperty("http.proxyHost", "192.168.5.100");
@@ -16,8 +15,6 @@ public class pdf {
             Client client = new Client("ggvishnu", "0f526ad01bf20de68f0945e9703b1cb2");
 
             // convert a web page and save the PDF to a file
-            Long n = System.currentTimeMillis();
-            fileName = n.toString();
             fileStream = new FileOutputStream("e:/pdfs/" + fileName + ".pdf");
             //client.convertURI("http://google.com", fileStream);
             //fileStream.close();
