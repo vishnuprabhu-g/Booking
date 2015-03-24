@@ -3,18 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/web/admin/addTrain1.jsp</file>
-            <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/web/user/availability.jsp</file>
-            <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/web/admin/addTrainFinal.jsp</file>
             <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/web/js/index.js</file>
-            <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/src/java/Do/TrainStationDO.java</file>
-            <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/src/java/Do/dump.txt</file>
-            <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/web/admin/showAddTrain.jsp</file>
-            <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/web/user/index2.jsp</file>
+            <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/web/admin.jsp</file>
+            <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/web/admin/addStation.jsp</file>
+            <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/web/admin/processAddStation.jsp</file>
             <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/web/js/admin.js</file>
-            <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/web/admin/admin.jsp</file>
-            <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/web/admin/addTrain2.jsp</file>
-            <file>file:/C:/Users/vishnu-pt517/Documents/NetBeansProjects/Booking/src/java/Do/TrainDO.java</file>
         </group>
     </open-files>
 </project-private>

@@ -157,3 +157,16 @@ function addStation()
         });
     });
 }
+
+function searchStation()
+{
+    var key = prompt("Enter the station name to search");
+    if (key !== null)
+    {
+        var url = "admin/searchStationByName.jsp?k=" + key;
+        j.get(url, function (data) {
+            j("#station").html(data);
+        });
+    }
+}
+

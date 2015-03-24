@@ -24,7 +24,7 @@ public class TrainStationDO {
         Connection con = util.ConnectionUtil.getConnection();
         String q = "select a.station_id as from_id,b.station_id as to_id,a.train_id,a.departure as departure,b.arrival as arrival from train_station a,train_station b"
                 + " where a.train_id=b.train_id and a.station_id=? "
-                + "and b.station_id=? and( a.order<b.order or b.order=-1)";
+                + "and b.station_id=? and( a.order_visit<b.order_visit or b.order_visit=-1)";
         PreparedStatement ps = con.prepareStatement(q);
         ps.setLong(1, fromId);
         ps.setLong(2, toId);
@@ -37,7 +37,7 @@ public class TrainStationDO {
 
     public void add(TrainStation obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
-        String q = "insert into train_station (train_id ,station_id,order ) values (? , ?, ?)";
+        String q = "insert into train_station (train_id ,station_id,order_visit ) values (? , ?, ?)";
         PreparedStatement ps = con.prepareStatement(q);
         ps.setLong(1, obj.trainId);
         ps.setLong(2, obj.stationId);

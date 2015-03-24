@@ -53,6 +53,7 @@
         util.CommitUtil.commit();
     } catch (Exception e) {
         out.println(e.getMessage());
+        e.printStackTrace();
         util.CommitUtil.rollBack();
     }
 

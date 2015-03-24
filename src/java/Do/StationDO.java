@@ -72,4 +72,19 @@ public class StationDO {
         return obj;
     }
 
+    public List<Station> search(String name) throws SQLException {
+        Connection con = util.ConnectionUtil.getConnection();
+        String q = "select * from station where name like '%" + name + "%' ";
+        PreparedStatement ps = con.prepareStatement(q);
+        ResultSet rs = ps.executeQuery();
+        List<Station> user = new ArrayList<>();
+        while (rs.next()) {
+            Station u = new Station();
+            u.name = rs.getString("name");
+            u.id = rs.getLong("id");
+            user.add(u);
+        }
+        return user;
+    }
+
 }
