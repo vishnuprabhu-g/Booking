@@ -5,7 +5,7 @@ import java.io.*;
 
 public class pdf {
 
-    public static String htmlToPdf(String html,String fileName) {
+    public static String htmlToPdf(String html, String fileName) {
         try {
             FileOutputStream fileStream;
             System.setProperty("http.proxyHost", "192.168.5.100");

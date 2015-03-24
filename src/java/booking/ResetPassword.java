@@ -64,6 +64,7 @@ public class ResetPassword extends HttpServlet {
                 message += "\tIf you want to reset your password,please use the follwing link.\n";
                 message += link;
                 message += "\n";
+                message += "\n(use the most recent link to reset your password if you have requested more than once)";
                 message += "\nThanks for using the system.";
 
                 new util.MailUtil().SendMail(email, message, sub);

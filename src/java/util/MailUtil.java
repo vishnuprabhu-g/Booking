@@ -21,7 +21,7 @@ import javax.mail.internet.MimeMessage;
 public class MailUtil {
 
     /*This method is no longer supported*/
-    public static void SendMailOld(String to, String messageS, String subject) {
+    public static boolean SendMailOld(String to, String messageS, String subject) {
 
         String from = "";
         String host = "smtp";
@@ -63,8 +63,10 @@ public class MailUtil {
                 System.out.println("Error in inner try: " + e.getMessage());
             }
             System.out.println("Sent message successfully....");
+            return true;
         } catch (MessagingException mex) {
             mex.printStackTrace();
+            return false;
         }
     }
 
@@ -154,6 +156,7 @@ public class MailUtil {
 
             } catch (MessagingException e) {
                 System.out.println(e.getMessage());
+                System.out.println(e.getNextException());
             }
         }
 

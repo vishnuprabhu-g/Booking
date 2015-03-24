@@ -19,6 +19,10 @@ public class ResetDO {
 
     public void add(ResetKeyVal reset) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
+        String delete = "delete from reset where uid=?";
+        PreparedStatement psDeleteOld = con.prepareStatement(delete);
+        psDeleteOld.setLong(1, reset.uid);
+        psDeleteOld.executeUpdate();
         String query = "insert into reset values(?,?);";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setLong(1, reset.uid);
