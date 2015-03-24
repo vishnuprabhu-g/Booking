@@ -45,7 +45,7 @@
         ts.stationId = stationDO.getByName(from).id;
         tsdo.add(ts);
 
-        ts.order = -1;
+        ts.order = 999;
         ts.stationId = stationDO.getByName(to).id;
         tsdo.add(ts);
 

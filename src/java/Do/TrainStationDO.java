@@ -29,6 +29,7 @@ public class TrainStationDO {
         ps.setLong(1, fromId);
         ps.setLong(2, toId);
         ResultSet rs = ps.executeQuery();
+        System.out.println(ps);
         while (rs.next()) {
             trainList.add(rs.getLong("train_id"));
         }

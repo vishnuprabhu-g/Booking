@@ -170,3 +170,11 @@ function searchStation()
     }
 }
 
+function popupStation(stationID)
+{
+    alert("Editing station is UC");
+}
+function popupTrain(stationID)
+{
+    alert("Editing train is UC");
+}

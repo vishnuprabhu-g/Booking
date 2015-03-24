@@ -14,13 +14,7 @@
     </tbody>
     <%
         for (Station t : trainList) {
-            out.println("<tr><td>" + t.id + "</td><td>" + t.name + "</td><td><button class=\"btn\" onclick=\"popupStation(" + t.id + ")\">Update Station</button></td></tr>");
+            out.println("<tr><td>" + t.id + "</td><td>" + t.name + "</td><td><button class=\"btn btn-default\" onclick='popupStation(" + t.id + ")' >Update Station</button></td></tr>");
         }
     %>
 </table>
-<script type="text/javascript">
-    function popupStation(trainID)
-    {
-        $("#myModal").model();
-    }
-</script>

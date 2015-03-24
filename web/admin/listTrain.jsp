@@ -1,18 +1,20 @@
+<%@page import="Do.StationDO"%>
 <%@page import="Do.TrainDO"%>
 <%@page import="Domain.Train"%>
 <%@page import="java.util.List"%>
 <%
     List<Train> trainList = new TrainDO().getAll();
+    StationDO sdo = new StationDO();
 %>
 <table class="table table-bordered">
     <tbody>
         <tr>
-            <th>Train ID</th><th>Train Name</th><th>Actions</th>
+            <th>Train ID</th><th>Train Name</th><th>From</th><th>To</th><th>Actions</th>
         </tr>
     </tbody>
     <%
         for (Train t : trainList) {
-            out.println("<tr><td>" + t.trainId + "</td><td>" + t.name + "</td><td><button class=\"btn\" onclick=\"popupTrain(" + t.trainId + ")\">Update train</button></td></tr>");
+            out.println("<tr><td>" + t.trainId + "</td><td>" + t.name + "</td><td>" + sdo.get(t.fromStationId).name + "</td><td>" + sdo.get(t.toStationId).name + "</td><td><button class=\"btn btn-default\" onclick=\"popupTrain(" + t.trainId + ")\">Update train</button></td></tr>");
         }
     %>
 </table>
@@ -35,9 +37,3 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    function popupTrain(trainID)
-    {
-        $("#myModal").model();
-    }
-</script>

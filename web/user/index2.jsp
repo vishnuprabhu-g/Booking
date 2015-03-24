@@ -16,9 +16,10 @@
     Station t = stationDO.getByName(toStr.trim());
     from = f.id;
     to = t.id;
+    List<Long> lList2 = new TrainStationDO().getTrainFromTo(from, to);
     try {
         distance = new StationDistanceDO().getDistance(from, to);
-        if (distance == -1) {
+        if (lList2.isEmpty()) {
             out.println("<label>No trains available on this route now</label>");
             return;
         }
