@@ -94,10 +94,10 @@
         <div id="collapseFour" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingFour">
             <div class="panel-body">
                 <div class="row">
-                    <button type="button" class="btn btn-default" onclick="addTrain()" style="margin-left: 3%">
+                    <button type="button" class="btn btn-default" onclick="addTrainClass()" style="margin-left: 3%">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> View Train Class Details
                     </button>
-                    <button type="button" class="btn btn-default" onclick="searchTrain()" style="margin-left: 3%">
+                    <button type="button" class="btn btn-default" onclick="searchTrainClass()" style="margin-left: 3%">
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search Train
                     </button>
                 </div>

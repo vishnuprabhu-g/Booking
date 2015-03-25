@@ -83,8 +83,9 @@ public class ReservationDO {
         PreparedStatement ps = con.prepareStatement(q);
         ps.setLong(1, id);
         ResultSet rs = ps.executeQuery();
-        Reservation obj = new Reservation();
+        Reservation obj = null;
         if (rs.next()) {
+            obj = new Reservation();
             obj.pnr = rs.getLong("pnr");
             obj.journeyID = rs.getLong("journey_id");
             obj.ReservationStatus = rs.getInt("reservation_status");
