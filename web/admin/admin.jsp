@@ -84,6 +84,29 @@
         </div>
     </div>
     <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingFive">
+            <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseThree">
+                   Class Management
+                </a>
+            </h4>
+        </div>
+        <div id="collapseFive" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingFive">
+            <div class="panel-body">
+                <div class="row">
+                    <button type="button" class="btn btn-default" onclick="addClass()" style="margin-left: 3%">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Class
+                    </button>
+                    <button type="button" class="btn btn-default" onclick="listClass()" style="margin-left: 3%">
+                        <span class="glyphicon glyphicon-list" aria-hidden="true"></span> List Class
+                    </button>
+                </div>
+                <div id="classUpdate" class="row" style="margin: 1%">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingFour">
             <h4 class="panel-title">
                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
@@ -94,14 +117,14 @@
         <div id="collapseFour" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingFour">
             <div class="panel-body">
                 <div class="row">
-                    <button type="button" class="btn btn-default" onclick="addTrainClass()" style="margin-left: 3%">
+                    <button type="button" class="btn btn-default" onclick="viewTrainClass()" style="margin-left: 3%">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> View Train Class Details
                     </button>
                     <button type="button" class="btn btn-default" onclick="searchTrainClass()" style="margin-left: 3%">
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search Train
                     </button>
                 </div>
-                <div id="train" class="row" style="margin: 1%">
+                <div id="class" class="row" style="margin: 1%">
 
                 </div>
             </div>

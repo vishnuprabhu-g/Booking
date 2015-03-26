@@ -11,11 +11,10 @@ public class ClassDO {
 
     public void add(Domain.Class obj) throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
-        String q = "insert into class (id ,name ,code ) values (? , ?, ? )";
+        String q = "insert into class (class_id ,name ,code ) values (NULL , ?, ? )";
         PreparedStatement ps = con.prepareStatement(q);
-        ps.setLong(1, obj.id);
+        ps.setString(1, obj.name);
         ps.setString(2, obj.name);
-        ps.setString(3, obj.code);
         ps.executeUpdate();
     }
 
@@ -30,16 +29,15 @@ public class ClassDO {
         ps.executeUpdate();
     }
 
-    public List<Domain.Class> getAll(long id) throws SQLException {
+    public List<Domain.Class> getAll() throws SQLException {
         Connection con = util.ConnectionUtil.getConnection();
-        String q = "select * from class where id =?;";
+        String q = "select * from class;";
         PreparedStatement ps = con.prepareStatement(q);
-        ps.setLong(1, id);
         ResultSet rs = ps.executeQuery();
         List<Domain.Class> out = new ArrayList<>();
         while (rs.next()) {
             Domain.Class obj = new Domain.Class();
-            obj.id = rs.getLong("id");
+            obj.id = rs.getLong("class_id");
             obj.name = rs.getString("name");
             obj.code = rs.getString("code");
             out.add(obj);

@@ -178,3 +178,33 @@ function popupTrain(stationID)
 {
     alert("Editing train is UC");
 }
+
+function viewTrainClass()
+{
+    var url = "admin/viewTrainClass.jsp";
+    j.get(url, function (data) {
+        j("#class").html(data);
+    });
+}
+function updateClass(trainID)
+{
+    url="admin/updateTrainClass.jsp?trainID="+trainID;
+    j.get(url, function (data) {
+        j("#class").html(data);
+    });
+}
+
+function listClass()
+{
+    url="admin/listClass.jsp";
+    j.get(url, function (data) {
+        j("#classUpdate").html(data);
+    });
+}
+function addClass()
+{
+    url="admin/addClass.jsp";
+    j.get(url, function (data) {
+        j("#classUpdate").html(data);
+    });
+}

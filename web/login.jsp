@@ -44,10 +44,7 @@
             <div class="row">
                 <div class="col-lg-12" style="background-color:#3276b1 ">
                     <div align="right">
-                        <font color="white">
-                        <!-- Register <a style="margin-left: 3px" href="javascript:void(0)"><font color="white"> here </font> </a> -->
-                        </font>
-                        <br>
+                        <a href="PNR"><font color="white">PNR status</font></a>
                     </div>
                 </div>
             </div>
